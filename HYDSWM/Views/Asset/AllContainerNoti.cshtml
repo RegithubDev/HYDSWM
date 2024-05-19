@@ -1,0 +1,74 @@
+﻿@{ ViewData["Title"] = "All Container";
+                Layout = "_MonsterLayout"; }
+
+<div class="content pt-0">
+
+    <!-- Page header -->
+    <div class="page-header border-bottom-0">
+
+    </div>
+    <!-- /page header -->
+
+    <div class="card mt-3 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">All Container </span> Information</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+        </div>
+
+        <div class="dataTables_wrapper no-footer">
+
+            <div class="datatable-scroll-wrap">
+
+                <table class="table datatable-button-html5-columns" id="example">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Sr. No</th>
+                            <th>Image</th>
+                            <th>Status</th>
+                            <th>UId(QR Code)</th>
+                            <th>Container Code</th>
+                            <th>Container Name</th>
+                            <th>Container Capacity(MT)</th>
+                            <th>Container Type</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<style>
+    td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_open.png') no-repeat center center;
+    }
+
+    tr.shown td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_close.png') no-repeat center center;
+    }
+</style>
+@section scripts {
+    <link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+    <script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Asset/ContainerNotiInfo.js?@DateTime.Now.Ticks"></script>
+}

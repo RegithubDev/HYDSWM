@@ -1,0 +1,341 @@
+﻿
+@{
+    ViewData["Title"] = "All Transafer Station";
+    Layout = "_MonsterLayout";
+}
+<style>
+    .select2-container--classic .select2-selection--single, .select2-container--default .select2-selection--multiple, .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-selection__arrow, .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 20px !important;
+    }
+</style>
+<div class="page-header border-bottom-0">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+               
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+                @*  <div class="d-flex">
+                        <div class="dropdown me-2">
+                            <button class="btn btn-secondary dropdown-toggle"
+                                    type="button"
+                                    id="dropdownMenuButton"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                January 2021
+                            </button>
+                            <ul class="dropdown-menu"
+                                aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="#">February 2021</a></li>
+                                <li><a class="dropdown-item" href="#">March 2021</a></li>
+                                <li><a class="dropdown-item" href="#">April 2021</a></li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-success">
+                            <i data-feather="plus" class="fill-white feather-sm"></i>
+                            Create
+                        </button>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+    <!-- Page header -->
+    <div class="page-header border-bottom-0">
+
+    </div>
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">All Transfer Station </span> Information</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                <a title="Add" cid="" onclick="CallFunc(this,0);" id="btnAdd"><i class="icon-add"></i></a>
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+               
+                <div class="col-md-3">
+                    <select id="ddlSZone" onchange="CallCircleByZone();" data-placeholder="Select Your Zone" class="form-control form-control-select2" data-fouc>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select id="ddlSCircle" onchange="CallWardByCircle();" data-placeholder="Select Your Circle" class="form-control form-control-select2" style="width:100%">
+                        <option value="0">All Circle</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select id="ddlSWard" data-placeholder="Select Your Ward" class="form-control form-control-select2" data-fouc>
+                        <option value="0">All Ward</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select id="ddlSCity" data-placeholder="Select Your City" class="form-control form-control-select2" data-fouc>
+                        <option value="0">All City</option>
+                    </select>
+                </div>
+                <div class="col-md-12 row pt-3">
+                    <div class="col-md-3 ROW">
+
+                        <input type="button" id="btnSearch" class="btn btn-primary" value="Search" onclick="GetDataTableData('Click');">
+                        @*<button type="button" class="btn btn-outline bg-teal-400 text-teal-400 border-teal-400" onclick="DownloadFile('Excel');">
+                                <i class="icon-file-excel"></i> Export To Excel
+                            </button>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dataTables_wrapper no-footer" id="dvNotification">
+
+            <div class="datatable-scroll-wrap">
+
+                <table class="table datatable-button-html5-columns" id="example">
+                    <thead>
+                        <tr>
+                            <th>Sr. No</th>
+                            <th>Image</th>
+                            <th>Location</th>
+                            <th>Transfer Station Name</th>
+                            <th>Zone</th>
+                            <th>Circle</th>
+                            <th>Ward</th>
+                            <th>City</th>
+                            <th>Radius(In Meter)</th>
+                            <th>TS Code</th>
+                            <th>No Of Container</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<input type="hidden" id="hfLoginId" value="@ViewBag.LoginId" />
+<!-- Vertical form modal -->
+<div id="modal_form_vertical" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form class="form-validate-jquery" onsubmit="return Formsubmit();" name="registration">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="add_upd">Add Transfer Station Information</h3>
+                    <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <fieldset>
+                        <legend class="bg-info">Transfer Station Basic Detail</legend>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <input type="hidden" id="hfTSId" />
+                                        <label>Transfer Station Name</label>
+                                        <span class="text-danger">*</span>
+                                        <input type="text" placeholder="Enter Transfer Station Name" class="form-control" id="txtTSName" onkeypress = "return isAlpha(event.keyCode);" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>TS Code</label>
+                                    <span class="text-danger">*</span>
+                                    <select id="ddlTSType" required
+                                            class="form-control">
+                                        <option value="">Select</option>
+                                        <option value="TS">TS</option>
+                                        <option value="SCTP">SCTP</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+
+                                        <label>No Of Container</label>
+                                        <span class="text-danger">*</span>
+                                        <input type="text" placeholder="No Of Container" class="form-control" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" onselectstart="return false" autocomplete="off" onkeypress="return isNumberKeyValidate(this, event);" id="txtNoOfContainer" required>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label>Zone</label>
+                                    <span class="text-danger">*</span>
+                                    <select id="ddlZone" onchange="CallFCircleByZone();" required
+                                            class="form-control">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Circle</label>
+                                    <span class="text-danger">*</span>
+                                    <select id="ddlCircle" onchange="CallFWardByCircle()" required
+                                            class="form-control">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Ward</label>
+                                    <span class="text-danger">*</span>
+                                    <select id="ddlWard"  required
+                                            class="form-control">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label>City</label>
+                                    <span class="text-danger">*</span>
+                                    <select id="ddlCity" required
+                                            class="form-control">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label>Lattitude</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" placeholder="Enter Lattitude" class="form-control" id="txtLat" required>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Longitude </label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" placeholder="Enter Longitude" class="form-control" id="txtLng" required>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Location</label>
+                                    <span class="text-danger">*</span>
+                                    @*<input type="text" placeholder="Enter Location" class="form-control" id="txtLocation" required>*@
+                                    <textarea rows="3" cols="3" placeholder="Enter Location" class="form-control" id="txtLocation" required></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label>Radius(In Meter)</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" placeholder="Enter Radius" class="form-control" id="txtRadius" value="500" required>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Upload File</label>
+                                    <input type="file" id="files" name="files" class="form-control h-auto" accept=".jpg,.jpeg,.png,.gif,.bmp" value="" />
+
+                                </div>
+                                <div class="col-sm-4">
+                                    <br />
+                                    
+                                    <div class="form-check">
+
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="square-o" id="ckbIsActive" name="IsActive">
+                                            Is Active
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <br />
+                    <fieldset>
+                        <legend class="bg-info">Map View</legend>
+                        <input id="searchInput" class="input-controls" type="text" placeholder="Enter a location" style="width:50%;">
+                        <div id="dvIMap1" style="height: 300px; width: 100%">
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+                    <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+                    <button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
+                    @*<input type="button" value="Save" onclick="SaveAndUpdateAssetInfo()" />*@
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /vertical form modal -->
+<div id="viewonmap" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">View On Map</h3>
+                <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="dvIMap" style="height: 400px; width: 100%">
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+                <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+
+    function isAlpha(keyCode) {
+
+        return ((keyCode >= 65 && keyCode <= 90) || keyCode == 8 || keyCode == 32 || keyCode == 190 || (keyCode >= 48 && keyCode <= 57) || (keyCode >= 97 && keyCode <= 122))
+
+    }
+    //$(document).keydown(function (keyCode) {
+    //    if (keyCode.ctrlKey == true && (keyCode.which == '118' || keyCode.which == '86')) {
+
+    //        keyCode.preventDefault();
+    //    }
+    //});
+
+</script>
+
+@section scripts {
+    <link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+    <script src="~/otherfiles/Light/global_assets/js/plugins/forms/selects/nselect2.min.js"></script>
+    <script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR9w4KTLnl8IWjTgFLHIvHZXLrpJlKi6I&libraries=places"></script>
+    <script src="~/js/input.js"></script>
+    <script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Master/AllTransferStationInfo.js?@DateTime.Now.Ticks"></script>
+}
+
+
+
+

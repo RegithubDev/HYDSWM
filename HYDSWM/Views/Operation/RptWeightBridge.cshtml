@@ -1,0 +1,181 @@
+﻿@{
+    ViewData["Title"] = "Weight Bridge Report";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+
+<div class="page-header border-bottom-0">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+                @*  <div class="d-flex">
+                    <div class="dropdown me-2">
+                    <button class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    January 2021
+                    </button>
+                    <ul class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="#">February 2021</a></li>
+                    <li><a class="dropdown-item" href="#">March 2021</a></li>
+                    <li><a class="dropdown-item" href="#">April 2021</a></li>
+                    </ul>
+                    </div>
+                    <button class="btn btn-success">
+                    <i data-feather="plus" class="fill-white feather-sm"></i>
+                    Create
+                    </button>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">All Weight Bridge </span> Report</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                @*<a title="Download QR Code" cid="" onclick="GetMultipleQrCode(this);" id="btnDownload"><i class="icon-download7"></i></a>*@
+                @*<a title="Add" cid="" onclick="CallFunc(this);" id="btnAdd"><i class="icon-add"></i></a>*@
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-md-12 row pt-3">
+                    <div class="col-md-4 row">
+                        <label for="colFormLabelSm" class="col-md-3 col-form-label col-form-label-md pl-0" style="text-align : right;">FROM</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control mydatepicker" placeholder="Select From Date" readonly="" id="txtFromDate" autocomplete="off">
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4 row">
+                        <label for="colFormLabelSm" class="col-md-3 col-form-label col-form-label-md pl-0" style="text-align : right;">TO</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control mydatepicker" placeholder="Select To Date" readonly="" id="txtToDate" autocomplete="off">
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4 row">
+                        <div class="button-group">
+                            <input type="button" id="btnSearch" class="btn btn-primary" value="Search" onclick="GetDataTableData('Click');">
+                            <div style="top:2px; right:-9px" id="btnExcel" class="btn-group"
+                                 role="group"
+                                 aria-label="Button group with nested dropdown">
+
+
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop1"
+                                            type="button"
+                                            class="btn btn-success  dropdown-toggle"
+                                            data-bs-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false">
+                                        Export
+                                    </button>
+                                    <div class="dropdown-menu"
+                                         aria-labelledby="btnGroupDrop1">
+                                        <a class="dropdown-item" href="javascript:void(0)" onclick="DownloadFile('Excel');"><strong>Excel</strong></a>
+                                        <a class="dropdown-item" href="javascript:void(0)" onclick="CSVData('CSV');"><strong>CSV</strong></a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            @*<input type="button" id="btnExcel" class="btn btn-success" value="Export To Excel" onclick="DownloadFile('Excel');">*@
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="dataTables_wrapper no-footer" id="dvContent">
+
+            <div class="datatable-scroll-wrap">
+
+                <table class="table datatable-button-html5-columns vehicletable" id="example">
+                    <thead>
+                        <tr>
+                            <th>Sr. No</th>
+                            <th>Weighbridge Id</th>
+                            <th>WB Trans. Code</th>
+                            <th>Transaction Date & Time</th>
+                            <th>Status</th>
+                            <th>TS/SCTP</th>
+                            <th>Vehicle No</th>
+                            <th>Container No</th>
+                            <th>Gross Weight(In MT)</th>
+                            <th>Tare Weight(In MT)</th>
+                            <th>Net Weight(In MT)</th>
+                            <th>Total Est. Weight(In MT)</th>
+                            <th>Total Weight Variance</th>
+                            <th>Sync Date & Time</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+@section scripts {
+
+<link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+<script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+<link href="~/otherfiles/monsteradmin/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+<script src="~/otherfiles/monsteradmin/js/moment.js"></script>
+<script src="~/otherfiles/monsteradmin/js/bootstrap-datepicker.min.js"></script>
+<script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Operation/RptWeightBridgeInfo.js?@DateTime.Now.Ticks"></script>
+}
+
+
+
+
+
+
+
+
+
+
+

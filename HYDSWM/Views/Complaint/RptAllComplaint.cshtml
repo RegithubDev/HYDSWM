@@ -1,0 +1,259 @@
+﻿
+@{
+    ViewData["Title"] = "All Complaint";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+
+
+<div class="page-header border-bottom-0">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+                @*  <div class="d-flex">
+                        <div class="dropdown me-2">
+                            <button class="btn btn-secondary dropdown-toggle"
+                                    type="button"
+                                    id="dropdownMenuButton"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                January 2021
+                            </button>
+                            <ul class="dropdown-menu"
+                                aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="#">February 2021</a></li>
+                                <li><a class="dropdown-item" href="#">March 2021</a></li>
+                                <li><a class="dropdown-item" href="#">April 2021</a></li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-success">
+                            <i data-feather="plus" class="fill-white feather-sm"></i>
+                            Create
+                        </button>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">All Complaint </span> Report</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                @*<a title="Download QR Code" cid="" onclick="GetMultipleQrCode(this);" id="btnDownload"><i class="icon-download7"></i></a>*@
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-md-12 row pt-3">
+                    <div class="col-md-3 row">
+                        <label for="colFormLabelSm" class="col-md-3 col-form-label col-form-label-md pl-0" style="text-align : right;">FROM</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control mydatepicker" placeholder="Select From Date" readonly="" id="txtFromDate" autocomplete="off">
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3 row">
+                        <label for="colFormLabelSm" class="col-md-3 col-form-label col-form-label-md pl-0" style="text-align : right;">TO</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control mydatepicker" placeholder="Select To Date" readonly="" id="txtToDate" autocomplete="off">
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3 row">
+                        <div class="button-group">
+                        <input type="button" id="btnSearch" class="btn btn-primary" value="Search" onclick="GetDataTableData('Click');">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="dataTables_wrapper no-footer">
+
+            <div class="datatable-scroll-wrap">
+
+                <table class="table datatable-button-html5-columns vehicletable" id="example">
+                    <thead>
+                        <tr>
+                            <th>Sr. No</th>
+                            <th>Image</th>
+                            <th>Complaint No</th>
+                            <th>Complaint Category</th>
+                            <th>Location</th>
+                            <th>GPS Location</th>
+                            <th>Description</th>
+                            <th>Created By</th>
+                            <th>Complaint Created On</th>
+                            <th>Complaint Closure On</th>
+                            <th>Actual Duration(Hr:Min)</th>
+                            <th>Status</th>
+                            <th>Close Time Location</th>
+                            <th>Closing Image</th>
+                            <th>Action Remarks</th>
+                            <th>Closed By</th>
+                            <th>Transfer Station</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<input type="hidden" id="hfRoleId" value="@ViewBag.RoleId" />
+<input type="hidden" id="hfLoginid" value="@ViewBag.LoginId" />
+<!-- Vertical form modal -->
+<div id="modal_form_vertical" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog  modal-lg" id="dvUpdComp">
+        <form class="form-validate-jquery" onsubmit="return Formsubmit();" name="registration">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Staff Complaint</h3>
+                    <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+                </div>
+                @*<button type="button" class="btn bg-primary" id="alert" onclick="ShowMessage('1','record added');">Launch <i class="icon-play3 ml-2"></i></button>*@
+
+                <div class="modal-body">
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="hidden" id="hfCCId" />
+                                    <label>Complaint No</label>
+                                    <input type="text" class="form-control" id="txtComplaintNo" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Status</label>
+                                <span class="text-danger">*</span>
+                                <select id="ddlStatus" required
+                                        class="form-control">
+                                    <option value="">Select</option>
+                                    <option value="1">Closed</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Action Remarks</label>
+                                <span class="text-danger">*</span>
+                                <input type="text" placeholder="Action Remarks" class="form-control" id="txtActionRemarks" required>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <input type="hidden" id="hfCLat" />
+                                <input type="hidden" id="hfCLng" />
+                                <label>Address</label>
+                                <span class="text-danger">*</span>
+                                <textarea rows="3" cols="3" placeholder="Address" class="form-control" id="txtCAddress" required></textarea>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Upload File</label>
+                                <input type="file" id="Cfiles" name="Cfiles" class="form-control h-auto" accept=".jpg,.jpeg,.png,.gif,.bmp" value="" />
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <input id="searchCInput" class="input-controls" type="text" placeholder="Enter a location" style="width:50%;">
+                            <div id="dvICMap" style="height: 300px; width: 100%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+                    <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+                    <button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /vertical form modal -->
+
+<div class="col-sm-4" style="display:none">
+    <input type="hidden" id="hfLat" />
+    <input type="hidden" id="hfLng" />
+    <label>Address</label>
+    <span class="text-danger">*</span>
+    <textarea rows="3" cols="3" placeholder="Address" class="form-control" id="txtAddress" required></textarea>
+    <input id="searchInput" class="input-controls" type="text" placeholder="Enter a location" style="width:50%;">
+    <div id="dvIMap" style="height: 300px; width: 100%">
+    </div>
+</div>
+
+
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+@section scripts {
+
+    <link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+    <link href="~/otherfiles/monsteradmin/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/monsteradmin/js/moment.js"></script>
+    <script src="~/otherfiles/monsteradmin/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Complaint/rptComplaintInfo.js?@DateTime.Now.Ticks"></script>
+}
+
+
+
+
+
+
+
+
+
+
+

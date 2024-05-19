@@ -1,0 +1,174 @@
+﻿@{
+    ViewData["Title"] = "Add Route";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+<div class="page-header border-bottom-0">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+                @*  <div class="d-flex">
+                    <div class="dropdown me-2">
+                    <button class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    January 2021
+                    </button>
+                    <ul class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="#">February 2021</a></li>
+                    <li><a class="dropdown-item" href="#">March 2021</a></li>
+                    <li><a class="dropdown-item" href="#">April 2021</a></li>
+                    </ul>
+                    </div>
+                    <button class="btn btn-success">
+                    <i data-feather="plus" class="fill-white feather-sm"></i>
+                    Create
+                    </button>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">Add Route </span> Information</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+
+                <form class="form-validate-jquery" onsubmit="return Formsubmit();" name="registration">
+                    <div id="user_content" class="form-body">
+
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label>Zone</label>
+
+                                    <select id="ddlZone" onchange="CallFCircleByZone();" required
+                                            class="form-control">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Circle</label>
+                                    <select id="ddlCircle" onchange="GetNewRouteCode();" required
+                                            class="form-control">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+                                 <div class="col-sm-4">
+                                    <label>Shift</label>
+                                    <select id="ddlShift" required
+                                            class="form-control">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <div class="row">
+                                @*<div class="col-sm-6">
+                                    <div class="form-group">
+                                        
+                                        <label>Route Name</label>
+                                        <span class="text-danger">*</span>
+                                        <input type="text" placeholder="Enter Route Name" class="form-control" id="txtRouteName" required>
+                                    </div>
+                                </div>*@
+
+                                <div class="col-sm-6">
+                                    <input type="hidden" id="hfRouteId" />
+                                    <label>Route Code</label>
+                                    <input type="text" placeholder="Route Code" class="form-control" id="txtRouteCode" readonly="true">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-check">
+
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" id="ckbIsActive">
+                                            Is Active
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-actions">
+
+                        <div class="text-end">
+                            <button type="submit" class="
+                            btn btn-light-info
+                            text-info
+                            font-weight-medium
+                          ">
+                                Submit
+                            </button>
+                            <button type="reset" onclick="goBack();" class="
+                            btn btn-light-danger
+                            text-danger
+                            font-weight-medium
+                          ">
+                                Cancel
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+@section scripts {
+<link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+<script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+<script src="~/otherfiles/Light/global_assets/js/plugins/forms/selects/nselect2.min.js"></script>
+<script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+<script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Collection/AddSRouteInfo.js?@DateTime.Now.Ticks"></script>
+}
+
+

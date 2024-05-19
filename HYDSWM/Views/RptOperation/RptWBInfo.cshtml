@@ -1,0 +1,173 @@
+﻿@{
+    ViewData["Title"] = "WB Data Info";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+<div class="page-header border-bottom-0">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+    <!-- Page header -->
+    <div class="page-header border-bottom-0">
+    </div>
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i>  <span class="font-weight-semibold" id="spnHeader">Master Weight  </span> Report</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <label>From Date</label>
+                    <input type="text" placeholder="Select From Date" id="txtFromDate" autocomplete="off">
+                </div>
+
+                <div class="col-md-4">
+                    <label>To Date</label>
+                    <input type="text" placeholder="Select To Date" id="txtToDate" autocomplete="off">
+                </div>
+                <div class="col-md-4">
+                    <div class="button-group">
+                        <input type="button" id="btnSearch" class="btn btn-primary" value="Search" onclick="GetDataTableData('Click');">
+                        <div style="top:2px; right:-9px" id="btnExcel" class="btn-group"
+                             role="group"
+                             aria-label="Button group with nested dropdown">
+
+
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDrop1"
+                                        type="button"
+                                        class="btn btn-success  dropdown-toggle"
+                                        data-bs-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false">
+                                    Export
+                                </button>
+                                <div class="dropdown-menu"
+                                     aria-labelledby="btnGroupDrop1">
+                                    <a class="dropdown-item" href="javascript:void(0)" onclick="DownloadFile('Excel');"><strong>Excel</strong></a>
+                                    <a class="dropdown-item" href="javascript:void(0)" onclick="CSVData('CSV');"><strong>CSV</strong></a>
+                                </div>
+                            </div>
+
+                        </div>
+                        @*<input type="button" id="btnExcel" class="btn btn-success" value="Export To Excel" onclick="DownloadFile('Excel');">*@
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="dataTables_wrapper no-footer" id="dvContent">
+
+            <div class="datatable-scroll-wrap">
+
+                <table class="table datatable-button-html5-columns" id="example">
+                    <thead>
+                        <tr>
+                            <th>Sr. No</th>
+                            <th>Vehicle No</th>
+                            <th>Gross Wt.(In Kg)</th>
+                            <th>Tare Wt.(In Kg)</th>
+                            <th>Net Wt.(In Kg)</th>
+                            <th>Site ID</th>
+                            <th>Transaction Date & Time</th>
+
+                            <th>Material</th>
+                            <th>Party</th>
+                            <th>Transporter</th>
+                            <th>Bill DC No</th>
+                            <th>Bill Weight</th>
+                            <th>In Date</th>
+                            <th>User1</th>
+                            <th>User2</th>
+                            <th>Status</th>
+                            <th>SW Site ID</th>
+                            <th>Trip No</th>
+                            <th>Shift No</th>
+                            <th>Transfer Waste IE</th>
+                            <th>Transfer Waste</th>
+                            <th>Remarks</th>
+                            <th>Manifest Number</th>
+                            <th>Manifest Weight</th>
+                            <th>Member Ship Code</th>
+                            <th>In Gate Pass No</th>
+                            <th>In Meter Reading</th>
+                            <th>Out Gate Pass No</th>
+                            <th>Out Meter Reading</th>
+                            <th>Transfer ID</th>
+                            <th>Type Of Waste</th>
+                            <th>Total KMS Travelled</th>
+                            <th>Billable Weight</th>
+                            <th>Total Transport Charges</th>
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+@section scripts {
+<script src="~/otherfiles/assets/js/jquery.datetimepicker.js"></script>
+<link href="~/otherfiles/assets/css/jquery.datetimepicker.css" rel="stylesheet" />
+<script src="/otherfiles/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+<script src="/otherfiles/global_assets/js/plugins/pickers/daterangepicker.js"></script>
+<script src="~/otherfiles/Light/global_assets/js/plugins/forms/selects/nselect2.min.js"></script>
+<script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+<script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Operation_Report/RptWBDataInfo.js?@DateTime.Now.Ticks"></script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

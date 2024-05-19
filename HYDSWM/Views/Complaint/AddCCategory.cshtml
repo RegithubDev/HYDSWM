@@ -1,0 +1,58 @@
+﻿
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h3 class="modal-title">Add Complaint Category</h3>
+        <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+    </div>
+    @*<button type="button" class="btn bg-primary" id="alert" onclick="ShowMessage('1','record added');">Launch <i class="icon-play3 ml-2"></i></button>*@
+
+    <div class="modal-body">
+
+
+        <div class="form-group">
+            <div class="row">
+
+                <div class="col-sm-4">
+                    <label>Category Name</label>
+                    <input type="hidden" id="hfZId" />
+                    <span class="text-danger">*</span>
+                    <input type="text" placeholder="Enter Category Name" class="form-control" id="txtCCategory" onkeypress="return isAlpha(event.keyCode);" required>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="form-check">
+                        <br />
+                        <br />
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="ckbIsActive" name="IsActive">
+                            Is Active
+                        </label>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+        <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+        <button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function isAlpha(keyCode) {
+
+        return ((keyCode >= 65 && keyCode <= 90) || keyCode == 8 || keyCode == 32 || keyCode == 190 || (keyCode >= 48 && keyCode <= 57) || (keyCode >= 97 && keyCode <= 122))
+
+    }
+    $(document).keydown(function (keyCode) {
+        if (keyCode.ctrlKey == true && (keyCode.which == '118' || keyCode.which == '86')) {
+
+            keyCode.preventDefault();
+        }
+    });
+
+</script>

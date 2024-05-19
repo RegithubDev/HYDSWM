@@ -1,0 +1,59 @@
+﻿
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h3 class="modal-title">Add Circle </h3>
+        <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+    </div>
+    @*<button type="button" class="btn bg-primary" id="alert" onclick="ShowMessage('1','record added');">Launch <i class="icon-play3 ml-2"></i></button>*@
+
+    <div class="modal-body">
+
+
+        <div class="form-group">
+            <div class="row">
+
+                <div class="col-sm-4">
+                    <label>Circle</label>
+                    <input type="hidden" id="hfCircleId" />
+                    <span class="text-danger">*</span>
+                    <input type="text" placeholder="Circle" class="form-control" id="txtCircle" required>
+                </div>
+                <div class="col-sm-4">
+                    <label>Circle Code</label>
+                    <span class="text-danger">*</span>
+                    <input type="text" placeholder="Circle Code" class="form-control" id="txtCircleCode" required>
+                </div>
+                <div class="col-sm-4">
+                    <label>Zone</label>
+                    <span class="text-danger">*</span>
+                    <select id="ddlZone" required
+                            class="form-control">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="form-check">
+
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="ckbIsActive" name="IsActive">
+                            Is Active
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+        <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+        <button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
+    </div>
+</div>

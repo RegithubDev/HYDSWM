@@ -1,0 +1,177 @@
+﻿
+@{
+    ViewData["Title"] = "EmergencyPointDetail";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+<style>
+    td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_open.png') no-repeat center center;
+    }
+
+    tr.shown td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_close.png') no-repeat center center;
+    }
+
+    .progress {
+    }
+
+    .line-btw {
+        height: 3px;
+        width: 100px;
+        background-color: #2bb2bb;
+    }
+
+
+
+    .st {
+        width: 2em;
+        height: 2em;
+        text-align: center;
+        line-height: 2em;
+        border-radius: 1em;
+        background: dodgerblue;
+        margin: 0 1em;
+        display: inline-block;
+        color: white;
+        position: relative;
+    }
+
+        .st::before {
+            content: '';
+            position: absolute;
+            top: .9em;
+            left: -4em;
+            width: 4em;
+            height: .2em;
+            background: dodgerblue;
+            opacity: 0.3;
+        }
+
+        .st:first-child::before {
+            display: none;
+        }
+
+    div.scroll {
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+
+    .select2-container--classic .select2-selection--single, .select2-container--default .select2-selection--multiple, .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-selection__arrow, .select2-container--default .select2-selection--single .select2-selection__rendered {
+        border-color: #e9ecef;
+        color: #54667a;
+        height: calc(1.5385em + 0.875rem + 2px);
+        line-height: 30px;
+    }
+
+  
+</style>
+
+<div class="page-header border-bottom-0">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">Emergency Vehicles</span> Information</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                <a title="Add" cid="" onclick="CallFunc(this);" id="btnAdd"><i class="icon-add"></i></a>
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+            </div>
+        </div>
+
+        <div class="dataTables_wrapper no-footer">
+
+            <div class="datatable-scroll-wrap">
+
+                <table class="table datatable-button-html5-columns" id="example">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Sr. No</th>
+                            <th>Vehicle No</th>
+                            @* <th>Id</th>*@
+                            <th>SheduleTime</th>
+                            <th>Status</th>
+                            <th>Remarks</th>
+                            <th>Total Points</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<style>
+    td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_open.png') no-repeat center center;
+    }
+
+    tr.shown td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_close.png') no-repeat center center;
+    }
+</style>
+
+
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+
+@section scripts {
+    <link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+    <script src="~/otherfiles/Light/global_assets/js/plugins/forms/selects/nselect2.min.js"></script>
+    <script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR9w4KTLnl8IWjTgFLHIvHZXLrpJlKi6I"></script>
+    <script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Collection/EmrVehicleDetail.js?@DateTime.Now.Ticks"></script>
+}
+
+
+
+
+
+

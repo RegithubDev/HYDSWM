@@ -1,0 +1,152 @@
+﻿
+<div class="modal-content">
+    <div class="modal-header">
+        <h3 class="modal-title">Add Route Information</h3>
+        <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+    </div>
+
+    <div class="modal-body">
+        <fieldset>
+            <legend class="bg-info">Route Details</legend>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="hidden" id="hfRouteId" />
+                            <label>Route Name</label>
+                            <span class="text-danger">*</span>
+                            <input type="text" placeholder="Enter Route Name" class="form-control" id="txtRouteName" required>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label>Route Code</label>
+                        <input type="text" placeholder="Route Code" class="form-control" id="txtRouteCode" readonly="true">
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Vehicle No</label>
+                        <span class="text-danger">*</span>
+                        <select id="ddlVehicleNo"
+                                class="form-control form-control-select2" required>
+                            <option value="">Select</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Buffer Min</label>
+                        <input type="text" placeholder="Buffer Min" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" onselectstart="return false" autocomplete="off" onkeypress="return isNumberKey(this, event);" class="form-control" id="txtBufferMin" required>
+                    </div>
+                   @* <div class="col-sm-4">
+                        <label>Arrival Time</label>
+                        <input type="time" placeholder="Arrival Time" class="form-control" id="txtArrvlTime" readonly>
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Departure Time</label>
+                        <input type="time" placeholder="Departure Time" class="form-control" id="txtDeptTime" readonly>
+                    </div>*@
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-check">
+
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" id="ckbIsActive">
+                                Is Active
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend class="bg-info">Geo Point Details</legend>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label>Geo Point</label>
+                        <span class="text-danger">*</span>
+                        <select id="ddlStop"
+                                class="form-control form-control-select2">
+                            <option value="">Select</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Pickup Time</label>
+                        <span class="text-danger">*</span>
+                        <input type="time" placeholder="Pickup Time" class="form-control" id="txtPickupTime">
+                    </div>
+                     <div class="col-sm-3">
+                        <label>Trip </label>
+                        <span class="text-danger">*</span>
+                        <select id="ddlTrip"
+                                class="form-control">
+                            <option value="">Select</option>
+                        </select>
+                    </div>
+                   @* <div class="col-sm-3">
+                        <label>Arrival Time</label>
+                        <span class="text-danger">*</span>
+                        <input type="time" placeholder="Arrival Time" class="form-control" id="txtSArrvlTime">
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Departure Time</label>
+                        <span class="text-danger">*</span>
+                        <input type="time" placeholder="Departure Time" class="form-control" id="txtSDeptTime">
+                    </div>*@
+                    <div class="col-sm-3">
+                        <br />
+                        <button type="button" id="btnAddStop" class="
+                          justify-content-center
+                          w-60
+                          btn btn-rounded btn-light-success
+                          text-success
+                          font-weight-medium
+                          d-flex
+                          align-items-center
+                        " onclick="AddStops();">
+                            <i class="icon-add"></i> Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="card card-table table-responsive shadow-0 mb-0">
+                    <table id="tblStop" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Geo Point</th>
+                                <th>Pickup Time</th>
+                                <th>Trip</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+
+
+    </div>
+
+     <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+        <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+        <button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,78 @@
+﻿@model COMMON.SWMENTITY.ShiftInfo
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h3 class="modal-title">Add Shift Information</h3>
+        <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+    </div>
+    @*<button type="button" class="btn bg-primary" id="alert" onclick="ShowMessage('1','record added');">Launch <i class="icon-play3 ml-2"></i></button>*@
+
+    <div class="modal-body">
+
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input type="hidden" asp-for="ShiftId" name="ShiftId" id="hfShiftId" />
+                        <label>Shift Name</label>
+                        <span class="text-danger">*</span>
+                        <input type="text" placeholder="Enter Shift Name" class="form-control" asp-for="ShiftName" name="ShiftName" id="txtShiftName" onkeypress = "return isAlpha(event.keyCode);"  required>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <label>Start Time</label>
+                    <span class="text-danger">*</span>
+                    <input type="time" placeholder="Enter Start Time" class="form-control" asp-for="ShiftSTime" name="ShiftSTime" id="txtShiftSTime" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>End Time</label>
+                    <span class="text-danger">*</span>
+                    <input type="time" placeholder="Enter Address" class="form-control" asp-for="ShiftETime" name="ShiftETime" id="txtShiftETime" required>
+                </div>
+                <div class="col-sm-4">
+                    <label>Buffer Min Before Shift Start</label>
+                    <span class="text-danger">*</span>
+                    <input type="number" placeholder="Enter Buffer Min Before Shift Start" class="form-control" asp-for="BeforBMin" name="BeforBMin" id="txtBeforBMin" required>
+                </div>
+                <div class="col-sm-4">
+                    <label>Buffer Min After Shift Start</label>
+                    <span class="text-danger">*</span>
+                    <input type="number" placeholder="Enter Buffer Min Before Shift Start" class="form-control" asp-for="AfterBMin" name="AfterBMin" id="txtAfterBMin" required>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+        <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+        <button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
+    </div>
+
+</div>
+
+
+
+<script type="text/javascript">
+
+
+    function isAlpha(keyCode) {
+
+        return ((keyCode >= 65 && keyCode <= 90) || keyCode == 8 || keyCode == 32 || keyCode == 190 || (keyCode >= 48 && keyCode <= 57) || (keyCode >= 97 && keyCode <= 122))
+
+    }
+    $(document).keydown(function (keyCode) {
+        if (keyCode.ctrlKey == true && (keyCode.which == '118' || keyCode.which == '86')) {
+
+            keyCode.preventDefault();
+        }
+    });
+   
+</script>

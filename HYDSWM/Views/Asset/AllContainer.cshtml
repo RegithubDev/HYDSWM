@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewData["Title"] = "All Container";
+    Layout = "_MonsterLayout";
+}
+
+
+<div class="page-header border-bottom-0">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+               
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+                @*  <div class="d-flex">
+                        <div class="dropdown me-2">
+                            <button class="btn btn-secondary dropdown-toggle"
+                                    type="button"
+                                    id="dropdownMenuButton"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                January 2021
+                            </button>
+                            <ul class="dropdown-menu"
+                                aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="#">February 2021</a></li>
+                                <li><a class="dropdown-item" href="#">March 2021</a></li>
+                                <li><a class="dropdown-item" href="#">April 2021</a></li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-success">
+                            <i data-feather="plus" class="fill-white feather-sm"></i>
+                            Create
+                        </button>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+    <!-- Page header -->
+    <div class="page-header border-bottom-0">
+
+    </div>
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0 ">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">All Container </span> Information</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                @*<a title="Download QR Code" cid="" onclick="GetMultipleQrCode(this);" id="btnDownload"><i class="icon-download7"></i></a>*@
+                <a title="Add" cid="" onclick="CallFunc(this);" id="btnAdd"><i class="icon-add"></i></a>
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    
+                    <button type="button" class="btn btn-secondary border-2" onclick="GetMultipleQrCode(this);">Download QR Code <i class="icon-qrcode ml-2"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="dataTables_wrapper no-footer">
+
+            <div class="datatable-scroll-wrap">
+
+                <table class="table datatable-button-html5-columns vehicletable" id="example">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Sr. No</th>
+                            <td><span><input type="checkbox" onchange="SelectAll(this);"></span> All</td>
+
+                            <th>Status</th>
+                            <th>UId(QR Code)</th>
+                            <th>Print(QR Code)</th>
+                            <th>Container Code</th>
+                            <th>Container Name</th>
+                            <th>Container Capacity(MT)</th>
+                            <th>Container Type</th>
+
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<img src="" id="mainImg" style="display:none" />
+<input type="hidden" id="hfUserId" value="@ViewBag.UserId" />
+<!-- Vertical form modal -->
+<div id="modal_form_AddDetail" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form class="form-validate-jquery" onsubmit="return Formsubmit();">
+            <div id="user_content">
+
+            </div>
+
+        </form>
+    </div>
+</div>
+<!-- /vertical form modal -->
+
+<style>
+    td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_open.png') no-repeat center center;
+    }
+
+    tr.shown td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_close.png') no-repeat center center;
+    }
+</style>
+
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+@section scripts {
+    <link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+    <script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Asset/ContainerInfo.js?@DateTime.Now.Ticks"></script>
+}
+
+
+
+
+

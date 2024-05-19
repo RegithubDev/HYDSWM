@@ -1,0 +1,1637 @@
+﻿@{ ViewData["Title"] = "CollectionIndex";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml"; }
+
+@*<div class="
+                  d-flex
+                  border-bottom
+                  title-part-padding
+                  px-0
+                  mb-3
+                  align-items-center
+                ">
+        <div>
+            <h2 class="mb-0">Dashbord</h2>
+        </div>
+    </div>*@
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-md-4 align-self-center">
+            <h3 class="page-title">Dashboard</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Dashboard
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="
+                col-md-8
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+
+            <div class="d-flex">
+                <div class="col-md-2" style="left:8px; top:2px">
+                    <div class="form-group ">
+                        <label>Date</label>
+                        <input type="text" class="form-control" id="txtFromDate" autocomplete="off" readonly>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <label>Zone</label>
+                    <select id="ddlZone" onchange="CallFCircleByZone();" data-placeholder="Select Your Zone" class="form-control form-control-select2" style="width: 110% ">
+                        <option value="0">All Zone</option>
+                    </select>
+
+                    @*<select id="ddlZone" onchange="CallFCircleByZone();" data-placeholder="Select Your Zone" class="form-control form-control-select2" data-fouc>
+                            <option value="0">All Zone</option>
+                        </select>*@
+
+                </div>
+                <div class="input-group mb-3">
+                    <label>Circle</label>
+                    <select id="ddlCircle" onchange="CallFWardByCircle();" data-placeholder="Select Your Circle" class="form-control form-control-select2" style="width: 110% ">
+                        <option value="0">All Circle</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <label>Ward</label>
+                    <select id="ddlWard" data-placeholder="Select Your Ward" class="form-control form-control-select2" style="width: 110% ">
+                        <option value="0">All Ward</option>
+                    </select>
+
+                </div>
+
+                <div class="input-group mb-3">
+                    <label>Route</label>
+                    <select id="ddlRoute" onchange="CallAllTripByRoute();" data-placeholder="Select Route" class="form-control form-control-select2" data-fouc style="width: 110% ">
+                        <option value="0">All Route</option>
+                    </select>
+
+                    @*<select id="ddlRoute" data-placeholder="Select Route" class="form-control form-control-select2" data-fouc>
+                            <option value="0">All Route</option>
+                        </select>*@
+
+                </div>
+                <div class="input-group mb-3">
+                    <label>Route Trip Code</label>
+                    <select id="ddlTrip" data-placeholder="Select Asset Category" class="form-control form-control-select2" style="width: 110% ">
+                        <option value="0">All Trip</option>
+                    </select>
+                </div>
+
+
+                <button type="button" class="btn btn-primary border-2" style="height:42px; top:28px;" onclick="CallAllFunc('Click');">Search</button>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-tabs">
+            <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true">
+                <span>
+                    <i class="ti-home"></i>
+                </span>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-tab">
+            <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile5" role="tab" aria-controls="profile">
+                <span>
+                    <i class="ti-map"></i>
+                </span>
+                <span>Map View</span>
+
+            </a>
+        </li>
+         
+    </ul>
+    <div class="tab-content tabcontent-border p-3" id="myTabContent">
+        <div role="tabpanel" class="tab-pane fade show active" id="home5" aria-labelledby="home-tab">
+            <div class="
+              d-flex
+              border-bottom
+              title-part-padding
+              px-0
+              mb-3
+              align-items-center
+            ">
+                <div>
+                    <h4 class=" btn btn-dark-primary">
+                        All Zones Waste Collection Summary
+                    </h4>
+                </div>
+
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100 overflow-auto">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                @*<h4 class="card-title mb-0 btn btn-dark-primary">All Zone</h4>*@
+                                @*<div class="ms-auto">
+                                        <span class="text-danger fs-3 font-weight-medium">( <i class="fas fa-caret-down"></i> 04% Down )</span>
+                                    </div>*@
+                            </div>
+                            <div class="d-flex align-items-center my-3">
+                                <div class="border-end pe-3" id="dvZAllTotalPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Point</h6>
+                                        <b id="bZAllTotalPoint">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-0 border-end pe-3" id="dvZAllCollectedPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Collection Progress</h6>
+                                        <b id="bZAllCollectedPoint">0</b>
+                                        <b id="bZAllCollectedPointPerc">[%]</b>
+                                    </center>
+
+
+
+                                </div>
+                                <div class="ms-2 border-end pe-3" id="dvZAllNotCollectedPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Collected</h6>
+                                        <b id="bZAllNotCollectedPoint">0</b>
+
+                                    </center>
+
+
+                                </div>
+                                <div class="ms-2 border-end pe-3" id="dvZAllUniquePoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Unique Pickup</h6>
+                                        <b id="bZAllUniquePoint">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1  border-end pe-3" id="dvZAllMoreThanOncePoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">More Than Once</h6>
+                                        <b id="bZAllMoreThanOncePoint">0</b>
+                                    </center>
+                                </div>
+                                <div class="ms-2" id="dvZAllHotspotProgress">
+                                    <center>
+                                        <h6 class="text-muted fw-normal"> Hotspot Progress</h6>
+                                        <b id="bZAllHotspotProgress">0-[%]</b>
+                                    </center>
+                                </div>
+                            </div>
+                            @*<a href="javascript:void(0)"
+                                class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                      progress-bar progress-bar-striped
+                      bg-dark-primary
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch ">
+                    <div class="card w-100  overflow-auto">
+                        <div class="card-body ">
+                            <div class="d-flex align-items-center">
+                                @* <h4 class="card-title mb-5  "></h4>*@
+
+                            </div>
+
+                            <div class="d-flex align-items-center my-3">
+                                <div class="border-end pe-1" id="dvZAllTotalRoutes">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Routes</h6>
+                                        <b id="bZAllTotalRoutes">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZAllTotalTrips">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Trips</h6>
+                                        <b id="bZAllTotalTrips">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZAllVehicle">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Vehicle Deploy</h6>
+                                        <b id="bZAllVehicle">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvbZAllRouteProgress">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Trips Progress</h6>
+                                        <b id="bZAllRouteProgress">0%</b>
+                                    </center>
+
+                                </div>
+
+                                <div class="ms-1 border-end pe-1" id="dvZAllRouteEarlyCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Early Completion</h6>
+                                        <b id="bZAllRouteEarlyCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZAllRouteOnTimeCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">OnTime Completion</h6>
+                                        <b id="bZAllRouteOnTimeCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZAllRouteLateCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Late Completion</h6>
+                                        <b id="bZAllRouteLateCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1  border-end pe-1 " id="dvZAllRouteNotCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Completed</h6>
+                                        <b id="bZAllRouteNotCompl">0</b>
+                                    </center>
+
+                                </div>
+
+
+                            </div>
+                            @*<a href="javascript:void(0)"
+                                class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                      progress-bar progress-bar-striped
+                      bg-dark-primary
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <p>&nbsp;</p>
+            </div>
+
+            <div class="
+              d-flex
+              border-bottom
+              title-part-padding
+              px-0
+              mb-3
+              align-items-center
+            ">
+                <div>
+                    <h4 class="mb-lg-n4 btn btn-info" style="bottom:20px;">Zone Wise Waste Collection</h4>
+                </div>
+            </div>
+
+            <div class="row">
+
+
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100 overflow-auto">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-0 btn btn-warning
+                      ">
+                                    [Z1] L B Nagar Zone
+                                </h4>
+                                @*<div class="ms-auto">
+                            <span class="text-danger fs-3 font-weight-medium">( <i class="fas fa-caret-down"></i> 04% Down )</span>
+                        </div>*@
+                            </div>
+                            <div class="d-flex align-items-center my-3">
+                                <div class="border-end pe-3" id="dvZ3TotalPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Point</h6>
+                                        <b id="bZ3TotalPoint">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-0 border-end pe-3" id="dvZ3CollectedPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Collection Progress</h6>
+                                        <b id="bZ3CollectedPoint">0</b>
+                                        <b id="bZ3CollectedPointPerc">[%]</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-2 border-end pe-3" id="dvZ3NotCollectedPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Collected</h6>
+                                        <b id="bZ3NotCollectedPoint">0</b><br>
+                                        <b id="bZp3NotCollectedPoint">0</b>
+
+                                    </center>
+
+
+                                </div>
+                                <div class="ms-2 border-end pe-3" id="dvZ3UniquePoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Unique Pickup</h6>
+                                        <b id="bZ3UniquePoint">0</b>
+                                    </center>
+
+
+                                </div>
+                                <div class="ms-2  border-end pe-2" id="dvZ3MoreThanOncePoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">More Than Once</h6>
+                                        <b id="bZ3MoreThanOncePoint">0</b>
+                                    </center>
+                                </div>
+                                <div class="ms-2" id="dvZ3HotspotProgress">
+                                    <center>
+                                        <h6 class="text-muted fw-normal"> Hotspot Progress</h6>
+                                        <b id="bZ3HotspotProgress">0-[%]</b>
+                                    </center>
+                                </div>
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                      progress-bar progress-bar-striped
+                      bg-warning
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100 overflow-auto">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-5  "></h4>
+
+                            </div>
+
+                            <div class="d-flex align-items-center my-3">
+                                <div class="border-end pe-1" id="dvZ3TotalRoutes">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Routes</h6>
+                                        <b id="bZ3TotalRoutes">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ3TotalTrips">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Trips</h6>
+                                        <b id="bZ3TotalTrips">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ3Vehicle">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Vehicle Deploy</h6>
+                                        <b id="bZ3Vehicle">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ3RouteProgress">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Trips Progress</h6>
+                                        <b id="bZ3RouteProgress">0%</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ3RouteEarlyCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Early Completion</h6>
+                                        <b id="bZ3RouteEarlyCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ3RouteOnTimeCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">OnTime Completion</h6>
+                                        <b id="bZ3RouteOnTimeCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ3RouteLateCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Late Completion</h6>
+                                        <b id="bZ3RouteLateCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ3RouteNotCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Completed</h6>
+                                        <b id="bZ3RouteNotCompl">0</b>
+                                    </center>
+
+                                </div>
+
+
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                     progress-bar progress-bar-striped
+                      bg-warning
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100 overflow-auto">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-0  btn btn-success">[Z2] Charminar Zone</h4>
+                                @*<div class="ms-auto">
+                            <span class="text-danger fs-3 font-weight-medium">( <i class="fas fa-caret-down"></i> 04% Down )</span>
+                        </div>*@
+                            </div>
+                            <div class="d-flex align-items-center my-3">
+                                <div class="border-end pe-3" id="dvZ4TotalPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Point</h6>
+                                        <b id="bZ4TotalPoint">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-0 border-end pe-3" id="dvZ4CollectedPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Collection Progress</h6>
+                                        <b id="bZ4CollectedPoint">0</b>
+                                        <b id="bZ4CollectedPointPerc">[%]</b>
+                                    </center>
+
+
+
+                                </div>
+                                <div class="ms-2 border-end pe-3" id="dvZ4NotCollectedPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Collected</h6>
+                                        <b id="bZ4NotCollectedPoint">0</b><br>
+                                        <b id="bZp4NotCollectedPoint">0</b>
+
+                                    </center>
+
+
+                                </div>
+                                <div class="ms-2 border-end pe-3" id="dvZ4UniquePoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Unique Pickup</h6>
+                                        <b id="bZ4UniquePoint">0</b>
+                                    </center>
+                                </div>
+                                <div class="ms-2  border-end pe-2" id="dvZ4MoreThanOncePoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">More Than Once</h6>
+                                        <b id="bZ4MoreThanOncePoint">0</b>
+                                    </center>
+                                </div>
+                                <div class="ms-2" id="dvZ4HotspotProgress">
+                                    <center>
+                                        <h6 class="text-muted fw-normal"> Hotspot Progress</h6>
+                                        <b id="bZ4HotspotProgress">0-[%]</b>
+                                    </center>
+                                </div>
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                       progress-bar progress-bar-striped
+                      bg-success
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100 overflow-auto">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-5  "></h4>
+
+                            </div>
+
+                            <div class="d-flex align-items-center my-3">
+                                <div class="border-end pe-2" id="dvZ4TotalRoutes">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Routes</h6>
+                                        <b id="bZ4TotalRoutes">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="border-end pe-1" id="dvZ4TotalTrips">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Trip  </h6>
+                                        <b id="bZ4TotalTrips">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ4Vehicle">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Vehicle Deploy</h6>
+                                        <b id="bZ4Vehicle">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ4RouteProgress">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Trips Progress</h6>
+                                        <b id="bZ4RouteProgress">0%</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ4RouteEarlyCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Early Completion</h6>
+                                        <b id="bZ4RouteEarlyCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ4RouteOnTimeCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">OnTime Completion</h6>
+                                        <b id="bZ4RouteOnTimeCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ4RouteLateCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Late Completion</h6>
+                                        <b id="bZ4RouteLateCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ4RouteNotCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Completed</h6>
+                                        <b id="bZ4RouteNotCompl">0</b>
+                                    </center>
+
+                                </div>
+
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                      progress-bar progress-bar-striped
+                      bg-success
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100 overflow-auto">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-0 btn btn-info">[Z3] Khairatabad Zone</h4>
+                                @*<div class="ms-auto">
+                            <span class="text-danger fs-3 font-weight-medium">( <i class="fas fa-caret-down"></i> 04% Down )</span>
+                        </div>*@
+                            </div>
+                            <div class="d-flex align-items-center my-3">
+                                <div class="border-end pe-3" id="dvZ5TotalPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Point</h6>
+                                        <b id="bZ5TotalPoint">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-0 border-end pe-3" id="dvZ5CollectedPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Collection Progress</h6>
+                                        <b id="bZ5CollectedPoint">0</b>
+                                        <b id="bZ5CollectedPointPerc">[%]</b>
+                                    </center>
+
+
+
+                                </div>
+                                <div class="ms-2 border-end pe-3" id="dvZ5NotCollectedPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Collected</h6>
+                                        <b id="bZ5NotCollectedPoint">0</b><br />
+                                        <b id="bZp5NotCollectedPoint">0</b>
+
+                                    </center>
+
+
+                                </div>
+                                <div class="ms-2 border-end pe-3" id="dvZ5UniquePoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Unique Pickup</h6>
+                                        <b id="bZ5UniquePoint">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1  border-end pe-3" id="dvZ5MoreThanOncePoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">More Than Once</h6>
+                                        <b id="bZ5MoreThanOncePoint">0</b>
+                                    </center>
+                                </div>
+                                <div class="ms-2" id="dvZ5HotspotProgress">
+                                    <center>
+                                        <h6 class="text-muted fw-normal"> Hotspot Progress</h6>
+                                        <b id="bZ5HotspotProgress">0-[%]</b>
+                                    </center>
+                                </div>
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                      progress-bar progress-bar-striped
+                      bg-info
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100 overflow-auto">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-5  "></h4>
+
+                            </div>
+
+                            <div class="d-flex align-items-center my-3">
+                                <div class="border-end pe-1" id="dvZ5TotalRoutes">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Routes</h6>
+                                        <b id="bZ5TotalRoutes">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ5TotalTrips">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Trips</h6>
+                                        <b id="bZ5TotalTrips">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ5Vehicle">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Vehicle Deploy</h6>
+                                        <b id="bZ5Vehicle">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvbZ5RouteProgress">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Trips Progress</h6>
+                                        <b id="bZ5RouteProgress">0%</b>
+                                    </center>
+
+                                </div>
+
+                                <div class="ms-1 border-end pe-1" id="dvZ5RouteEarlyCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Early Completion</h6>
+                                        <b id="bZ5RouteEarlyCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ5RouteOnTimeCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">OnTime Completion</h6>
+                                        <b id="bZ5RouteOnTimeCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ5RouteLateCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Late Completion</h6>
+                                        <b id="bZ5RouteLateCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1  border-end pe-1 " id="dvZ5RouteNotCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Completed</h6>
+                                        <b id="bZ5RouteNotCompl">0</b>
+                                    </center>
+
+                                </div>
+
+
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                      progress-bar progress-bar-striped
+                      bg-info
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100 overflow-auto">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-0 btn btn-danger ">[Z4] Secunderabad Zone</h4>
+                                @*<div class="ms-auto">
+                            <span class="text-danger fs-3 font-weight-medium">( <i class="fas fa-caret-down"></i> 04% Down )</span>
+                        </div>*@
+                            </div>
+                            <div class="d-flex align-items-center my-3">
+                                <div class="border-end pe-3" id="dvZ6TotalPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Point</h6>
+                                        <b id="bZ6TotalPoint">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-0 border-end pe-3" id="dvZ6CollectedPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Collection Progress</h6>
+                                        <b id="bZ6CollectedPoint">0</b>
+                                        <b id="bZ6CollectedPointPerc">[%]</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-3" id="dvZ6NotCollectedPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Collected</h6>
+                                        <b id="bZ6NotCollectedPoint">0</b><br />
+                                        <b id="bZp6NotCollectedPoint">0</b>
+
+                                    </center>
+
+
+                                </div>
+                                <div class="ms-1 border-end pe-3" id="dvZ6UniquePoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Unique Pickup</h6>
+                                        <b id="bZ6UniquePoint">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-3" id="dvZ6MoreThanOncePoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">More Than Once</h6>
+                                        <b id="bZ6MoreThanOncePoint">0</b>
+                                    </center>
+                                </div>
+                                <div class="ms-2" id="dvZ6HotspotProgress">
+                                    <center>
+                                        <h6 class="text-muted fw-normal"> Hotspot Progress</h6>
+                                        <b id="bZ6HotspotProgress">0-[%]</b>
+                                    </center>
+                                </div>
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                     progress-bar progress-bar-striped
+                      bg-danger
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100 overflow-auto">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-5  "></h4>
+
+                            </div>
+                            <div class="d-flex align-items-center my-3">
+                                <div class="border-end pe-1" id="dvZ6TotalRoutes">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Routes</h6>
+                                        <b id="bZ6TotalRoutes">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ6TotalTrips">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Trips</h6>
+                                        <b id="bZ6TotalTrips">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ6Vehicle">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Vehicle Deploy</h6>
+                                        <b id="bZ6Vehicle">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ6RouteProgress">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Trips Progress</h6>
+                                        <b id="bZ6RouteProgress">0% </b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvbZ6RouteEarlyCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Early Completion</h6>
+                                        <b id="bZ6RouteEarlyCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ6RouteOnTimeCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">OnTime Completion</h6>
+                                        <b id="bZ6RouteOnTimeCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ6RouteLateCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Late Completion</h6>
+                                        <b id="bZ6RouteLateCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ6RouteNotCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Completed</h6>
+                                        <b id="bZ6RouteNotCompl">0</b>
+                                    </center>
+
+                                </div>
+
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                      progress-bar progress-bar-striped
+                      bg-danger
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100 overflow-auto">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-0 btn btn-secondary">[Z5] Serilingampally Zone</h4>
+                                @*<div class="ms-auto">
+                            <span class="text-danger fs-3 font-weight-medium">( <i class="fas fa-caret-down"></i> 04% Down )</span>
+                        </div>*@
+                            </div>
+                            <div class="d-flex align-items-center my-3">
+                                <div class=" border-end pe-3" id="dvZ2TotalPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Point</h6>
+                                        <b id="bZ2TotalPoint">0</b>
+                                    </center>
+
+                                </div>
+
+                                <div class="border-end pe-3" id="dvZ2CollectedPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Collection Progress</h6>
+                                        <b id="bZ2CollectedPoint">0</b>
+                                        <b id="bZ2CollectedPointPerc">[%]</b>
+                                    </center>
+
+                                </div>
+
+                                <div class="ms-2 border-end pe-3" id="dvZ2NotCollectedPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Collected</h6>
+                                        <b id="bZ2NotCollectedPoint">0</b><br />
+                                        <b id="bZp2NotCollectedPoint">0</b>
+
+                                    </center>
+
+
+                                </div>
+                                <div class="ms-2 border-end pe-3" id="dvZ2UniquePoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Unique Pickup</h6>
+                                        <b id="bZ2UniquePoint">0</b>
+                                    </center>
+
+
+                                </div>
+                                <div class="ms-2  border-end pe-2" id="dvZ2MoreThanOncePoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">More Than Once</h6>
+                                        <b id="bZ2MoreThanOncePoint">0</b>
+                                    </center>
+                                </div>
+                                <div class="ms-2" id="dvZ2HotspotProgress">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Hotspot Progress</h6>
+                                        <b id="bZ2HotspotProgress">0-[%]</b>
+                                    </center>
+                                </div>
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                      progress-bar progress-bar-striped
+                      bg-secondary
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100 overflow-auto">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-5  "></h4>
+
+                            </div>
+
+                            <div class="d-flex align-items-center my-3">
+                                <div class="border-end pe-1" id="dvZ2TotalRoutes">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Routes</h6>
+                                        <b id="bZ2TotalRoutes">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ2TotalTrips">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Trips</h6>
+                                        <b id="bZ2TotalTrips">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ2Vehicle" style="bottom:20px">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Vehicle Deploy</h6>
+                                        <b id="bZ2Vehicle">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ2RouteProgress">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Trips Progress</h6>
+                                        <b id="bZ2RouteProgress">0%</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ2RouteEarlyCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Early Completion</h6>
+                                        <b id="bZ2RouteEarlyCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ2RouteOnTimeCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">OnTime Completion</h6>
+                                        <b id="bZ2RouteOnTimeCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ2RouteLateCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Late Completion</h6>
+                                        <b id="bZ2RouteLateCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ2RouteNotCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Completed</h6>
+                                        <b id="bZ2RouteNotCompl">0</b>
+                                    </center>
+
+                                </div>
+
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                      progress-bar progress-bar-striped
+                      bg-secondary
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100 overflow-auto">
+                        <div class="card-body " style="overflow:auto">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-0 btn btn-primary ">[Z6] Kukatpally Zone</h4>
+
+                            </div>
+                            <div class="d-flex align-items-center my-3">
+
+                                <div class="border-end pe-3" id="dvZ1TotalPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Point</h6>
+                                        <b id="bZ1TotalPoint">0</b>
+                                    </center>
+
+                                </div>
+                                <div class=" border-end pe-3" id="dvZ1CollectedPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Collection Progress</h6>
+                                        <b id="bZ1CollectedPoint">0</b>
+                                        <b id="bZ1CollectedPointPerc">[%]</b>
+                                    </center>
+                                </div>
+                                <div class="ms-2 border-end pe-3" id="dvZ1NotCollectedPoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Collected</h6>
+                                        <b id="bZ1NotCollectedPoint">0</b><br />
+                                        <b id="bZp1NotCollectedPoint">0</b>
+                                    </center>
+                                </div>
+                                <div class="ms-2 border-end pe-3" id="dvZ1UniquePoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Unique Pickup</h6>
+                                        <b id="bZ1UniquePoint">0</b>
+                                    </center>
+                                </div>
+
+                                <div class="ms-2  border-end pe-2" id="dvZ1MoreThanOncePoint">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">More Than Once</h6>
+                                        <b id="bZ1MoreThanOncePoint">0</b>
+                                    </center>
+                                </div>
+                                <div class="ms-2" id="dvZ1HotspotProgress">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Hotspot Progress</h6>
+                                        <b id="bZ1HotspotProgress">0-[%]</b>
+                                    </center>
+                                </div>
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                      progress-bar progress-bar-striped
+                      bg-primary
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100 overflow-auto">
+                        <div class="card-body " style="overflow:auto">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-5"></h4>
+
+                            </div>
+
+                            <div class="d-flex align-items-center my-3">
+
+                                <div class="border-end pe-1" id="dvZ1TotalRoutes">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Routes</h6>
+                                        <b id="bZ1TotalRoutes">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ1TotalTrips">
+                                    <center>
+                                        <h6 class="text-muted fw-normal"> Total Trips</h6>
+                                        <b id="bZ1TotalTrips">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ1Vehicle">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Vehicle Deploy</h6>
+                                        <b id="bZ1Vehicle">0</b>
+                                    </center>
+
+                                </div>
+
+                                <div class="ms-1 border-end pe-1" id="dvZ1RouteProgress">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Trips Progress</h6>
+                                        <b id="bZ1RouteProgress">0% </b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ1RouteEarlyCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Early Completion</h6>
+                                        <b id="bZ1RouteEarlyCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ1RouteOnTimeCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">OnTime Completion</h6>
+                                        <b id="bZ1RouteOnTimeCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 border-end pe-1" id="dvZ1RouteLateCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Late Completion</h6>
+                                        <b id="bZ1RouteLateCompl">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1  border-end pe-1" id="dvZ1RouteNotCompl">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Completed</h6>
+                                        <b id="bZ1RouteNotCompl">0</b>
+                                    </center>
+
+                                </div>
+
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                      progress-bar progress-bar-striped
+                      bg-primary
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="
+              d-flex
+              border-bottom
+              title-part-padding
+              px-0
+              mb-3
+              align-items-center
+            ">
+                    <div>
+                        <h4 class="mb-lg-n4 btn btn-info" style="bottom:20px; left:18px">
+                            Point Summary Operation/Master
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-0 btn btn-info  ">Master Data Geo Points</h4>
+                                @*<div class="ms-auto">
+                            <span class="text-danger fs-3 font-weight-medium">( <i class="fas fa-caret-down"></i> 04% Down )</span>
+                        </div>*@
+                            </div>
+                            <div class="d-flex align-items-center my-3">
+                                <div class=" border-end pe-2" style=" position: relative; top: 2px;" id="dvMTotal">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Points</h6>
+                                        <b id="h6MTotal">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-0 border-end pe-1" id="dvMActive">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Active Points</h6>
+                                        <b id="h6MActiveCount">0</b>
+                                        <b id="h6MActivePerc">[%]</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-0 border-end pe-1" id="dvMInActive">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">InActive Points</h6>
+                                        <b id="h6MInActiveCount">0</b>
+                                        <b id="h6MInActivePerc">[%]</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-0 border-end pe-1" id="dvMAssignedToRoute">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Assgined to Routes</h6>
+                                        <b id="h6MAssignedToRouteCount">0</b>
+                                        <b id="h6MAssignedToRoutePerc">[%]</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-0 " id="dvMNotAssignedToRoute">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Assigned to Routes</h6>
+                                        <b id="h6MNotAssignedToRouteCount">0</b>
+                                        <b id="h6MNotAssignedToRoutePerc">[%]</b>
+                                    </center>
+
+                                </div>
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                      progress-bar progress-bar-striped
+                      bg-info
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-0 btn btn-info ">Operations</h4>
+
+                            </div>
+
+                            <div class="d-flex align-items-center my-3">
+                                <div class="border-end pe-3" style=" position: relative; top: 2px;" id="dvOTotal">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Points</h6>
+                                        <b id="h6OTotalCount">0</b>
+                                    </center>
+
+                                </div>
+
+
+                                <div class="ms-0 border-end pe-3" id="dvOCollected">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">
+                                            Collected
+                                            Avg 7 Days
+                                        </h6>
+                                        <b class="align-content-sm-center" id="h6OCollectedCount">0 </b>
+                                        <b id="h6OCollectedPerc">[%] </b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-0 border-end pe-3" id="dvONotCollected">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Collected Avg 7 Days</h6>
+                                        <b id="h6ONotCollectedCount">0</b>
+                                        <b id="h6ONotCollectedPerc">[%]</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-0 border-end pe-3" id="dvOCollectedInRoute">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Collected Route Avg 7 Days</h6>
+                                        <b id="h6OCollectedInRouteCount">0</b>
+                                        <b id="h6OCollectedInRoutePerc">[%]</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-0 " id="dvONotCollectedInRoute">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Missed Points Avg 7 Days</h6>
+                                        <b id="h6NotCollectedInRouteCount">0</b>
+                                        <b id="h6NotCollectedInRoutePerc">[%]</b>
+                                    </center>
+
+                                </div>
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                      progress-bar progress-bar-striped
+                      bg-info
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-0 btn btn-default" style="background-color: #d2691e;">Master Data Vehicle</h4>
+                                @*<div class="ms-auto">
+                            <span class="text-danger fs-3 font-weight-medium">( <i class="fas fa-caret-down"></i> 04% Down )</span>
+                        </div>*@
+                            </div>
+                            <div class="d-flex align-items-center my-3">
+                                <div class=" border-end pe-2" id="dvMTotalVehicle">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total Vehicles</h6>
+                                        <b id="h7MTotalVehicle">0</b>
+                                    </center>
+
+                                </div>
+                                <div class="ms-1 " id="dvMVehicleNotAssigned">
+                                    <center>
+                                        <h6 class="text-muted fw-normal"> Vehicle Not Assigned </h6>
+                                        <b id="h7MVehicleNotAssigned">0</b>
+
+                                    </center>
+
+                                </div>
+
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                      progress-bar progress-bar-striped
+                      bg-default
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px; background-color: #d2691e;"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="
+              d-flex
+              border-bottom
+              title-part-padding
+              px-0
+              mb-3
+              align-items-center
+            ">
+                    <div>
+                        <h4 class="mb-lg-n4 btn btn-danger" style="bottom:20px; left:18px">
+                            Emergency Point Detail
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-12 col-xl-12 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title mb-0 btn btn-danger ">Emergency points</h4>
+
+                            </div>
+
+                            <div class="d-flex align-items-center my-3">
+                                <div class="border-end pe-5" style=" position: relative; top: 2px;" id="dvETotal">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Total points</h6>
+                                        <b id="hETotalCount">0</b>
+                                    </center>
+
+                                </div>
+
+
+                                <div class="ms-5 border-end pe-5" id="dvECollected">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">
+                                            Collected points
+                                        </h6>
+                                        <b class="align-content-sm-center" id="hECollectedCount">0 </b>
+                                        
+                                    </center>
+
+                                </div>
+                                <div class="ms-5 border-end pe-5" id="dENotCollected">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Not Collected points</h6>
+                                        <b id="hENotCollectedCount">0</b>
+                                       
+                                    </center>
+
+                                </div>
+                                <div class="ms-5 border-end pe-5" id="dvECollectedInRoute">
+                                    <center>
+                                        <h6 class="text-muted fw-normal">Schedule points</h6>
+                                        <b id="hESchedulepoints">0</b>
+                                       
+                                    </center>
+
+                                </div>
+                               
+                            </div>
+                            @*<a href="javascript:void(0)"
+                    class="btn btn-light-info text-info font-weight-medium">Learn More</a>*@
+                        </div>
+                        <div class="progress">
+                            <div class="
+                      progress-bar progress-bar-striped
+                      bg-danger
+                      progress-bar-animated
+                    "
+                                 style="width: 100%; height: 6px"
+                                 role="progressbar">
+                                <span class="sr-only">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="profile5" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="=row">
+
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="border-bottom title-part-padding">
+                            <h4 class="card-title mb-0">Geo Points Map View</h4>
+                            @*<div class="col-md-6" style="left:200px; top:-25px">
+                                <h4 class="card-title  badge badge-secondary" onclick="GetGeopointDataForMap('Click','-2')" style="background-color: #808000; width:45px">All</h4>
+                                <h6 class="card-title  badge badge-danger" onclick="GetGeopointDataForMap('Click','0')" style="width:45px">00</h6>
+                                <h6 class="card-title  badge badge-success" onclick="GetGeopointDataForMap('Click','1')">01</h6>
+                                <h6 class="card-title  badge badge-warning" style="background-color: #ffd800" onclick="GetGeopointDataForMap('Click','2')">02</h6>
+                                <h6 class="card-title  badge badge-primary" onclick="GetGeopointDataForMap('Click','3')">03</h6>
+                                <h4 class="card-title  badge badge-warning" onclick="GetGeopointDataForMap('Click','4')">04</h4>
+                                <h4 class="card-title  badge badge-primary" style="background-color:#6352ca" onclick="GetGeopointDataForMap('Click','5')">>=05</h4>
+                                <h4 class="card-title  badge badge-secondary" onclick="GetGeopointDataForMap('Click','-1')">Gray</h4>
+
+                            </div>*@
+                        <div class="col-md-12 " style="left:200px; top:-25px; ">
+
+                            <h6 class="card-title   badge badge-secondary" onclick="GetGeopointDataForMap('Click','-2')" style="background-color: #808000; width: 45px;">All <br />---<br /><b id="htagidAll"></b></h6>
+                            @*<h4 class="card-title  badge badge-secondary" onclick="GetGeopointDataForMap('Click','-2')" style="background-color: #808000; width: 45px; height: 35px; border-bottom:1px solid red;">All <br /> <b id="htagidAll"></b></h4>*@
+                            <h6 class="card-title  badge badge-danger" onclick="GetGeopointDataForMap('Click','0')" style="width:45px">00 <br />---<br /><b id="htagidred">00</b></h6>
+                            <h6 class="card-title  badge badge-success" onclick="GetGeopointDataForMap('Click','1')">01 <br /> ---<br /><b id="htagidgreen">01</b></h6>
+                            <h6 class="card-title  badge badge-warning" onclick="GetGeopointDataForMap('Click','2')" style="background-color: #ffd800">02 <br />---<br /><b id="htagidyellow">02</b></h6>
+                            <h6 class="card-title  badge badge-primary" onclick="GetGeopointDataForMap('Click','3')">03 <br />---<br /><b id="htagidblue">03</b></h6>
+                            <h4 class="card-title  badge badge-warning" onclick="GetGeopointDataForMap('Click','4')">04 <br />---<br /><b id="htagidorange">04</b></h4>
+                            <h4 class="card-title  badge badge-primary" onclick="GetGeopointDataForMap('Click','5')" style="background-color:#6352ca">>=05 <br /> ---<br /><b id="htagidpurple"></b></h4>
+                            <h4 class="card-title  badge badge-secondary" onclick="GetGeopointDataForMap('Click','-1')">Gray <br /> ---<br /><b id="htagidgrey">6</b></h4>
+                            <div class="col-md-12 " style="right: -400px; top: -56px;">
+                                <span>
+                                    <input type="radio" id="rdbGVP" name="fav_language" value="HTML">
+                                    <label for="html">GVP Point</label><br>
+                                </span>
+
+                            </div>
+                            <div class="col-md-12 " style="right: -500px; top: -88px; ">
+                                
+                                <span>
+                                    <input type="radio" id="rdbEmergency" name="fav_language" value="CSS">
+                                    <label for="css">Emergency Point</label><br>
+                                </span>
+                            </div>
+                        </div>
+                            @*<div class="col-md-6" style="left:200px; top:-25px">
+            <h4 class="card-title  badge badge-secondary" id="htagidAll" style="background-color: #808000">All</h4>
+            <h6 class="card-title  badge badge-danger" id="htagidred">0</h6>
+            <h6 class="card-title  badge badge-success" id="htagidgreen" style="width:32px">0</h6>
+            <h6 class="card-title  badge badge-warning" style="background-color: #ffd800; width:34px" id="htagidyellow ">0</h6>
+            <h6 class="card-title  badge badge-primary" id="htagidblue" style="width:34px">0</h6>
+            <h4 class="card-title  badge badge-warning" id="htagidorange" style="width:34px">0</h4>
+            <h4 class="card-title  badge badge-primary" style="background-color: #6352ca; width: 48px" id="htagidpurple">0</h4>
+            <h4 class="card-title  badge badge-secondary" id="htagidgrey" style="width:48px">0</h4>
+
+        </div>*@
+
+
+                        </div>
+
+                        <div class="card-body analytics-info">
+                            <div id="map_basic" style="height: 680px"></div>
+                        </div>
+
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+        @*<div class="tab-pane fade" id="profile5" role="tabpanel" aria-labelledby="profile-tab">
+                <div id="map_basic" style="height: 680px"></div>
+
+                <input type="hidden" id="hfLoginId" value="@ViewBag.LoginId" />
+
+
+
+            </div>*@
+
+    </div>
+
+</div>
+<!-- version2  -->
+<!-- 9. end Progress Card -->
+
+
+@section scripts {
+
+    @*<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+
+        <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>*@
+
+    <script src="~/otherfiles/monsteradmin/js/bootstrap-datepicker.min.js"></script>
+    <link href="~/otherfiles/monsteradmin/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.init.js"></script>
+    <script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR9w4KTLnl8IWjTgFLHIvHZXLrpJlKi6I"></script>
+    <script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Collection/CollectionIndexInfo.js?@DateTime.Now.Ticks"></script>
+
+
+
+}

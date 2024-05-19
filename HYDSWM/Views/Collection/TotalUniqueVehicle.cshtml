@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewData["Title"] = "TotalUniqueVehicle";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+<div class="page-breadcrumb">
+
+    <div class="row">
+        <div class="col-md-4 align-self-center">
+            <h3 class="page-title">All Vehicle Notification</h3>
+
+        </div>
+        <div class="
+                col-md-8
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+
+    <div class="row">
+
+        <div class="col-lg-12">
+
+            <div class="card mt-1 mr-2">
+                <div class="card-header header-elements-inline pt-0 pb-0">
+                    <div class="page-title d-flex mt-4">
+                        <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">All Vehicle </span> Notification</h4>&nbsp;
+
+                    </div>
+
+                    <div class="list-icons">
+                        @*<a title="Download QR Code" cid="" onclick="GetMultipleQrCode(this);" id="btnDownload"><i class="icon-download7"></i></a>*@
+                        @*<a title="Add" cid="" onclick="CallFunc(this);" id="btnAdd"><i class="icon-add"></i></a>*@
+                        <a class="list-icons-item" data-action="collapse"></a>
+                        <a class="list-icons-item" data-action="reload"></a>
+                        <a class="list-icons-item" data-action="remove"></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                    </div>
+
+                </div>
+
+                <div class="dataTables_wrapper no-footer">
+
+                    <div class="datatable-scroll-wrap">
+
+                        <table class="table stylish-table mb-0 mt-2 no-wrap v-middle" id="example">
+                            <thead>
+                                <tr>
+                                    <th>Sr. No</th>
+                                    <th>Vehicle No</th>
+                                    <th>Uid</th>
+                                    <th>Vehicle Type</th>
+                                    <th>OwnerType</th>
+                                    <th>Zone</th>
+                                    <th>Circle</th>
+                                    <th>Ward</th>
+                                    <th>Driver Name</th>
+                                    <th>Driver Contact No</th>
+
+                                </tr>
+                            </thead>
+                            <tfoot>
+                            </tfoot>
+                            <tbody></tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+
+@section scripts {
+    <link href="~/otherfiles/monsteradmin/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/monsteradmin/js/moment.js"></script>
+    <script src="~/otherfiles/monsteradmin/js/bootstrap-datepicker.min.js"></script>
+    <link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.init.js"></script>
+    <script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR9w4KTLnl8IWjTgFLHIvHZXLrpJlKi6I"></script>
+    <script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Collection/UniqueVehicleInfo.js?@DateTime.Now.Ticks"></script>
+}
+

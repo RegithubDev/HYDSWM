@@ -1,0 +1,137 @@
+﻿
+@{
+    ViewData["Title"] = "All Trip Point";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+
+<div class="page-header border-bottom-0">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">All Trip Points</span> Information</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                
+                <input type="button" id="btnExcel" class="btn btn-success" style=" left: -10px; top: 3px" value="Export To Excel" onclick="DownloadFile('Excel');">
+                    
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+            </div>
+        </div>
+
+        <div class="dataTables_wrapper no-footer">
+
+            <div class="datatable-scroll-wrap">
+
+                <table class="table datatable-button-html5-columns" id="example">
+                    <thead>
+                        <tr>
+                            <th></th>
+
+                            <th>Sr. No</th>
+                            <th>Route Code</th>
+                            <th>Route Trip Code</th>
+                            <th>Vehicle No</th>
+                           @* <th>Id</th>*@
+                            <th>Buffer Min</th>
+                            <th>Total Points</th>
+                            <th>Status</th>
+                            <th>View On Map</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Vertical form modal -->
+<div id="viewonmap" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Trip Points Information</h3>
+                <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div id="dvIMap" style="height: 400px; width: 100%">
+                </div>
+            </div>
+
+            <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+                <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /vertical form modal -->
+
+<style>
+    td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_open.png') no-repeat center center;
+    }
+
+    tr.shown td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_close.png') no-repeat center center;
+    }
+</style>
+
+
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+@section scripts {
+<link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+<script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+<script src="~/otherfiles/Light/global_assets/js/plugins/forms/selects/nselect2.min.js"></script>
+<script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR9w4KTLnl8IWjTgFLHIvHZXLrpJlKi6I"></script>
+<script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Collection/AllTripPointInfo.js?@DateTime.Now.Ticks"></script>
+}
+
+
+
+

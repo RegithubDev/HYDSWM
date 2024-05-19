@@ -1,0 +1,1085 @@
+﻿
+@{
+    ViewData["Title"] = "AllRouteWiseCollectDetail_Copy";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+<link href="~/otherfiles/assets/css/style.css" rel="stylesheet" type="text/css">
+<link href="~/otherfiles/assets/css/magnific-popup.css"
+      rel="stylesheet" />
+
+<div class="page-header border-bottom-0">
+
+
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+                @*  <div class="d-flex">
+                    <div class="dropdown me-2">
+                    <button class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    January 2021
+                    </button>
+                    <ul class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="#">February 2021</a></li>
+                    <li><a class="dropdown-item" href="#">March 2021</a></li>
+                    <li><a class="dropdown-item" href="#">April 2021</a></li>
+                    </ul>
+                    </div>
+                    <button class="btn btn-success">
+                    <i data-feather="plus" class="fill-white feather-sm"></i>
+                    Create
+                    </button>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+    <!-- Page header -->
+    <div class="page-header border-bottom-0">
+    </div>
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0 ">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">All Route Wise Collection </span> Report</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+
+
+        <div class="card-body">
+
+            <div class="form-group">
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>From Date</label>
+                            <input type="text" placeholder="Select From Date" class="form-control mydatepicker" id="txtFromDate" autocomplete="off">
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>To Date</label>
+                            <input type="text" placeholder="Select To Date" id="txtToDate" class="form-control mydatepicker" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Zone</label>
+                            <select id="ddlZone" onchange="CallFCircleByZone();" data-placeholder="Select Your Zone" class="form-control form-control-select2" style="width: 100%; height: 36px">
+                                <option value="0">All Zone</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Circle</label>
+                            <select id="ddlCircle" onchange="CallAllRouteByZoneAndWard();" data-placeholder="Select Your Circle" class="form-control form-control-select2" style="width: 100%; height: 36px">
+                                <option value="0">All Circle</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Route</label>
+                                <select id="ddlRoute" onchange="CallAllTripByRoute();" data-placeholder="Select" class="form-control form-control-select2" style="width: 100%; height: 36px">
+                                    <option value="0">Select</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Route Trip Code</label>
+                                <select id="ddlTrip" data-placeholder="Select" class="form-control form-control-select2" style="width: 100%; height: 36px">
+                                    <option value="0">Select</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group">
+
+                                <input type="button" id="btnSearch" class="btn btn-primary" value="Search" onclick="CallAllFunction('Click');" style="margin-top:32px;">
+
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label>Point Status By Color </label><br>
+                            <h6 class="card-title  badge badge-dark ">Start/End</h6>
+                            <h6 class="card-title  badge badge-secondary">Gray</h6>
+                            <h6 class="card-title  badge badge-success">Collected</h6>
+                            <h6 class="card-title  badge badge-danger">Not Collected</h6>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="border-bottom title-part-padding input-group">
+                            <h4 class="card-title mb-0">Map View</h4>
+                            <div class="col-md-3">
+
+                                <select id="ddlMap" class="form-control" onchange="AllPointTimelineInfo('Click');">
+                                    <option value="10">10</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="500">500</option>
+                                    <option value="1000">1000</option>
+                                    <option value="-1">All</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="map_basic" style="height: 373px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="accordion accordion-flush" id="dvTimeline">
+            </div>
+
+
+        </div>
+
+
+
+        <div class="dataTables_wrapper no-footer">
+
+            <div class="datatable-scroll-wrap" id="dv1">
+
+                <table class="table datatable-button-html5-columns" id="example">
+                    <thead>
+                        <tr>
+                            <th>Sr. No</th>
+                            <th>Dated On</th>
+                            <th>Route Information</th>
+                            <th>Status</th>
+                            <th>Start Time</th>
+                            <th>Total Point</th>
+                            <th>Collected Point</th>
+                            <th>Not Collected Point</th>
+                            <th>Total Drive Time</th>
+                            <th>Total Weight</th>
+                            <th>Last Pickup Date & Time</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+<div id="viewonmap" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">View On Map</h3>
+                <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="dvIMap" style="height: 400px; width: 100%">
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center bg-teal-400 border-top-0">
+                <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Vertical form modal -->
+<div id="modal_form_vertical" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form class="form-validate-jquery" onsubmit="return Formsubmit();" name="registration">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="mainheadingtag">Add Geo Point Information</h3>
+                    <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+                </div>
+
+                <div class="modal-body">
+
+
+                    <fieldset>
+                        <legend class="bg-info"></legend>
+                        <div class="form-group">
+                            <div class="row">
+
+                                <!-- Column -->
+
+                                <div class="col-lg-6 col-md-6" id="divbeforeimage">
+                                    <div class="mb-0">
+
+                                        <label>Before Image :</label>
+
+                                    </div>
+                                    <div class="card">
+                                        <div class="el-card-item pb-3">
+                                            <div class="
+                                              el-card-avatar
+                                              mb-0s
+                                              el-overlay-1
+                                              w-100
+                                              overflow-hidden
+                                              position-relative
+                                              text-center
+                                            ">
+                                                <a target="_blank"
+                                                   href="javascript:void(0)" id="hrfBeforeImage">
+                                                    <img src=""
+                                                         class="d-block position-relative w-100"
+                                                         alt="user" id="ImgBefore" style="height:200px" />
+                                                </a>
+                                                <div class="mb-0" id="dvBeforeDate">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-lg-6 col-md-6" id="divafterimage">
+                                    <div class="mb-0">
+
+                                        <label>After Image :</label>
+
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="el-card-item pb-3">
+                                            <div class="
+                                              el-card-avatar
+                                              mb-0
+                                              el-overlay-1
+                                              w-100
+                                              overflow-hidden
+                                              position-relative
+                                              text-center
+                                            ">
+                                                <a target="_blank"
+                                                   href="javascript:void(0)" id="hrfAfterImage">
+                                                    <img src=""
+                                                         class="d-block position-relative w-100"
+                                                         alt="user" id="ImgAfter" style="height:200px" />
+                                                </a>
+                                                <div class="mb-0" id="dvAfterDate">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+
+                                <!--<div class="col-lg-5 col-md-6" id="divafterimage">
+                                <div class="mb-0">
+
+                                    <label>After Image : </label>
+
+                                </div>
+                                <div class="card">
+                                    <div class="card-body" id="ImgAfter">
+                                        <div class="d-flex flex-row align-items-center">
+
+                                            <div class="ms-6 align-self-center">-->
+                                @*<b id="ImgAfter">12</b>*@
+                                <!--</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                <!-- Column -->
+                                <div class="col-lg-4 col-md-6">
+
+                                    <div class="mb-0">
+
+                                        <label>Route Trip Code :  </label>
+
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-row align-items-center">
+
+                                                <div class="ms-6 align-self-center">
+
+                                                    <b id="txtRouteCode">0</b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Column -->
+                                <!-- Column -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="mb-0">
+
+                                        <label>Schedule Pickup Time :  </label>
+
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-row align-items-center">
+
+                                                <div class="ms-6 align-self-center">
+
+                                                    <b id="txtSdlPickup">0</b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Column -->
+                                <!-- Column -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="mb-0">
+
+                                        <label>Actual Pickup Time :</label>
+
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-row align-items-center">
+
+                                                <div class="ms-6 align-self-center">
+
+                                                    <b id="txtActpickup">0</b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Column -->
+                                <!-- Column -->
+                                <div class="col-lg-4 col-md-6" id="divremarks">
+                                    <div class="mb-0">
+
+                                        <label>Remarks :  </label>
+
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-row align-items-center">
+
+                                                <div class="ms-6 align-self-center">
+
+                                                    <b id="txtRemarks">start</b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+
+                    </fieldset>
+                    <br />
+
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+                    @*<button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>*@
+
+                    @*@<input type="button" value="Save" onclick="SaveAndUpdateAssetInfo()" />@*@
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /vertical form modal -->
+<!-- Grey Point form modal -->
+<div id="modal_form_Greypoint" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form class="form-validate-jquery" name="registration">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="mainheadingtag">Add Geo Point Information</h3>
+                    <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+                </div>
+
+                <div class="modal-body">
+
+
+                    <fieldset>
+                        <legend class="bg-info"></legend>
+                        <div class="form-group">
+                            <div class="row">
+
+                                <!-- Column -->
+
+                                <div class="col-lg-6 col-md-6" id="divbeforeimage1">
+                                    <div class="mb-0">
+
+                                        <label>Before Image :</label>
+
+                                    </div>
+                                    <div class="card">
+                                        <div class="el-card-item pb-3">
+                                            <div class="
+                                              el-card-avatar
+                                              mb-0
+                                              el-overlay-1
+                                              w-100
+                                              overflow-hidden
+                                              position-relative
+                                              text-center
+                                            ">
+                                                <a target="_blank"
+                                                   href="javascript:void(0)" id="hrfBeforeImage1">
+                                                    <img src=""
+                                                         class="d-block position-relative w-100"
+                                                         alt="user" id="ImgBefore1" style="height:200px" />
+                                                </a>
+                                                <div class="mb-0" id="dvBeforeDate1">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6" id="divafterimage1">
+                                    <div class="mb-0">
+
+                                        <label>After Image :</label>
+
+                                    </div>
+                                    <div class="card">
+                                        <div class="el-card-item pb-3">
+                                            <div class="
+                                              el-card-avatar
+                                              mb-0
+                                              el-overlay-1
+                                              w-100
+                                              overflow-hidden
+                                              position-relative
+                                              text-center
+                                            ">
+                                                <a target="_blank"
+                                                   href="javascript:void(0)" id="hrfAfterImage1">
+                                                    <img src=""
+                                                         class="d-block position-relative w-100"
+                                                         alt="user" id="ImgAfter1" style="height:200px" />
+                                                </a>
+                                                <div class="mb-0" id="dvAfterDate1">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <!--<div class="col-lg-5 col-md-6" id="divafterimage">
+                                <div class="mb-0">
+
+                                    <label>After Image : </label>
+
+                                </div>
+                                <div class="card">
+                                    <div class="card-body" id="ImgAfter">
+                                        <div class="d-flex flex-row align-items-center">
+
+                                            <div class="ms-6 align-self-center">-->
+                                @*<b id="ImgAfter">12</b>*@
+                                <!--</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                <!-- Column -->
+                                <div class="col-lg-4 col-md-6">
+
+                                    <div class="mb-0">
+
+                                        <label>Route Trip Code :  </label>
+
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-row align-items-center">
+
+                                                <div class="ms-6 align-self-center">
+
+                                                    <b id="txtRouteCode1">0</b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Column -->
+                                <!-- Column -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="mb-0">
+
+                                        <label>Actual Pickup Time :</label>
+
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-row align-items-center">
+
+                                                <div class="ms-6 align-self-center">
+
+                                                    <b id="txtActpickup1">0</b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Column -->
+                                <!-- Column -->
+                                <div class="col-lg-4 col-md-6" id="divremarks">
+                                    <div class="mb-0">
+
+                                        <label>Remarks :  </label>
+
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-row align-items-center">
+
+                                                <div class="ms-6 align-self-center">
+
+                                                    <b id="txtRemarks1">start</b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*Dropdown actual point*@
+                                <div class="col-md-3">
+                                    <label>Actual Point</label>
+                                    <select id="ddlGreyPoint" style="width: 110% ">
+                                        <option value="0">All Actual Point</option>
+
+                                    </select>
+                                </div>
+
+
+
+                                <div class="col-md-3" style="left: 106px;bottom: -11px;">
+
+
+                                    <button type="button" class="btn bg-info text-white border-white border-2" data-dismiss="modal" id="btnSave">Update</button>
+                                    <button type="button" class="btn bg-danger text-white border-white border-2" data-dismiss="modal" id="btnRemove">Delete</button>
+
+                                    @*@@<input type="button" value="Save" onclick="SaveAndUpdateAssetInfo()" />@@*@
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                    </fieldset>
+
+
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /Grey Point form modal -->
+<!-- Option  Point form modal -->
+<div id="modal_form_Option" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form class="form-validate-jquery" name="registration">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="mainheadingtag">Adjust Gray Point</h3>
+                    <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+                </div>
+
+                <div class="modal-body">
+
+
+                    <fieldset>
+                        <legend class="bg-info"></legend>
+                        <div class="form-group">
+                            <div class="row">
+
+                                <!-- Column -->
+
+
+
+
+                                <div class="col-md-3" style="left: 106px;bottom: -11px;">
+
+
+                                    <button type="button" class="btn bg-info text-white border-white border-2" data-dismiss="modal" id="btngrayPoint">Mark As Collected Point</button>
+
+                                    @*@@<input type="button" value="Save" onclick="SaveAndUpdateAssetInfo()" />@@*@
+                                </div>
+
+
+                                <div class="col-md-3" style="left: 106px;bottom: -11px;">
+
+
+                                    <button type="button" class="btn bg-danger text-white border-white border-2" data-dismiss="modal" id="btnWizard">Adjust In Route-Trip</button>
+
+                                    @*@@<input type="button" value="Save" onclick="SaveAndUpdateAssetInfo()" />@@*@
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                    </fieldset>
+
+
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /Grey Point form modal -->
+@*
+    <div class="progress p-5 d-flex align-items-center">
+
+    <div class="fa-stack fa-2x text-center">
+    <i class="fa fa-circle-o fa-stack-2x"></i>
+    <div class=""><b>1</b></div>
+    </div>
+    <div class="line-btw"></div>
+    <div class="fa-stack fa-2x text-center" style="">
+    <i class="fa fa-circle-o fa-stack-2x"></i>
+    <div style=""><b>2</b></div>
+    </div>
+    <div class="line-btw"></div>
+    <div class="fa-stack fa-2x text-center" style="">
+    <i class="fa fa-circle-o fa-stack-2x"></i>
+    <div class=""><b>3</b></div>
+    </div>
+
+    </div>*@
+
+
+
+<!-- Wizard with validation -->
+<!-- SmartWizard html -->
+<div id="smartwizard">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link">
+                <div class="num">1</div>
+                Add Geo Point
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link">
+                <span class="num">2</span>
+                Add Point In Route Trip
+            </a>
+        </li>
+
+    </ul>
+
+    <div class="tab-content">
+        <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
+            <div class="modal-dialog modal-lg">
+                <form class="form-validate-jquery" onsubmit="return Formsubmit1();" name="registration">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Add Geo Point Information</h3>
+                            <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+                        </div>
+
+                        <div class="modal-body">
+                            <fieldset>
+                                <legend class="bg-info">Geo Point Basic Detail</legend>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <input type="hidden" id="hfGPId" />
+                                                <label>Point Name</label>
+                                                <span class="text-danger">*</span>
+                                                <input type="text" placeholder="Enter Point Name" class="form-control" id="txtPointName" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label>Category</label>
+                                            <span class="text-danger">*</span>
+                                            <select id="ddlCatgory" class="form-control">
+                                                <option value="">Select</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <label>Radius(In Meter)</label>
+                                            <span class="text-danger">*</span>
+                                            <input type="text" placeholder="Enter Radius" class="form-control" id="txtRadius" value="50" required>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label>Zone</label>
+
+                                            <select id="ddlSZone" onchange="CallSCircleByZone();" required
+                                                    class="form-control">
+                                                <option value="0">Select</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label>Circle</label>
+                                            <select id="ddlSCircle" onchange="CallSWardByCircle()" required
+                                                    class="form-control">
+                                                <option value="0">Select</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label>Ward</label>
+                                            <select id="ddlSWard" required
+                                                    class="form-control">
+                                                <option value="0">Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label>Lattitude</label>
+                                            <span class="text-danger">*</span>
+                                            <input type="text" placeholder="Enter Lattitude" class="form-control" id="txtLat"  required>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label>Longitude </label>
+                                            <span class="text-danger">*</span>
+                                            <input type="text" placeholder="Enter Longitude" class="form-control" id="txtLng"  required>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label>Location</label>
+                                            <span class="text-danger">*</span>
+                                            @*<input type="text" placeholder="Enter Location" class="form-control" id="txtLocation" required>*@
+                                            <textarea rows="3" cols="3" placeholder="Enter Location" class="form-control" id="txtLocation" required></textarea>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="col-sm-4">
+                                            <label>Remarks</label>
+                                            <span class="text-danger">*</span>
+                                            @*<input type="text" placeholder="Enter Location" class="form-control" id="txtLocation" required>*@
+                                            <textarea rows="3" cols="3" placeholder="Enter Remarks" class="form-control" id="txtRemarksSSS" required></textarea>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <label>Upload File</label>
+                                            <input type="file" id="files" name="files" class="form-control h-auto" accept=".jpg,.jpeg,.png,.gif,.bmp" value="" />
+
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <br />
+                                            <br />
+                                            <div class="form-check">
+
+                                                <label class="form-check-label">
+                                                    <input type="checkbox" class="form-check-input" id="ckbIsActive" name="IsActive">
+                                                    Is Active
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <br />
+                            <fieldset>
+                                <legend class="bg-info">Map View</legend>
+                                <input id="searchInput" class="input-controls" type="text" placeholder="Enter a location" style="width:50%;">
+                                <div id="dvIMap1" style="height: 300px; width: 100%">
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+                            <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+                            <button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
+                            @*<input type="button" value="Save" onclick="SaveAndUpdateAssetInfo()" />*@
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2" style="display:none;">
+            <div class="card-body">
+
+                <div class="row">
+
+                    <form class="form-validate-jquery" onsubmit="return Formsubmit();" name="registration">
+                        <div id="user_content" class="form-body">
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label>Route Code</label>
+                                        <input type="hidden" id="hfRouteId" />
+                                        <input type="text" placeholder="Route Code" class="form-control" id="txtRouteCodeSSS" >
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>Zone</label>
+                                        <input type="text" class="form-control" id="txtZone" readonly="true">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>Circle</label>
+                                        <input type="text" class="form-control" id="txtCircle" readonly="true">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    @*<div class="col-sm-3">
+                                    <label>Trip</label>
+                                    <span class="text-danger">*</span>
+                                    <select id="ddlMTrip" onchange="ChangeIdText();"
+                                            class="form-control">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>*@
+                                    @* <div class="col-sm-3">
+                                    <label>Vehicle No</label>
+                                    <span class="text-danger">*</span>
+                                    <select id="ddlVehicleNo"
+                                            class="form-control form-control-select2" required>
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>*@
+                                    <div class="col-sm-4">
+                                        <label>Route Trip Code</label>
+                                        <span class="text-danger">*</span>
+                                        <input type="text" placeholder="Id" autocomplete="off" class="form-control" id="txtTId" readonly="true">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>Buffer Min</label>
+                                        <span class="text-danger">*</span>
+                                        <input type="text" value="15" placeholder="Buffer Min" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" onselectstart="return false" autocomplete="off" onkeypress="return isNumberKey(this, event);" class="form-control" id="txtBufferMin">
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <br />
+                                        <button type="button" id="btnAddTrip" class="
+                          justify-content-center
+                          w-60
+                          btn btn-rounded btn-light-success
+                          text-success
+                          font-weight-medium
+                          d-flex
+                          align-items-center
+                        " onclick="AddTrips();">
+                                            <i class="icon-add"></i> Add
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="card card-table table-responsive shadow-0 mb-0">
+                                    <table id="tblTrip" class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                @* <th>Trip</th>*@
+                                                <th>Route Trip Code</th>
+                                                @*  <th>Vehicle No</th>*@
+                                                <th>Buffer Min</th>
+                                                <th>Remove</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-actions">
+
+                            <div class="text-end">
+                                <button type="submit" class="
+                            btn btn-light-info
+                            text-info
+                            font-weight-medium
+                          ">
+                                    Submit
+                                </button>
+                                <button type="reset" onclick="goBack();" class="
+                            btn btn-light-danger
+                            text-danger
+                            font-weight-medium
+                          ">
+                                    Cancel
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <!-- -------------------------------------------------------------- -->
+    <!-- Example -->
+    <!-- Include optional progressbar HTML -->
+    @*<div class="col-12">
+        <div class="card">
+            <div class="border-bottom title-part-padding">
+                <h4 class="card-title mb-0">Basic Form Example</h4>
+            </div>
+            <div class="card-body">
+                <h6 class="card-subtitle mb-3"></h6>
+                <form id="example-form" action="#" class="mt-5" novalidate="novalidate">
+                    <div role="application" class="wizard clearfix" id="steps-uid-1">
+                        <div class="steps clearfix"><ul role="tablist"><li role="tab" class="first current" aria-disabled="false" aria-selected="true"><a id="steps-uid-1-t-0" href="#steps-uid-1-h-0" aria-controls="steps-uid-1-p-0"><span class="current-info audible">current step: </span><span class="number">1.</span> Account</a></li><li role="tab" class="disabled" aria-disabled="true"><a id="steps-uid-1-t-1" href="#steps-uid-1-h-1" aria-controls="steps-uid-1-p-1"><span class="number">2.</span> Profile</a></li><li role="tab" class="disabled" aria-disabled="true"><a id="steps-uid-1-t-2" href="#steps-uid-1-h-2" aria-controls="steps-uid-1-p-2"><span class="number">3.</span> Hints</a></li><li role="tab" class="disabled last" aria-disabled="true"><a id="steps-uid-1-t-3" href="#steps-uid-1-h-3" aria-controls="steps-uid-1-p-3"><span class="number">4.</span> Finish</a></li></ul></div><div class="content clearfix">
+                            <h3 id="steps-uid-1-h-0" tabindex="-1" class="title current">Account</h3>
+                            <section id="steps-uid-1-p-0" role="tabpanel" aria-labelledby="steps-uid-1-h-0" class="body current" aria-hidden="false">
+                                <label for="userName">User name *</label>
+                                <input id="userName" name="userName" type="text" class="required form-control">
+                                <label for="password">Password *</label>
+                                <input id="password" name="password" type="text" class="required form-control">
+                                <label for="confirm">Confirm Password *</label>
+                                <input id="confirm" name="confirm" type="text" class="required form-control">
+                                <p>(*) Mandatory</p>
+                            </section>
+                            <h3 id="steps-uid-1-h-1" tabindex="-1" class="title">Profile</h3>
+                            <section id="steps-uid-1-p-1" role="tabpanel" aria-labelledby="steps-uid-1-h-1" class="body" aria-hidden="true" style="display: none;">
+                                <label for="name">First name *</label>
+                                <input id="name" name="name" type="text" class="required form-control">
+                                <label for="surname">Last name *</label>
+                                <input id="surname" name="surname" type="text" class="required form-control">
+                                <label for="email">Email *</label>
+                                <input id="email" name="email" type="text" class="required email form-control">
+                                <label for="address">Address</label>
+                                <input id="address" name="address" type="text" class="form-control">
+                                <p>(*) Mandatory</p>
+                            </section>
+                            
+                            <h3 id="steps-uid-1-h-3" tabindex="-1" class="title">Finish</h3>
+                            <section id="steps-uid-1-p-3" role="tabpanel" aria-labelledby="steps-uid-1-h-3" class="body" aria-hidden="true" style="display: none;">
+                                <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
+                                <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+                            </section>
+                        </div><div class="actions clearfix"><ul role="menu" aria-label="Pagination"><li class="disabled" aria-disabled="true"><a href="#previous" role="menuitem">Previous</a></li><li aria-hidden="false" aria-disabled="false"><a href="#next" role="menuitem">Next</a></li><li aria-hidden="true" style="display: none;"><a href="#finish" role="menuitem">Finish</a></li></ul></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>*@
+</div>
+
+
+
+
+<!-- /wizard with validation -->
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+
+@section scripts {
+    <link href="~/otherfiles/monsteradmin/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/monsteradmin/js/moment.js"></script>
+    <script src="~/otherfiles/monsteradmin/js/bootstrap-datepicker.min.js"></script>
+    <link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.init.js"></script>
+    <script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+    @*<script src="/otherfiles/assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="/otherfiles/assets/js/meg.init.js"></script>*@
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbDwPN59e4wcuNqJEbCd3yTq2tYOvP3JU"></script>
+    <script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Collection/RouteWiseCltnInfo_Copy.js?@DateTime.Now.Ticks"></script>
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/smartwizard@6/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/smartwizard@6/dist/js/jquery.smartWizard.min.js" type="text/javascript"></script>
+}

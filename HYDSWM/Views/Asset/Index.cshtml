@@ -1,0 +1,327 @@
+﻿@{
+    ViewData["Title"] = "Asset Dashboard";
+    Layout = "_MonsterLayout";
+
+}
+
+<style>
+    .select2-container--classic .select2-selection--single, .select2-container--default .select2-selection--multiple, .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-selection__arrow, .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 25px !important;
+    }
+</style>
+<div class="page-header border-bottom-0">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+                @*  <div class="d-flex">
+                    <div class="dropdown me-2">
+                    <button class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    January 2021
+                    </button>
+                    <ul class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="#">February 2021</a></li>
+                    <li><a class="dropdown-item" href="#">March 2021</a></li>
+                    <li><a class="dropdown-item" href="#">April 2021</a></li>
+                    </ul>
+                    </div>
+                    <button class="btn btn-success">
+                    <i data-feather="plus" class="fill-white feather-sm"></i>
+                    Create
+                    </button>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content pt-0">
+
+    <div class="row">
+
+
+        <div class="col-xl-12">
+            <div class="card for_collapsed mr-2">
+                <div class="card-header header-elements-inline">
+                    <h4 class="card-title">
+                        <i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ASSET</span> - Dashboard
+
+                    </h4>
+
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            Search<a class="list-icons-item" data-action="collapse"></a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body cardhide" style="display: none;">
+                    <p class="mb-3"></p>
+
+                    <div class="form-group">
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+
+                                <select id="ddlZone" onchange="CallFCircleByZone();" data-placeholder="Zone" class="form-control form-control-select2" style="width:100%">
+                                </select>
+
+                            </div>
+                            <div class="col-md-3">
+
+                                <select id="ddlCircle" onchange="CallFWardByCircle();" data-placeholder="Circle" class="form-control form-control-select2" style="width:100%">
+                                    <option value="0">Circle</option>
+                                </select>
+
+                            </div>
+                            <div class="col-md-3">
+                                <select id="ddlWard" data-placeholder="Select Your Ward" class="form-control form-control-select2" style="width:100%">
+                                    <option value="0">WARD</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select id="ddlVehicleType" data-placeholder="Select Your Vehicle Type" class="form-control form-control-select2" style="width:100%">
+                                    <option value="0">All Vehicle Type</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer d-flex justify-content-between align-items-center bg-primary-400 border-top-0">
+                        <button type="button" class="btn btn-primary border-2" onclick="CallAllFunc();">Search <i class="icon-paperplane ml-2"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card mr-2">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">Vehicle Summary By Status</h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            <a class="list-icons-item" data-action="collapse"></a>
+                            <a class="list-icons-item" data-action="reload"></a>
+                            <a class="list-icons-item" data-action="remove"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" id="dvNotification">
+                    <div class="row">
+                        <div class="col-sm-2 col-xl-2" id="dvTotalAsset">
+
+                            <div class="card card-body text-center">
+                                <div class="svg-center position-relative" id="progress_icon_one"><svg width="84" height="84"><g transform="translate(42,42)"><path class="d3-progress-background" d="M0,42A42,42 0 1,1 0,-42A42,42 0 1,1 0,42M0,39.5A39.5,39.5 0 1,0 0,-39.5A39.5,39.5 0 1,0 0,39.5Z" style="fill: rgb(76, 182, 172); opacity: 0.1;"></path><path class="d3-progress-foreground" filter="url(#blur)" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 172); stroke: rgb(76, 182, 172);"></path><path class="d3-progress-front" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 172); fill-opacity: 1;"></path></g></svg><i class="icon-truck counter-icon" style="color: rgb(76, 182, 172); top: 26px;"></i></div>
+                                <h2 class="pt-1 mt-2 mb-1" id="h2TotalAsset">0</h2>
+
+
+                                <div> Vehicle</div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2 col-xl-2" id="dvInUse">
+                            <div class="card card-body text-center">
+                                <div class="svg-center position-relative" id="progress_icon_one"><svg width="84" height="84"><g transform="translate(42,42)"><path class="d3-progress-background" d="M0,42A42,42 0 1,1 0,-42A42,42 0 1,1 0,42M0,39.5A39.5,39.5 0 1,0 0,-39.5A39.5,39.5 0 1,0 0,39.5Z" style="fill: rgb(122, 237, 64); opacity: 0.1;"></path><path class="d3-progress-foreground" filter="url(#blur)" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 172); stroke: rgb(76, 182, 172);"></path><path class="d3-progress-front" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 13); fill-opacity: 1;"></path></g></svg><i class="icon-truck counter-icon" style="color: rgb(76, 182, 13); top: 26px;"></i></div>
+                                <h2 class="pt-1 mt-2 mb-1" id="h2InUse">0</h2>
+
+
+                                <div> In Use</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xl-2" id="dvInStock">
+
+                            <div class="card card-body text-center">
+                                <div class="svg-center position-relative" id="progress_icon_one"><svg width="84" height="84"><g transform="translate(42,42)"><path class="d3-progress-background" d="M0,42A42,42 0 1,1 0,-42A42,42 0 1,1 0,42M0,39.5A39.5,39.5 0 1,0 0,-39.5A39.5,39.5 0 1,0 0,39.5Z" style="fill: rgb(76, 182, 172); opacity: 0.1;"></path><path class="d3-progress-foreground" filter="url(#blur)" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 172); stroke: rgb(76, 182, 172);"></path><path class="d3-progress-front" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(79, 44, 187); fill-opacity: 1;"></path></g></svg><i class="icon-truck counter-icon" style="color: rgb(79, 44, 187); top: 26px;"></i></div>
+                                <h2 class="pt-1 mt-2 mb-1" id="h2InStock">0</h2>
+
+
+                                <div> In Stock</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xl-2" id="dvInRepair">
+
+                            <div class="card card-body text-center">
+                                <div class="svg-center position-relative" id="progress_icon_one"><svg width="84" height="84"><g transform="translate(42,42)"><path class="d3-progress-background" d="M0,42A42,42 0 1,1 0,-42A42,42 0 1,1 0,42M0,39.5A39.5,39.5 0 1,0 0,-39.5A39.5,39.5 0 1,0 0,39.5Z" style="fill: rgb(76, 182, 172); opacity: 0.1;"></path><path class="d3-progress-foreground" filter="url(#blur)" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 172); stroke: rgb(76, 182, 172);"></path><path class="d3-progress-front" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(119, 119, 119); fill-opacity: 1;"></path></g></svg><i class="icon-truck counter-icon" style="color: rgb(119, 119, 119); top: 26px;"></i></div>
+                                <h2 class="pt-1 mt-2 mb-1" id="h2InRepair">0</h2>
+
+
+                                <div> In Repair</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xl-2" id="dvInDead">
+
+                            <div class="card card-body text-center">
+                                <div class="svg-center position-relative" id="progress_icon_one"><svg width="84" height="84"><g transform="translate(42,42)"><path class="d3-progress-background" d="M0,42A42,42 0 1,1 0,-42A42,42 0 1,1 0,42M0,39.5A39.5,39.5 0 1,0 0,-39.5A39.5,39.5 0 1,0 0,39.5Z" style="fill: rgb(76, 182, 172); opacity: 0.1;"></path><path class="d3-progress-foreground" filter="url(#blur)" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 172); stroke: rgb(76, 182, 172);"></path><path class="d3-progress-front" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(221, 224, 26); fill-opacity: 1;"></path></g></svg><i class="icon-truck counter-icon" style="color: rgb(221, 224, 26); top: 26px;"></i></div>
+                                <h2 class="pt-1 mt-2 mb-1" id="h2InDead">0</h2>
+
+
+                                <div> In Dead</div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-2 col-xl-2" id="dvInScrapped">
+                            <div class="card card-body text-center">
+                                <div class="svg-center position-relative" id="progress_icon_one"><svg width="84" height="84"><g transform="translate(42,42)"><path class="d3-progress-background" d="M0,42A42,42 0 1,1 0,-42A42,42 0 1,1 0,42M0,39.5A39.5,39.5 0 1,0 0,-39.5A39.5,39.5 0 1,0 0,39.5Z" style="fill: rgb(76, 182, 172); opacity: 0.1;"></path><path class="d3-progress-foreground" filter="url(#blur)" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 172); stroke: rgb(76, 182, 172);"></path><path class="d3-progress-front" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(255, 0, 0); fill-opacity: 1;"></path></g></svg><i class="icon-truck counter-icon" style="color: rgb(255, 0, 0); top: 26px;"></i></div>
+                                <h2 class="pt-1 mt-2 mb-1" id="h2InScrapped">0</h2>
+                                <div> In Scrapped</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card mr-2">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">Container Summary By Status</h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            <a class="list-icons-item" data-action="collapse"></a>
+                            <a class="list-icons-item" data-action="reload"></a>
+                            <a class="list-icons-item" data-action="remove"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" id="dvNotification1">
+                    <div class="row">
+                        <div class="col-sm-2 col-xl-2" id="dvTotalCNTAsset">
+
+                            <div class="card card-body text-center">
+                                <div class="svg-center position-relative" id="progress_icon_one"><svg width="84" height="84"><g transform="translate(42,42)"><path class="d3-progress-background" d="M0,42A42,42 0 1,1 0,-42A42,42 0 1,1 0,42M0,39.5A39.5,39.5 0 1,0 0,-39.5A39.5,39.5 0 1,0 0,39.5Z" style="fill: rgb(76, 182, 172); opacity: 0.1;"></path><path class="d3-progress-foreground" filter="url(#blur)" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 172); stroke: rgb(76, 182, 172);"></path><path class="d3-progress-front" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 172); fill-opacity: 1;"></path></g></svg><i class="icon-cabinet counter-icon" style="color: rgb(76, 182, 172); top: 26px;"></i></div>
+                                <h2 class="pt-1 mt-2 mb-1" id="h2TotalCNTAsset">0</h2>
+
+
+                                <div> Container</div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2 col-xl-2" id="dvCNTInUse">
+                            <div class="card card-body text-center">
+                                <div class="svg-center position-relative" id="progress_icon_one"><svg width="84" height="84"><g transform="translate(42,42)"><path class="d3-progress-background" d="M0,42A42,42 0 1,1 0,-42A42,42 0 1,1 0,42M0,39.5A39.5,39.5 0 1,0 0,-39.5A39.5,39.5 0 1,0 0,39.5Z" style="fill: rgb(122, 237, 64); opacity: 0.1;"></path><path class="d3-progress-foreground" filter="url(#blur)" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 172); stroke: rgb(76, 182, 172);"></path><path class="d3-progress-front" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 13); fill-opacity: 1;"></path></g></svg><i class="icon-cabinet counter-icon" style="color: rgb(76, 182, 13); top: 26px;"></i></div>
+                                <h2 class="pt-1 mt-2 mb-1" id="h2CNTInUse">0</h2>
+
+
+                                <div> In Use</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xl-2" id="dvCNTInStock">
+
+                            <div class="card card-body text-center">
+                                <div class="svg-center position-relative" id="progress_icon_one"><svg width="84" height="84"><g transform="translate(42,42)"><path class="d3-progress-background" d="M0,42A42,42 0 1,1 0,-42A42,42 0 1,1 0,42M0,39.5A39.5,39.5 0 1,0 0,-39.5A39.5,39.5 0 1,0 0,39.5Z" style="fill: rgb(76, 182, 172); opacity: 0.1;"></path><path class="d3-progress-foreground" filter="url(#blur)" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 172); stroke: rgb(76, 182, 172);"></path><path class="d3-progress-front" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(79, 44, 187); fill-opacity: 1;"></path></g></svg><i class="icon-cabinet counter-icon" style="color: rgb(79, 44, 187); top: 26px;"></i></div>
+                                <h2 class="pt-1 mt-2 mb-1" id="h2CNTInStock">0</h2>
+
+
+                                <div> In Stock</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xl-2" id="dvCNTInRepair">
+
+                            <div class="card card-body text-center">
+                                <div class="svg-center position-relative" id="progress_icon_one"><svg width="84" height="84"><g transform="translate(42,42)"><path class="d3-progress-background" d="M0,42A42,42 0 1,1 0,-42A42,42 0 1,1 0,42M0,39.5A39.5,39.5 0 1,0 0,-39.5A39.5,39.5 0 1,0 0,39.5Z" style="fill: rgb(76, 182, 172); opacity: 0.1;"></path><path class="d3-progress-foreground" filter="url(#blur)" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 172); stroke: rgb(76, 182, 172);"></path><path class="d3-progress-front" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(119, 119, 119); fill-opacity: 1;"></path></g></svg><i class="icon-cabinet counter-icon" style="color: rgb(119, 119, 119); top: 26px;"></i></div>
+                                <h2 class="pt-1 mt-2 mb-1" id="h2CNTInRepair">0</h2>
+
+
+                                <div> In Repair</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xl-2" id="dvCNTInDead">
+
+                            <div class="card card-body text-center">
+                                <div class="svg-center position-relative" id="progress_icon_one"><svg width="84" height="84"><g transform="translate(42,42)"><path class="d3-progress-background" d="M0,42A42,42 0 1,1 0,-42A42,42 0 1,1 0,42M0,39.5A39.5,39.5 0 1,0 0,-39.5A39.5,39.5 0 1,0 0,39.5Z" style="fill: rgb(76, 182, 172); opacity: 0.1;"></path><path class="d3-progress-foreground" filter="url(#blur)" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 172); stroke: rgb(76, 182, 172);"></path><path class="d3-progress-front" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(221, 224, 26); fill-opacity: 1;"></path></g></svg><i class="icon-cabinet counter-icon" style="color: rgb(221, 224, 26); top: 26px;"></i></div>
+                                <h2 class="pt-1 mt-2 mb-1" id="h2CNTInDead">0</h2>
+
+
+                                <div> In Dead</div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-2 col-xl-2" id="dvCNTInScrapped">
+                            <div class="card card-body text-center">
+                                <div class="svg-center position-relative" id="progress_icon_one"><svg width="84" height="84"><g transform="translate(42,42)"><path class="d3-progress-background" d="M0,42A42,42 0 1,1 0,-42A42,42 0 1,1 0,42M0,39.5A39.5,39.5 0 1,0 0,-39.5A39.5,39.5 0 1,0 0,39.5Z" style="fill: rgb(76, 182, 172); opacity: 0.1;"></path><path class="d3-progress-foreground" filter="url(#blur)" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(76, 182, 172); stroke: rgb(76, 182, 172);"></path><path class="d3-progress-front" d="M6.661338147750939e-16,-40.7308237088326A1.25,1.25 0 0,1 1.2883435582822094,-41.98023547904219A42,42 0 1,1 -37.43630272279338,19.040043026405503A1.25,1.25 0 0,1 -36.85435116097611,17.342341263608528L-36.85435116097611,17.342341263608528A1.25,1.25 0 0,1 -35.20795137024616,17.906707131976606A39.5,39.5 0 1,0 1.2116564417177922,-39.48141193862301A1.25,1.25 0 0,1 6.661338147750939e-16,-40.7308237088326Z" style="fill: rgb(255, 0, 0); fill-opacity: 1;"></path></g></svg><i class="icon-cabinet counter-icon" style="color: rgb(255, 0, 0); top: 26px;"></i></div>
+                                <h2 class="pt-1 mt-2 mb-1" id="h2CNTInScrapped">0</h2>
+                                <div> In Scrapped</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main charts -->
+    <div class="row">
+        <div class="col-xl-12">
+
+            <!-- Basic columns -->
+            <div class="card mr-2">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">Zone Wise Vehicle Summary</h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            <a class="list-icons-item" data-action="collapse"></a>
+                            <a class="list-icons-item" data-action="reload"></a>
+                            <a class="list-icons-item" data-action="remove"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="chart-container ">
+                        <div class="chart has-fixed-height " id="columns_basic"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /basic columns -->
+
+
+
+        </div>
+
+    </div>
+    <!-- /main charts -->
+
+
+
+</div>
+
+<!-- /content area -->
+@section scripts {
+<script src="/otherfiles/Light/global_assets/js/plugins/visualization/echarts/echarts.min.js"></script>
+<script src="~/otherfiles/Light/global_assets/js/plugins/forms/selects/nselect2.min.js"></script>
+<script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+<script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Asset/AssetDashboardInfo.js?@DateTime.Now.Ticks"></script>
+<script>
+
+</script>
+
+
+}
+

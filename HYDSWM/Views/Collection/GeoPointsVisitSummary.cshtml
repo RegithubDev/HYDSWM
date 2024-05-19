@@ -1,0 +1,414 @@
+﻿@{
+    ViewData["Title"] = "All Geo Point Visit Summary";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+<style>
+    td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_open.png') no-repeat center center;
+    }
+
+    tr.shown td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_close.png') no-repeat center center;
+    }
+
+    .progress {
+    }
+
+    .line-btw {
+        height: 3px;
+        width: 100px;
+        background-color: #2bb2bb;
+    }
+
+
+
+    .st {
+        width: 2em;
+        height: 2em;
+        text-align: center;
+        line-height: 2em;
+        border-radius: 1em;
+        background: dodgerblue;
+        margin: 0 1em;
+        display: inline-block;
+        color: white;
+        position: relative;
+    }
+
+        .st::before {
+            content: '';
+            position: absolute;
+            top: .9em;
+            left: -4em;
+            width: 4em;
+            height: .2em;
+            background: dodgerblue;
+            opacity: 0.3;
+        }
+
+        .st:first-child::before {
+            display: none;
+        }
+
+    div.scroll {
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+    .select2-container--classic .select2-selection--single, .select2-container--default .select2-selection--multiple, .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-selection__arrow, .select2-container--default .select2-selection--single .select2-selection__rendered {
+        border-color: #e9ecef;
+        color: #54667a;
+        height: calc(1.5385em + 0.875rem + 2px);
+        line-height: 30px;
+    }
+</style>
+
+<div class="content pt-0">
+
+    <!-- Page header -->
+    <div class="page-header border-bottom-0">
+    </div>
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0 ">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">All Point Collection Visit </span> Report</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+
+
+        <div class="card-body">
+            <div class="row mb-3">
+
+
+                <div class="col-md-3">
+                    <label>From Date</label>
+                    <input type="text" class="form-control" placeholder="Select From Date" id="txtFromDate" autocomplete="off">
+                </div>
+
+                <div class="col-md-3">
+                    <label>To Date</label>
+                    <input type="text" class="form-control" placeholder="Select To Date" id="txtToDate" autocomplete="off">
+                </div>
+                <div class="col-md-3">
+                    <label>Frequency Of Visit</label><br>
+                    <h6 class="card-title  badge badge-danger ">00</h6>
+                    <h6 class="card-title  badge badge-success ">01</h6>
+                    <h6 class="card-title  badge badge-warning" style="background-color: #ffd800">02</h6>
+                    <h6 class="card-title  badge badge-primary ">03</h6>
+                    <h4 class="card-title  badge badge-warning">04</h4>
+                    <h4 class="card-title  badge badge-info" style="background-color:#6352ca">>=05</h4>
+
+                </div>
+                
+                </div>
+            <div class="row">
+                <div class="col-md-2" >
+                    <label>Zone</label>
+                    <select id="ddlZone" onchange="CallFCircleByZone();" data-placeholder="Select Your Zone" class="form-control form-control-select2" style="width: 110% ">
+                        <option value="0">All Zone</option>
+                    </select>
+
+                    @*<select id="ddlZone" onchange="CallFCircleByZone();" data-placeholder="Select Your Zone" class="form-control form-control-select2" data-fouc>
+                <option value="0">All Zone</option>
+            </select>*@
+
+                </div>
+                <div class="col-md-2" >
+                    <label>Circle</label>
+                    <select id="ddlCircle" onchange="CallFWardByCircle();" data-placeholder="Select Your Circle" class="form-control form-control-select2" style="width: 110% ">
+                        <option value="0">All Circle</option>
+                    </select>
+                </div>
+                <div class="col-md-2" >
+                    <label>Ward</label>
+                    <select id="ddlWard" data-placeholder="Select Your Ward" class="form-control form-control-select2" style="width: 110% ">
+                        <option value="0">All Ward</option>
+                    </select>
+
+                </div>
+
+                <div class="col-md-2" >
+                    <label>Route</label>
+                    <select id="ddlRoute" onchange="CallAllTripByRoute();" data-placeholder="Select Route" class="form-control form-control-select2" data-fouc style="width: 110% ">
+                        <option value="0">All Route</option>
+                    </select>
+
+                    @*<select id="ddlRoute" data-placeholder="Select Route" class="form-control form-control-select2" data-fouc>
+                <option value="0">All Route</option>
+            </select>*@
+
+                </div>
+                <div class="col-md-2" >
+                    <label>Route Trip Code</label>
+                    <select id="ddlTrip" onchange="CallAllTripId();" data-placeholder="Select Asset Category" class="form-control form-control-select2" style="width: 110% ">
+                        <option value="0">All Trip</option>
+                    </select>
+                </div>
+
+
+                
+
+
+
+
+
+            </div>
+            <br />
+            <div class="row">
+
+                <div class="col-md-2">
+                    <label>Status (Active/Inactive)</label>
+                    <select id="ddlStatus" class="form-control form-control-select2" style="width: 110%; ">
+                        <option value="-1">All</option>
+                        <option value="1">Active</option>
+                        <option value="0">InActive</option>
+                    </select>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <label> Geo Points Category</label>
+                    <select id="ddlCatgory"
+                            class="form-control form-control-select2" style="width: 110% ">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label>Visit Count of Geo Point</label>
+                    <select id="ddlVisitingType"
+                            data-placeholder="Select Reader Category" class="form-control form-control-select2" style="width: 110% ">
+                        <option value="-1">All</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">>5</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label>Vehicle Number</label>
+                    <select id="ddlVehicleNumber" data-placeholder="Select Vehicle Number" class="form-control form-control-select2" style="width: 110% ">
+                        <option value="0">All Vehicle Number</option>
+                       
+                    </select>
+                </div>
+                <div class="col-sm-3">
+
+                    <input type="button" id="btnSearch" class="btn btn-primary" style=" width:100px; top:32px" value="Search" onclick="GetDataTableData('Click');">
+                    <div style="top:32px; right:-9px" id="btnExcel" class="btn-group"
+                         role="group"
+                         aria-label="Button group with nested dropdown">
+
+
+                        <div class="btn-group" role="group">
+                            <button id="btnGroupDrop1"
+                                    type="button"
+                                    class="btn btn-success  dropdown-toggle"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                Export
+                            </button>
+                            <div class="dropdown-menu"
+                                 aria-labelledby="btnGroupDrop1">
+                                <a class="dropdown-item" href="javascript:void(0)" onclick="DownloadFile('Excel');"><strong>Excel</strong></a>
+                                <a class="dropdown-item" href="javascript:void(0)" onclick="CSVData('CSV');"><strong>CSV</strong></a>
+                            </div>
+                        </div>
+
+                    </div>
+                    @*<input type="button" id="btnExcel" class="btn btn-success" style=" left: 4px; top: 32px" value="Export To Excel" onclick="DownloadFile('Excel');">*@
+
+                    @*<button type="button" class="btn btn-outline bg-teal-400 text-teal-400 border-teal-400" onclick="DownloadFile('Excel');">
+            <i class="icon-file-excel"></i> Export To Excel
+        </button>*@
+                </div>
+            </div>
+                
+         </div>
+
+
+
+        <!--<div class="card-body">
+            <div class="row">
+                <div class="col-md-3 ROW">
+                    <select id="ddlZone" onchange="CallFCircleByZone();" data-placeholder="Select Your Zone" class="form-control form-control-select2" data-fouc>
+                        <option value="0">All Zone</option>
+                    </select>
+
+
+
+                </div>
+
+                <div class="col-md-3 ROW">
+
+                    <select id="ddlCircle" data-placeholder="Select Your Circle" class="form-control form-control-select2" data-fouc>
+                        <option value="0">All Circle</option>
+                    </select>
+                </div>
+                <div class="col-md-3 ROW">
+
+                    <select id="ddlWard" data-placeholder="Select Your Ward" class="form-control form-control-select2" data-fouc>
+                        <option value="0">All Ward</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 ROW">
+
+                    <select id="ddlTrip" data-placeholder="Select Trip" class="form-control form-control-select2" data-fouc>
+                        <option value="0">All Trip</option>
+                    </select>
+                </div>
+                <div class="col-md-12 row pt-3">
+
+                    <select id="ddlRoute" data-placeholder="Select Route" class="form-control form-control-select2" data-fouc>
+                        <option value="0">All Route</option>
+                    </select>
+
+
+                </div>
+                <div class="col-md-12 row pt-3">
+                    <label for="colFormLabelSm" class="col-md-3 col-form-label col-form-label-md pl-0" style="text-align : right;">FROM</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="Select From Date" id="txtFromDate" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="col-md-3 row">
+                    <label for="colFormLabelSm" class="col-md-3 col-form-label col-form-label-md pl-0" style="text-align : right;">TO</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="Select To Date" id="txtToDate" autocomplete="off">
+                    </div>
+                </div>-->
+        @*<button type="button" class="btn btn-primary border-2" style="height:42px;" onclick="CallAllFunc('Click');">Search</button>*@
+        <!--<div class="col-md-3 ROW">
+
+                    <input type="button" id="btnSearch" class="btn btn-primary" value="Search" onclick="GetDataTableData('Click');">
+                    <button type="button" class="btn btn-outline bg-teal-400 text-teal-400 border-teal-400" onclick="DownloadFile('Excel');">
+                        <i class="icon-file-excel"></i> Export To Excel
+                    </button>
+                </div>
+            </div>
+
+
+        </div>-->
+
+
+
+        <div class="dataTables_wrapper no-footer">
+
+            <div class="datatable-scroll-wrap" id="dv1">
+
+                <table class="table datatable-button-html5-columns" id="example">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Sr. No</th>
+                            <th>Zone</th>
+                            <th>Circle</th>
+                            <th>Ward</th>
+                            <th>Point Name</th>
+                            <th>Category</th>
+                            <th>Point Status</th>
+                            <th>Total Visit</th>
+                            <th>Last Visit Date</th>
+                            <th data-toggle="tooltip" title="Days Lapsed since last Visit">Days Lapsed</th>
+                            <th>Cordinates</th>
+                            @*<th>Map View Link</th>*@
+                            @*since last Visit*@
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+@*
+    <div class="progress p-5 d-flex align-items-center">
+
+    <div class="fa-stack fa-2x text-center">
+    <i class="fa fa-circle-o fa-stack-2x"></i>
+    <div class=""><b>1</b></div>
+    </div>
+    <div class="line-btw"></div>
+    <div class="fa-stack fa-2x text-center" style="">
+    <i class="fa fa-circle-o fa-stack-2x"></i>
+    <div style=""><b>2</b></div>
+    </div>
+    <div class="line-btw"></div>
+    <div class="fa-stack fa-2x text-center" style="">
+    <i class="fa fa-circle-o fa-stack-2x"></i>
+    <div class=""><b>3</b></div>
+    </div>
+
+    </div>*@
+
+
+<style>
+    td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_open.png') no-repeat center center;
+    }
+
+    tr.shown td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_close.png') no-repeat center center;
+    }
+</style>
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+@section scripts {
+    <link href="~/otherfiles/monsteradmin/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/monsteradmin/js/moment.js"></script>
+    <script src="~/otherfiles/monsteradmin/js/bootstrap-datepicker.min.js"></script>
+    <link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.init.js"></script>
+    <script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR9w4KTLnl8IWjTgFLHIvHZXLrpJlKi6I"></script>
+    <script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Collection/AllGeoPointVisitSummary.js?@DateTime.Now.Ticks"></script>
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,175 @@
+﻿@{
+    ViewData["Title"] = "All Shifts";
+    Layout = "_MonsterLayout";
+}
+
+
+
+<div class="content pt-0">
+
+
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">All Shifts </span> Information</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                @*<a title="Download QR Code" cid="" onclick="GetMultipleQrCode(this);" id="btnDownload"><i class="icon-download7"></i></a>*@
+                <a title="Add" cid="" onclick="CallFunc(this);" id="btnAdd"><i class="icon-add"></i></a>
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <button type="button" class="btn btn-secondary border-2" onclick="GetMultipleQrCode(this);">Download QR Code <i class="icon-qrcode ml-2"></i></button>
+
+
+                    <button type="button" class="btn btn-primary border-2" style="height:40px; margin-left: 15px;" onclick="GetDataTableData('Click'); CallFunc1();">Search</button>
+
+                    <div style=" right:-9px;height:40px" id="btnExcel" class="btn-group"
+                         role="group"
+                         aria-label="Button group with nested dropdown">
+
+
+                        <div class="btn-group" role="group">
+                            <button id="btnGroupDrop1"
+                                    type="button"
+                                    class="btn btn-success  dropdown-toggle"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                Export
+                            </button>
+                            <div class="dropdown-menu"
+                                 aria-labelledby="btnGroupDrop1">
+                                <a class="dropdown-item" href="javascript:void(0)" onclick="DownloadFile('Excel');"><strong>Excel</strong></a>
+                                <a class="dropdown-item" href="javascript:void(0)" onclick="CSVData('CSV');"><strong>CSV</strong></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dataTables_wrapper no-footer">
+
+            <div class="datatable-scroll-wrap">
+
+                <table class="table datatable-button-html5-columns vehicletable" id="example">
+                    <thead>
+                        <tr>
+                            
+                            <th>Sr.No</th>
+                            <th>Shift Name</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Min Before Shift Start</th>
+                            <th>Min After Shift STart</th>
+                            <th>Action</th>
+                            
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<img src="" id="mainImg" style="display:none" />
+
+<input type="hidden" id="hfUserId" value="@ViewBag.UserId" />
+<!-- Vertical form modal -->
+<div id="modal_form_AddDetail" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form class="form-validate-jquery" onsubmit="return Formsubmit();">
+            <div id="user_content">
+            </div>
+
+        </form>
+    </div>
+</div>
+<!-- /vertical form modal -->
+
+
+
+<style>
+    td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_open.png') no-repeat center center;
+    }
+
+    tr.shown td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_close.png') no-repeat center center;
+    }
+</style>
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+
+<script type="text/javascript">
+    const chBoxes =
+        document.querySelectorAll('.dropdown-menu input[type="checkbox"]');
+    const dpBtn =
+        document.getElementById('multiSelectDropdown');
+    let mySelectedListItems = [];
+
+    function handleCB() {
+        mySelectedListItems = [];
+        let mySelectedListItemsText = '';
+
+        chBoxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                mySelectedListItems.push(checkbox.value);
+                mySelectedListItemsText += checkbox.value + ', ';
+            }
+        });
+
+        dpBtn.innerText =
+            mySelectedListItems.length > 0
+                ? mySelectedListItemsText.slice(0, -2) : 'Select';
+    }
+
+    chBoxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', handleCB);
+    });
+</script>
+
+@section scripts {
+    <link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+    <script src="~/otherfiles/Light/global_assets/js/plugins/forms/selects/nselect2.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.init.js"></script>
+    <script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+    <script src="/otherfiles/global_assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+    <script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Attendance/ShiftInfo.js?@DateTime.Now.Ticks"></script>
+    <script src="/otherfiles/Light/global_assets/js/plugins/visualization/echarts/echarts.min.js"></script>
+}
+
+
+
+
+
+
+

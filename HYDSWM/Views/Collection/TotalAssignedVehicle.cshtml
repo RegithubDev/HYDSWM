@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewData["Title"] = "TotalAssignedVehicle";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+<div class="content pt-0">
+
+    <!-- Page header -->
+    <div class="page-header border-bottom-0">
+
+    </div>
+    <!-- /page header -->
+
+    <div class="card mt-3 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">All Vehicle </span> Information</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+        </div>
+
+        <div class="dataTables_wrapper no-footer">
+
+            <div class="datatable-scroll-wrap">
+
+                <table class="table datatable-button-html5-columns" id="example">
+                    <thead>
+                        <tr>
+                            <th>Sr. No</th>
+                            <th>Vehicle No</th>
+                            <th>UId</th>
+                            <th>Vehicle Type</th>
+                          @*  <th>Total Assign Route</th>*@
+                            <th>Owner Type</th>
+                            
+                            <th>Zone</th>
+                            <th>Circle</th>
+                            <th>Ward</th>
+                            <th>Driver Contact No</th>
+                            <th>Driver Name</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts {
+    <link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+    <script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Collection/TotalAssignedMiniTrippers.js?@DateTime.Now.Ticks"></script>
+}
+
+
+
+

@@ -1,0 +1,260 @@
+﻿
+@{
+    ViewData["Title"] = "All Roles";
+    Layout = "_MonsterLayout";
+}
+
+<div class="page-header border-bottom-0">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+               
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+                @*  <div class="d-flex">
+                        <div class="dropdown me-2">
+                            <button class="btn btn-secondary dropdown-toggle"
+                                    type="button"
+                                    id="dropdownMenuButton"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                January 2021
+                            </button>
+                            <ul class="dropdown-menu"
+                                aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="#">February 2021</a></li>
+                                <li><a class="dropdown-item" href="#">March 2021</a></li>
+                                <li><a class="dropdown-item" href="#">April 2021</a></li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-success">
+                            <i data-feather="plus" class="fill-white feather-sm"></i>
+                            Create
+                        </button>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+    <!-- Page header -->
+    
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline">
+            <div class="page-title d-flex">
+                <h4> <span class="font-weight-semibold">All Roles </span> </h4>&nbsp;
+                @*<button type="button" class="btn btn-outline bg-teal-400 text-teal-400 border-teal-400" id="btnAdd" isactive="true" cid="0" roleName="" onclick="CallFunc(this);">
+                <i class="icon-add"></i> Add New
+            </button>*@
+            </div>
+           
+            <div class="list-icons">
+                <a title="Add" cid="0" onclick="CallFunc(this);" id="btnAdd"><i class="icon-add"></i></a>
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+
+
+            <div class="dataTables_wrapper no-footer">
+
+                <div class="datatable-scroll-wrap">
+
+                    <table class="table datatable-button-html5-columns" id="tlbRole">
+                        <thead>
+                            <tr>
+                                <th>Sr. No</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                        </tfoot>
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<input type="hidden" id="hfTotalrows" />
+<!-- Vertical form modal -->
+<div id="modal_form_vertical" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form class="form-validate-jquery" onsubmit="return Formsubmit();" name="registration">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalTitle"></h3>
+                    <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+                </div>
+                @*<button type="button" class="btn bg-primary" id="alert" onclick="ShowMessage('1','record added');">Launch <i class="icon-play3 ml-2"></i></button>*@
+
+                <div class="modal-body">
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="hidden" id="RoleId" value="0" />
+                                    <label>Name</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" placeholder="Enter Name" class="form-control" id="txtRoleName" onkeypress="return isAlpha(event.keyCode);" required>
+
+                                </div>
+
+
+                               
+                            </div>
+                             <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Vehicle Type</label>
+
+                                        <select id="ddlVehicleType" class="select2 form-control" style="height: 36px; width: 100%" multiple="multiple">
+                                           
+                                        </select>
+                                   
+
+                            </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>IsActive</label>
+                                <input type="checkbox" checked="checked" id="cbIsActive" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="datatable-scroll-wrap">
+                            <table class="table datatable-button-html5-columns" id="tblMenumaster">
+                                <thead>
+                                    <tr>
+                                        <th>Menu</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                </tfoot>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+                    <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+                    <button onclick="SaveAndUpdateMenuInfo();" type="button" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /vertical form modal -->
+
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+    function isAlpha(keyCode) {
+
+        return ((keyCode >= 65 && keyCode <= 90) || keyCode == 8 || keyCode == 32 || keyCode == 190 || (keyCode >= 48 && keyCode <= 57) || (keyCode >= 97 && keyCode <= 122))
+
+    }
+   
+</script>
+@*<style>
+    .dropdown-check-list {
+        display: inline-block;
+    }
+
+        .dropdown-check-list .anchor {
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+            padding: 5px 50px 5px 10px;
+            border: 1px solid #ccc;
+        }
+
+            .dropdown-check-list .anchor:after {
+                position: absolute;
+                content: "";
+                border-left: 2px solid black;
+                border-top: 2px solid black;
+                padding: 5px;
+                right: 10px;
+                top: 20%;
+                -moz-transform: rotate(-135deg);
+                -ms-transform: rotate(-135deg);
+                -o-transform: rotate(-135deg);
+                -webkit-transform: rotate(-135deg);
+                transform: rotate(-135deg);
+            }
+
+            .dropdown-check-list .anchor:active:after {
+                right: 8px;
+                top: 21%;
+            }
+
+        .dropdown-check-list ul.items {
+            padding: 2px;
+            display: none;
+            margin: 0;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+            .dropdown-check-list ul.items li {
+                list-style: none;
+            }
+
+        .dropdown-check-list.visible .anchor {
+            color: #0094ff;
+        }
+
+        .dropdown-check-list.visible .items {
+            display: block;
+        }
+
+</style>*@
+@section scripts {
+
+   @* <script src="/otherfiles/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+    <script src="/otherfiles/global_assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script src="/otherfiles/global_assets/js/plugins/pickers/anytime.min.js"></script>
+    <script src="/otherfiles/global_assets/js/plugins/pickers/pickadate/picker.js"></script>
+    <script src="/otherfiles/global_assets/js/plugins/pickers/pickadate/picker.date.js"></script>
+    <script src="/otherfiles/global_assets/js/plugins/pickers/pickadate/legacy.js"></script>
+    <script src="/otherfiles/global_assets/js/demo_pages/picker_date.js"></script>
+    <script src="/otherfiles/global_assets/js/demo_pages/datatables_extension_buttons_html5.js"></script>*@
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.init.js"></script>
+    <script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+   @* <script src="/otherfiles/global_assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>*@
+    <script src="~/js/aes.js"></script>
+    <link href="/otherfiles/assets/css/sweetalert.css" rel="stylesheet" />
+    <script src="~/otherfiles/assets/js/sweetalert.min.js"></script>
+    <script src="~/ViewJs/UserAccount/Roles.js?@DateTime.Now.Ticks"></script>
+}
+
+
+
+

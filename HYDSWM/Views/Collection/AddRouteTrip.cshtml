@@ -1,0 +1,182 @@
+﻿@{
+    ViewData["Title"] = "Add Route Trip";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+
+<div class="page-header border-bottom-0">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">Add Route Trip </span> Information</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+
+                <form class="form-validate-jquery" onsubmit="return Formsubmit();" name="registration">
+                    <div id="user_content" class="form-body">
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>Route Code</label>
+                                    <input type="hidden" id="hfRouteId" />
+                                    <input type="text" placeholder="Route Code" class="form-control" id="txtRouteCode" readonly="true">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Zone</label>
+                                    <input type="text" class="form-control" id="txtZone" readonly="true">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Circle</label>
+                                    <input type="text" class="form-control" id="txtCircle" readonly="true">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Shift</label>
+                                    <span class="text-danger">*</span>
+                                    <select id="ddlShift"
+                                            class="form-control form-control-select2" required>
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                @*<div class="col-sm-3">
+                                    <label>Trip</label>
+                                    <span class="text-danger">*</span>
+                                    <select id="ddlMTrip" onchange="ChangeIdText();"
+                                            class="form-control">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>*@
+                               @* <div class="col-sm-3">
+                                    <label>Vehicle No</label>
+                                    <span class="text-danger">*</span>
+                                    <select id="ddlVehicleNo"
+                                            class="form-control form-control-select2" required>
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>*@
+                                 <div class="col-sm-4">
+                                    <label>Route Trip Code</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" placeholder="Id" autocomplete="off" class="form-control" id="txtTId" readonly="true">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Buffer Min</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" value="15" placeholder="Buffer Min" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" onselectstart="return false" autocomplete="off" onkeypress="return isNumberKey(this, event);" class="form-control" id="txtBufferMin">
+                                </div>
+                               
+                                <div class="col-sm-4">
+                                    <br />
+                                    <button type="button" id="btnAddTrip" class="
+                          justify-content-center
+                          w-60
+                          btn btn-rounded btn-light-success
+                          text-success
+                          font-weight-medium
+                          d-flex
+                          align-items-center
+                        " onclick="AddTrips();">
+                                        <i class="icon-add"></i> Add
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="card card-table table-responsive shadow-0 mb-0">
+                                <table id="tblTrip" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            @* <th>Trip</th>*@
+                                            <th>Route Trip Code</th>
+                                            @*  <th>Vehicle No</th>*@
+                                            <th>Buffer Min</th>
+                                            <th>Shift</th>
+                                            <th>Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-actions">
+
+                        <div class="text-end">
+                            <button type="submit" class="
+                            btn btn-light-info
+                            text-info
+                            font-weight-medium
+                          ">
+                                Submit
+                            </button>
+                            <button type="reset" onclick="goBack();" class="
+                            btn btn-light-danger
+                            text-danger
+                            font-weight-medium
+                          ">
+                                Cancel
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+@section scripts {
+<link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+<script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+<script src="~/otherfiles/Light/global_assets/js/plugins/forms/selects/nselect2.min.js"></script>
+<script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+<script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Collection/AddRouteTripInfo.js?@DateTime.Now.Ticks"></script>
+}
+
+

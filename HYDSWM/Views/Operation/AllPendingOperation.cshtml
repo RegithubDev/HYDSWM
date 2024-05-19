@@ -1,0 +1,320 @@
+﻿@{
+    ViewData["Title"] = "All Pending Operation";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+
+
+<div class="page-header border-bottom-0">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+    <!-- Page header -->
+    <div class="page-header border-bottom-0">
+    </div>
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i>  <span class="font-weight-semibold" id="spnHeader">Operation Monitoring </span> Information</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>TS/SCTP</label>
+                    <select id="ddlTransferStation" class="form-control form-control-select2" data-fouc>
+                        <option value="0">All Transfer Station</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label>Status</label>
+                    <select id="ddlStatus" data-placeholder="Select Status" class="form-control form-control-select2" data-fouc>
+                        <option value="-1">All</option>
+                        <option value="0">Open</option>
+                        <option value="1">Closed</option>
+                    </select>
+                </div>
+
+                 <div class="col-md-4">
+                    <label>User</label>
+                    <select id="ddlUser" data-placeholder="Select User" class="form-control form-control-select2" data-fouc>
+                        <option value="0">All</option>
+                       
+                    </select>
+                </div>
+
+            </div>
+            <br />
+            <div class="row">
+
+                <div class="col-md-4">
+                    <label>From Date</label>
+                    <input type="text" placeholder="Select From Date" class="form-control" id="txtFromDate" autocomplete="off">
+                </div>
+
+                <div class="col-md-4">
+                    <label>To Date</label>
+                    <input type="text" placeholder="Select To Date" id="txtToDate" class="form-control" autocomplete="off">
+                </div>
+                <div class="col-md-4">
+                    <div class="button-group">
+                        <input type="button" id="btnSearch" class="btn btn-primary" value="Search" onclick="GetDataTableData('Click');">
+                        <input type="button" id="btnExcel" class="btn btn-success" value="Export To Excel" onclick="DownloadFile('Excel');">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="dataTables_wrapper no-footer" id="dvContent">
+
+            <div class="datatable-scroll-wrap">
+
+                <table class="table datatable-button-html5-columns" id="example">
+                    <thead>
+                        <tr>
+                            <th>Sr. No</th>
+                            <th>Date & Time</th>
+                            <th>TS/SCTP</th>
+                            <th>AC</th>
+                            @* <th>CO</th>*@
+                            <th>PC</th>
+                            <th class="col-sm-2 Column-VerticalLine">CC</th>
+                            <th>AH</th>
+                            <th>LH</th>
+                            <th>MP</th>
+                            <th class="col-sm-2 Column-VerticalLine">WB(In MT)</th>
+                            <th>EST. WT(In MT)</th>
+                            <th>WB. WT(In MT)</th>
+                            <th>Status</th>
+                            <th>Operator</th>
+                            <th>Last Activity On</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal_form_vertical" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <form class="form-validate-jquery" onsubmit="return Formsubmit();" name="registration">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Add Linkage To Hookloader</h3>
+                    <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input type="hidden" id="hfPCId" value="0" />
+                                    <input type="hidden" id="hfTSId" value="0" />
+                                    <input type="hidden" id="hfDHLTId" value="0" />
+                                    <input type="hidden" id="hfLDate" value="" />
+                                    <input type="hidden" id="hfDUId" value="" />
+                                    <label>Hook Loader</label>
+                                    <span class="text-danger">*</span>
+                                    <select id="ddlHKL" required data-placeholder="Select Hookloader" class="form-control form-control-select2" data-fouc>
+                                        <option value="">Select</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Transaction Date</label>
+                                    <input type="text" placeholder="Select Transaction Date" id="txtTDate" autocomplete="off" readonly required>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+                    <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+                    <button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modal_form_vertical_WB" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <form class="form-validate-jquery" onsubmit="return WBFormsubmit();" name="registration">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Add WB Data</h3>
+                    <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input type="hidden" id="hfWBPCId" value="0" />
+                                <input type="hidden" id="hfWBTSId" value="0" />
+                                <input type="hidden" id="hfWBDHLTId" value="0" />
+                                <input type="hidden" id="hfWBVDHLTId" value="0" />
+                                <input type="hidden" id="hfWBLDate" value="" />
+                                <input type="hidden" id="hfWBVUId" value="" />
+                                <input type="hidden" id="hfWBOperationTypeId" value="" />
+                                <input type="hidden" id="hfWBTSName" value="" />
+                                <input type="hidden" id="hfWBVNo" value="" />
+                                <label>Gross Weight(In Kg.)</label>
+                                <span class="text-danger">*</span>
+                                <input type="text" value="0" placeholder="Gross Weight" class="form-control" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" onselectstart="return false" autocomplete="off" onkeypress="return isNumberKey(this, event);" id="txtGrossWt" required>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Tare Weight(In Kg.)</label>
+                                <span class="text-danger">*</span>
+                                <input type="text" value="0" placeholder="Tare Weight" class="form-control" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" onselectstart="return false" autocomplete="off" onkeypress="return isNumberKey(this, event);" id="txtTareWt" required>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Net Weight(In Kg.)</label>
+                                <span class="text-danger">*</span>
+                                <input type="text" value="0" placeholder="Net Weight" class="form-control" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" onselectstart="return false" autocomplete="off" onkeypress="return isNumberKey(this, event);" id="txtNetWt" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Transaction Date</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" placeholder="Select Transaction Date" id="txtWBTDate" class="form-control" autocomplete="off" readonly required>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+                    <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+                    <button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<input type="hidden" id="hfTotalrows" />
+<style>
+
+    .timeline {
+        text-align: center;
+        vertical-align: middle;
+        height: 30px;
+        width: 50px;
+        position: relative;
+    }
+
+        .timeline span {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: gray;
+            display: none;
+        }
+
+        .timeline.has-left:before {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            left: -1px;
+            width: 50%;
+            height: 3px;
+            top: 12px;
+            background-color: gray;
+        }
+
+        .timeline.has-right:after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            right: -1px;
+            width: 50%;
+            height: 3px;
+            top: 12px;
+            background-color: gray;
+        }
+
+        .timeline.has-left span,
+        .timeline.has-right span {
+            display: inline-block;
+        }
+
+    .Column-VerticalLine {
+        border-right: thin solid #0f0e0e;
+    }
+</style>
+
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+@section scripts {
+<script src="~/otherfiles/assets/js/jquery.datetimepicker.js"></script>
+<link href="~/otherfiles/assets/css/jquery.datetimepicker.css" rel="stylesheet" />
+<script src="/otherfiles/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+<script src="/otherfiles/global_assets/js/plugins/pickers/daterangepicker.js"></script>
+<script src="~/otherfiles/Light/global_assets/js/plugins/forms/selects/nselect2.min.js"></script>
+<script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+<script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Operation/PendingOperationInfo.js?@DateTime.Now.Ticks"></script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

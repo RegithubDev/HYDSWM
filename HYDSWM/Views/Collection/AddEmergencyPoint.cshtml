@@ -1,0 +1,317 @@
+﻿@{
+    ViewData["Title"] = "Add Emergency Point";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+
+
+<div class="page-header border-bottom-0">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">Add Emergency Points</span> Information</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+
+                <form class="form-validate-jquery" onsubmit="return Formsubmit();" name="registration">
+                    <div id="user_content" class="form-body">
+
+                        <div class="form-group">
+                            <div class="row">
+
+                                <div class="col-md-2">
+                                    <label>Zone</label>
+                                    <select id="ddlZone" onchange="CallFCircleByZone();" data-placeholder="Select Your Zone" class="form-control form-control-select2" style="width: 110% ">
+                                        <option value="0">All Zone</option>
+                                    </select>
+
+                                    @*<select id="ddlZone" onchange="CallFCircleByZone();" data-placeholder="Select Your Zone" class="form-control form-control-select2" data-fouc>
+                <option value="0">All Zone</option>
+            </select>*@
+
+                                </div>
+                                <div class="col-md-2">
+                                    <label>Circle</label>
+                                    <select id="ddlCircle" onchange="CallFWardByCircle();" data-placeholder="Select Your Circle" class="form-control form-control-select2" style="width: 110% ">
+                                        <option value="0">All Circle</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>Ward</label>
+                                    <select id="ddlWard" onchange="GetPointsNameByWardId();" data-placeholder="Select Your Ward" class="form-control form-control-select2" style="width: 110% ">
+                                        <option value="0">All Ward</option>
+                                    </select>
+
+                                </div>
+
+
+                                <div class="col-md-2">
+                                    <label>Vehicle Number</label>
+                                    <select id="ddlVehicleNumber" data-placeholder="Select Vehicle Number" class="form-control form-control-select2" style="width: 110% ">
+                                        <option value="0">All Vehicle Number</option>
+
+                                    </select>
+                                </div>
+                                @*<div class="col-md-2" style="left:8px; top:2px">
+            <div class="form-group ">
+                <label>Schedule Time</label>
+                <input type="text" class="form-control pickadate-accessibility picker_input picker_input--active" id="txtFromDate" autocomplete="off" aria-haspopup="true" aria-expanded="true" aria-readonly="false" aria-owns="P1054185948_root">
+            </div>
+        </div>*@
+                                <div class="col-md-2" style="left:8px; top:2px">
+                                    @*<label for="colFormLabelSm" class="col-md-3 col-form-label col-form-label-md pl-0" >Shedule Time</label>*@
+                                    <label>Schedule Time</label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Select From Date" id="txtFromDate" autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label>Remarks</label>
+                                    <input type="text" class="form-control" id="txtRemarks">
+                                </div>
+                                @*<div class="col-md-2">
+                                    <label>Point Type</label>
+                                    <select id="ddlPointType"
+                                            data-placeholder="Select Reader Category" class="form-control form-control-select2" style="width: 110% ">
+                                        <option value="-1">All</option>
+                                        <option value="1">Existing</option>
+                                        <option value="2">New</option>
+
+                                    </select>
+                                </div>*@
+                                @*<div class="col-sm-2" style="top:4px">
+                                    <label for="vehicle1"> Is Permanent</label><br>
+                                    <input type="checkbox" id="Ispermanent" name="vehicle1" value="Bike">
+                                </div>*@
+
+
+                            </div>
+                            
+
+                        </div>
+                        
+
+                        <div class="form-group">
+                            <div class="row" id="dvPoint">
+
+
+                                @*<div class="col-sm-2">
+            <label>Point Id</label>
+            <input type="text" class="form-control" id="txtPointId">
+        </div>*@
+                                <div class="col-md-2" id="dvPointName">
+                                    <label>Point Name</label>
+
+                                    <select id="txtPointName" data-placeholder="Select Point Name" class="form-control form-control-select2" style="width: 110% ">
+                                        <option value="0">Select  Point Name</option>
+
+                                    </select>
+                                </div>
+                                @*<div class="col-sm-2" id="dvtxtPointName">
+            <label>Point Name</label>
+            <input type="text" class="form-control" id="txtPointName">
+        </div>*@
+                                <div class="col-sm-2" style="display:none">
+                                    <label>Lat</label>
+                                    <input type="text" class="form-control" id="txtLat" onkeypress="return isNumberKey(event)">
+                                </div>
+                                <div class="col-sm-2" style="display:none">
+                                    <label>Lng</label>
+                                    <input type="text" class="form-control" id="txtLng" onkeypress="return isNumberKey(event)">
+                                </div>
+                                <div class="col-sm-2" style="display:none">
+                                    <label>Category</label>
+                                    <input type="text" class="form-control" id="txtCategoryS" onkeypress="return isNumberKey(event)">
+                                </div>
+                                <div class="col-sm-2" style="display:none">
+                                    <label>Point Type</label>
+                                    <input type="text" class="form-control" id="txtPointtype" onkeypress="return isNumberKey(event)">
+                                </div>
+                                <div class="col-sm-2" style="display:none">
+                                    <label>Radius</label>
+                                    <input type="text" class="form-control" id="txtRadius" onkeypress="return isNumberKey(event)">
+                                </div>
+                                <div class="col-sm-2" id="divcategory">
+                                    <label>Category</label>
+
+                                    <select id="ddlCatgory" class="form-control">
+                                        <option value="0">Select</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2" style="left:8px; top:2px" id="divtodate">
+                                    @*<label for="colFormLabelSm" class="col-md-3 col-form-label col-form-label-md pl-0" >Shedule Time</label>*@
+                                    <label>Pickup Time</label>
+                                    <div class="form-group">
+
+                                        <input type="time" placeholder="Pickup Time" class="form-control" id="txtToDate">
+
+                                        @*<input type="text" class="form-control" placeholder="Select From Date" id="txtToDate" autocomplete="off">*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-3" id="dvAdd">
+                                    <br />
+                                    <button type="button" id="btnAdd" class="
+                          justify-content-center
+                          w-60
+                          btn btn-rounded btn-light-success
+                          text-success
+                          font-weight-medium
+                          d-flex
+                          align-items-center
+                        " onclick="">
+                                        <i class="icon-add"></i> Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="card card-table table-responsive shadow-0 mb-0" id="example1">
+                                <table id="example" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No</th>
+
+                                            <th>Point Name</th>
+                                            @*<th>Lattitude</th>
+                                            <th>Longitude</th>*@
+                                            @*<th>Point Type</th>*@
+                                            @*<th>Radius</th>*@
+                                            @*<th>Zone</th>
+                                            <th>Circle</th>
+                                            <th>Ward</th>*@
+                                            <th>Category</th>
+                                            <th>PickupTime</th>
+                                            <th>Remove</th>
+                                            @* <th>Edit</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tblbodyexample">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        @*<fieldset>
+                            <legend class="bg-info">Map View</legend>
+                            <input id="searchInput" class="input-controls" type="text" placeholder="Enter a location" style="width:50%;">
+                            <div id="dvIMap1" style="height: 300px; width: 100%">
+                            </div>
+                        </fieldset>*@
+                    </div>
+
+
+
+                    <div class="form-actions" id="btnSave">
+
+                        <div class="text-end">
+                            <button type="submit" class="
+                            btn btn-light-info
+                            text-info
+                            font-weight-medium
+                          ">
+                                Submit
+                            </button>
+                            <button type="reset" onclick="goBack();" class="
+                            btn btn-light-danger
+                            text-danger
+                            font-weight-medium
+                          ">
+                                Cancel
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+</div>
+<style>
+    td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_open.png') no-repeat center center;
+    }
+
+    tr.shown td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_close.png') no-repeat center center;
+    }
+</style>
+
+<!-- Vertical form modal -->
+<!-- /vertical form modal -->
+
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+
+@section scripts {
+
+    <link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+    @*  <link href="~/otherfiles/monsteradmin/css/bootstrap-datepicker.min.css" rel="stylesheet" />*@
+    <script src="~/otherfiles/assets/js/jquery.datetimepicker.js"></script>
+    <link href="~/otherfiles/assets/css/jquery.datetimepicker.css" rel="stylesheet" />
+    <script src="~/otherfiles/monsteradmin/js/moment.js"></script>
+    @*<script src="~/otherfiles/monsteradmin/js/bootstrap-datepicker.min.js"></script>*@
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.init.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR9w4KTLnl8IWjTgFLHIvHZXLrpJlKi6I&libraries=places"></script>
+    <script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Collection/AddEmergencyPointInfo.js?@DateTime.Now.Ticks"></script>
+}
+
+
+
+
+
+
+

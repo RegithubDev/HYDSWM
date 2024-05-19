@@ -1,0 +1,212 @@
+﻿@{
+    ViewData["Title"] = "Timeline";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+<style>
+    td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_open.png') no-repeat center center;
+    }
+
+    tr.shown td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_close.png') no-repeat center center;
+    }
+
+    .progress {
+    }
+
+    .line-btw {
+        height: 3px;
+        width: 100px;
+        background-color: #2bb2bb;
+    }
+
+
+
+    .st {
+        width: 2em;
+        height: 2em;
+        text-align: center;
+        line-height: 2em;
+        border-radius: 1em;
+        background: dodgerblue;
+        margin: 0 1em;
+        display: inline-block;
+        color: white;
+        position: relative;
+    }
+
+        .st::before {
+            content: '';
+            position: absolute;
+            top: .9em;
+            left: -4em;
+            width: 4em;
+            height: .2em;
+            background: dodgerblue;
+            opacity:0.3;
+        }
+
+        .st:first-child::before {
+            display: none;
+        }
+
+</style>
+<div class="page-header border-bottom-0">
+
+
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+                @*  <div class="d-flex">
+                    <div class="dropdown me-2">
+                    <button class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    January 2021
+                    </button>
+                    <ul class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="#">February 2021</a></li>
+                    <li><a class="dropdown-item" href="#">March 2021</a></li>
+                    <li><a class="dropdown-item" href="#">April 2021</a></li>
+                    </ul>
+                    </div>
+                    <button class="btn btn-success">
+                    <i data-feather="plus" class="fill-white feather-sm"></i>
+                    Create
+                    </button>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+    <!-- Page header -->
+    <div class="page-header border-bottom-0">
+    </div>
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0 ">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">All Route Wise Collection </span> Report</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <label>From Date</label>
+                    <input type="text" placeholder="Select From Date" class="form-control" id="txtFromDate" autocomplete="off">
+                </div>
+
+                <div class="col-md-4">
+                    <label>To Date</label>
+                    <input type="text" placeholder="Select To Date" id="txtToDate" class="form-control" autocomplete="off">
+                </div>
+                <div class="col-md-4">
+                    <div class="button-group">
+                        <input type="button" id="btnSearch" class="btn btn-primary" value="Search" onclick="CallAllFunction('Click');">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row" id="dvTimeline">
+                <div class="col-12">
+                    <h5>Route-Z1-C22-R1  Points-0/25 Dated On-19-07-2022</h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <ul>
+                                    <li class="st" >1</li>
+                                    <li class="st">2</li>
+                                    <li class="st">3</li>
+                                    <li class="st">4</li>
+                                    <li class="st">5</li>
+                                    <li class="st">6</li>
+                                    <li class="st">7</li>
+                                    <li class="st">7</li>
+                                    <li class="st">7</li>
+                                    <li class="st">7</li>
+                                    <li class="st">7</li>
+                                    <li class="st">7</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div><div class="col-12">
+                    <h5>Route-Z2-C8-R2  Points-0/1 Dated On-19-07-2022</h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <table class="tbl1">
+                                    <thead><tr><td><div class="lbl-score">Start</div></td><td><div class="lbl-score">02:34</div></td> <td><div class="lbl-score">End</div></td></tr></thead>
+                                    <tbody><tr><td><span style="background-color: green;" class="circle-score"><i class="icon-star-empty3"></i></span></td><td class="drline"><div style="background-color: red;" class="circle-score">1</div></td><td class="drline1"><span style="background-color: black;" class="circle-score"><i class="icon-stop"></i></span></td></tr></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="dataTables_wrapper no-footer">
+
+            <div class="datatable-scroll-wrap" id="dv1">
+
+                <table class="table datatable-button-html5-columns" id="example">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Sr. No</th>
+                            <th>Route Id</th>
+                            <th>Transaction Date</th>
+                            <th>Total Trip</th>
+                            <th>Total Point</th>
+                            <th>Total Actual Collected Point</th>
+                            <th>Total New Collected Point</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+

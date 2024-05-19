@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewData["Title"] = "All Mobile Role";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+
+<div class="page-header border-bottom-0">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+                @*  <div class="d-flex">
+                        <div class="dropdown me-2">
+                            <button class="btn btn-secondary dropdown-toggle"
+                                    type="button"
+                                    id="dropdownMenuButton"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                January 2021
+                            </button>
+                            <ul class="dropdown-menu"
+                                aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="#">February 2021</a></li>
+                                <li><a class="dropdown-item" href="#">March 2021</a></li>
+                                <li><a class="dropdown-item" href="#">April 2021</a></li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-success">
+                            <i data-feather="plus" class="fill-white feather-sm"></i>
+                            Create
+                        </button>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+    <!-- Page header -->
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline">
+            <div class="page-title d-flex">
+                <h4> <span class="font-weight-semibold">All App Menu Roles </span> </h4>&nbsp;
+                @*<button type="button" class="btn btn-outline bg-teal-400 text-teal-400 border-teal-400" id="btnAdd" isactive="true" cid="0" roleName="" onclick="CallFunc(this);">
+                        <i class="icon-add"></i> Add New
+                    </button>*@
+            </div>
+
+            <div class="list-icons">
+                @*<a title="Add" cid="0" onclick="CallFunc(this);" id="btnAdd"><i class="icon-add"></i></a>*@
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+
+
+            <div class="dataTables_wrapper no-footer">
+
+                <div class="datatable-scroll-wrap">
+
+                    <table class="table datatable-button-html5-columns" id="tlbRole">
+                        <thead>
+                            <tr>
+                                <th>Sr. No</th>
+                                <th>Role Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                        </tfoot>
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<input type="hidden" id="hfTotalrows" />
+<!-- Vertical form modal -->
+<div id="modal_form_vertical" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form class="form-validate-jquery" onsubmit="return Formsubmit();" name="registration">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalTitle"></h3>
+                    <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+                </div>
+                @*<button type="button" class="btn bg-primary" id="alert" onclick="ShowMessage('1','record added');">Launch <i class="icon-play3 ml-2"></i></button>*@
+
+                <div class="modal-body">
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <input type="hidden" id="hfRoleId" value="0" />
+                                    <label>Role</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" placeholder="Enter Name" class="form-control" id="txtRoleName" readonly required>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="datatable-scroll-wrap">
+                            <table class="table datatable-button-html5-columns" id="tblMenumaster">
+                                <thead>
+                                    <tr>
+                                        <th>Menu</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                </tfoot>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+                    <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+                    <button onclick="SaveAndUpdateMenuInfo();" type="button" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /vertical form modal -->
+
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+
+@section scripts {
+    <script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/UserAccount/MobileRole.js?@DateTime.Now.Ticks"></script>
+}
+
+
+
+
+
+

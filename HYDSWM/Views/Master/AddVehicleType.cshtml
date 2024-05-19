@@ -1,0 +1,67 @@
+﻿
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h3 class="modal-title">Add Vehicle Type</h3>
+        <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+    </div>
+    @*<button type="button" class="btn bg-primary" id="alert" onclick="ShowMessage('1','record added');">Launch <i class="icon-play3 ml-2"></i></button>*@
+
+    <div class="modal-body">
+
+
+        <div class="form-group">
+            <div class="row">
+
+                <div class="col-sm-4">
+                    <label>Vehicle Type</label>
+                    <input type="hidden" id="hfVehicleTypeId" />
+                    <span class="text-danger">*</span>
+                    <input type="text" placeholder="Enter Vehicle Type" class="form-control" id="txtVehicleType" required>
+                </div>
+                <div class="col-sm-4">
+                    <label>Volume</label>
+                    <span class="text-danger">*</span>
+                    <input type="text" placeholder="Enter Volume" class="form-control" id="txtVolume" required>
+                </div>
+                <div class="col-sm-4">
+                    <label>Density</label>
+                    <span class="text-danger">*</span>
+                    <input type="text" placeholder="Enter Density" class="form-control" id="txtDensity" required>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-check">
+                        <br />
+                        <br />
+                        <label class="form-check-label">
+                            <input type="checkbox" class="square-o" id="ckbIsActive" name="IsActive">
+                            Is Active
+                        </label>
+                    </div>
+
+                </div>
+               
+                
+                
+                
+                <div class="col-sm-4">
+                    <label for="OperationType">Operation Type</label>
+
+                    <select id="ddlOperationType" class="form-control">
+                        <option value="">Select</option>
+                        
+                    </select>
+
+                </div>
+                
+
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+        <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+        <button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
+    </div>
+</div>
+

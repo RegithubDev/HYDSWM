@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewData["Title"] = "All Shift";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+
+<div class="content pt-0">
+
+    <!-- Page header -->
+    <div class="page-header border-bottom-0">
+        @* <div class="page-header-content header-elements-md-inline">
+                <div class="page-title d-flex">
+                    <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Vehicle Performance </span> - Report</h4>
+                    <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+                </div>
+
+            </div>*@
+    </div>
+    <!-- /page header -->
+
+    <div class="card mt-3">
+        <div class="card-header header-elements-inline pt-0 pb-0">
+            <div class="page-title d-flex">
+                <h4><i class="icon-arrow-left52 mr-2"></i>  <span class="font-weight-semibold" id="spnHeader">Shift </span> Information</h4>&nbsp;
+            </div>
+
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+
+
+        </div>
+
+        <div class="dataTables_wrapper no-footer" id="dvContent">
+
+            <div class="datatable-scroll-wrap">
+
+                <table class="table datatable-button-html5-columns" id="example">
+                    <thead>
+                        <tr>
+                            <th>Sr. No</th>
+                            <th>Shift Name</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Min Before Shift Start</th>
+                            <th>Min After Shift Start</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="hfTotalrows" />
+
+<!-- Vertical form modal -->
+<div id="modal_form_vertical" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form class="form-validate-jquery" onsubmit="return Formsubmit();" name="registration">
+            <div id="user_content">
+
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /vertical form modal -->
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+@section scripts {
+    <script src="~/js/CommonHelper.js"></script>
+    <script src="~/ViewJs/SWMMaster/ShiftInfo.js?@DateTime.Now.Ticks"></script>
+}

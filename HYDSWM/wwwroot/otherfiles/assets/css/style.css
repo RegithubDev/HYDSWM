@@ -1,0 +1,143 @@
+*,
+*::after,
+*::before {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--clr-bg: rgb(76, 76, 233);
+	--clr: white;
+	--circle-h: 2em;
+	--circle-w: 2em;
+	--border-radius: 50%;
+	--h: 3em;
+	--clr-marker: red;
+}
+.path-container {
+	position: relative;
+}
+.path-content {
+	display: flex;
+	align-items: center;
+	position: relative;
+	flex-wrap: wrap;
+}
+
+.start-point {
+	margin: -1.563em 0;
+	height: var(--circle-h);
+	width: var(--circle-w);
+	background-color: green;
+	border-radius: var(--border-radius);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+}
+.end-point {
+	margin: -1.563em 0;
+	height: var(--circle-h);
+	width: var(--circle-w);
+	background-color: grey;
+	border-radius: var(--border-radius);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+}
+.path {
+	display: flex;
+	align-items: center;
+	min-height: var(--h);
+	position: relative;
+	margin: 2em 2em;
+	z-index: 2;
+}
+.path:first-child::before {
+	margin-left: 0;
+	width: 0;
+}
+.path:last-child::after {
+	margin: 0;
+	width: 0;
+}
+.path::before {
+	content: "";
+	background-color: var(--clr-bg);
+	height: 2px;
+	width: 100%;
+	z-index: 1;
+	position: absolute;
+	top: 1.5em;
+	left: -100%;
+	bottom: 0;
+}
+.path::after {
+	content: "";
+	background-color: var(--clr-bg);
+	height: 2px;
+	width: 100%;
+	z-index: 1;
+	position: absolute;
+	top: 1.5em;
+	right: -100%;
+	bottom: 0;
+}
+.path-item {
+	margin: -1.563em auto;
+	height: var(--circle-h);
+	width: var(--circle-w);
+	background-color: var(--clr-bg);
+	border-radius: var(--border-radius);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--clr);
+	z-index: 100;
+}
+.up-text,
+.down-text {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	left: 0;
+	right: 0;
+	white-space: nowrap;
+	font-size: 80%;
+	height: 1.5em;
+}
+.up-text {
+	top: -1em;
+}
+.down-text {
+	bottom: -1em;
+}
+.down-text.other-up-text {
+	bottom: 125%;
+}
+.down-text.other-down-text {
+	top: 125%;
+}
+.path-container {
+	padding: 2em 0;
+	border: 1px solid grey;
+}
+.marker {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+	z-index: 101;
+}
+.marker svg {
+	height: 1em;
+	width: 1em;
+}
+.marker svg circle,
+.marker svg path {
+	fill: var(--clr-marker);
+}

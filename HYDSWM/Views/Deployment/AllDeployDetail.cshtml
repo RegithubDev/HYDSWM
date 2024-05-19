@@ -1,0 +1,353 @@
+﻿@{
+    ViewData["Title"] = "AllVDeployment";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+<div class="content pt-0">
+
+    
+    <div class="page-header border-bottom-0">
+    </div>
+    
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0 ">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">Deployment Summary</span> Report</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Zone</label>
+                    <select id="ddlZone" onchange="CallFCircleByZone();" data-placeholder="Select Your Zone" class="form-control form-control-select2" style="width: 110% ">
+                        <option value="0">All Zone</option>
+                    </select>
+
+                </div>
+                <div class="col-md-3">
+                    <label>Circle</label>
+                    <select id="ddlCircle" onchange="CallFWardByCircle();" data-placeholder="Select Your Circle" class="form-control form-control-select2" style="width: 110% ">
+                        <option value="0">All Circle</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label>Ward</label>
+                    <select id="ddlWard" data-placeholder="Select Your Ward" class="form-control form-control-select2" style="width: 110% ">
+                        <option value="0">All Ward</option>
+                    </select>
+
+                </div>
+                <div class="col-md-3">
+                    <label>Vehicle Type</label>
+                    <select id="ddlVehicleType" onchange="AllVehicleLst();" data-placeholder="Select All VehicleType" class="form-control form-control-select2" style="width: 110% ">
+                        <option value="0">All Vehicle Type</option>
+                    </select>
+
+                </div>
+
+
+                <div class="row mb-3">
+
+                   
+                    <div class="col-md-3">
+                        <label>Select  Date</label>
+                        <input type="text" class="form-control" placeholder="Select From Date" id="txtFromDate" autocomplete="off">
+                    </div>
+
+                   
+
+                    <div class="col-sm-6">
+
+                        <input type="button" id="btnSearch" class="btn btn-primary" style=" width:80px; top:32px" value="Search" onclick="CallFunc();">
+                        <input type="button" id="btnExcel" class="btn btn-success" style=" left: 4px; top: 32px" value="Export To Excel" onclick="DownloadFile('Excel');">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-7">
+
+
+            <div class="card">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">SA - Swachh Autos(Master)</h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            <a class="list-icons-item" data-action="collapse"></a>
+                            <a class="list-icons-item" data-action="reload"></a>
+                            <a class="list-icons-item" data-action="remove"></a>
+                            <a class="list-icons-item" data-action="fullscreen"><i class="icon-fullscreen"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body" style="height: 418px; overflow: auto;">
+
+                    <div class="dataTables_wrapper no-footer">
+
+                        <div class="datatable-scroll-wrap">
+                            <input type="hidden" id="hfTotalrows" value="0" />
+                            <table class="table datatable-button-html5-columns" id="example">
+                                <thead>
+                                    <tr>
+                                        <th>Sr. No</th>
+                                        <th>Vehicle Type</th>
+                                        <th>Active</th>
+                                        <th>InActive</th>
+                                        <th>Repair</th>
+                                        <th>Condemned</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                </tfoot>
+                                <tbody></tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-sm-5">
+
+            <!-- Basic donut -->
+            <div class="card">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">SA - Vehicle Type Summary</h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            <a class="list-icons-item" data-action="collapse"></a>
+                            <a class="list-icons-item" data-action="reload"></a>
+                            <a class="list-icons-item" data-action="remove"></a>
+                            <a class="list-icons-item" data-action="fullscreen"><i class="icon-fullscreen"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="chart-container">
+                        <div class="chart has-fixed-height" id="columns_clustered"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /basic donut -->
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-7">
+
+
+            <div class="card" style="height: 479px; overflow: auto;">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">SB - Swachh Autos(Active )</h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            <a class="list-icons-item" data-action="collapse"></a>
+                            <a class="list-icons-item" data-action="reload"></a>
+                            <a class="list-icons-item" data-action="remove"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="dataTables_wrapper no-footer">
+
+                        <div class="datatable-scroll-wrap">
+                            <input type="hidden" id="hfTotalrows1" value="0" />
+                            <table class="table datatable-button-html5-columns" id="example1">
+                                <thead>
+                                    <tr>
+                                        <th>Sr. No</th>
+                                        <th>Vehicle Type</th>
+                                        <th>Deployed</th>
+                                        <th>Not Deployed </th>
+                                        <th>Total</th>
+
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                </tfoot>
+                                <tbody></tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-sm-5">
+
+            <!-- Basic donut -->
+            <div class="card">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">SB - Vehicle Type Summary</h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            <a class="list-icons-item" data-action="collapse"></a>
+                            <a class="list-icons-item" data-action="reload"></a>
+                            <a class="list-icons-item" data-action="remove"></a>
+                            <a class="list-icons-item" data-action="fullscreen"><i class="icon-fullscreen"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="chart-container">
+                        <div class="chart has-fixed-height" id="columns_stacked1"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /basic donut -->
+
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-sm-7">
+
+
+            <div class="card" style="height: 479px; overflow: auto;">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">SC - Swachh Autos(Active) Deployed Vs Reported</h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            <a class="list-icons-item" data-action="collapse"></a>
+                            <a class="list-icons-item" data-action="reload"></a>
+                            <a class="list-icons-item" data-action="remove"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="dataTables_wrapper no-footer">
+
+                        <div class="datatable-scroll-wrap">
+                            <input type="hidden" id="hfTotalrows2" value="0" />
+                            <table class="table datatable-button-html5-columns" id="example2">
+                                <thead>
+                                    <tr>
+                                        <th>Sr. No</th>
+                                        <th>Vehicle Type</th>
+                                        <th>Active Master</th>
+                                        <th>Deployed(Unique)</th>
+                                        <th>Deploy & Reported(Unique)</th>
+                                        <th>Not Deployed</th>
+                                        <th>Not Deploy But Reported(Unique)</th>
+                                       @* <th>Total</th>*@
+
+                                    </tr>
+
+                                </thead>
+                                <tfoot>
+                                </tfoot>
+                                <tbody>
+                                   
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-sm-5">
+
+            <!-- Basic donut -->
+            <div class="card">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">SC - Vehicle Type Summary</h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            <a class="list-icons-item" data-action="collapse"></a>
+                            <a class="list-icons-item" data-action="reload"></a>
+                            <a class="list-icons-item" data-action="remove"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="chart-container">
+                        <div class="chart has-fixed-height" id="columns_stacked2"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /basic donut -->
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+<script>
+
+</script>
+
+@section scripts {
+    <link href="~/otherfiles/monsteradmin/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <script src="~/otherfiles/monsteradmin/js/moment.js"></script>
+    <script src="~/otherfiles/monsteradmin/js/bootstrap-datepicker.min.js"></script>
+
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.min.js"></script>
+    <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.init.js"></script>
+    <script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+    <script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+    <script src="~/ViewJs/Deployment/VehicleDeploy.js?@DateTime.Now.Ticks"></script>
+    <script src="/otherfiles/Light/global_assets/js/plugins/visualization/echarts/echarts.min.js"></script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

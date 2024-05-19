@@ -1,0 +1,195 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h3 class="modal-title">Add Vehicle </h3>
+        <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+    </div>
+    @*<button type="button" class="btn bg-primary" id="alert" onclick="ShowMessage('1','record added');">Launch <i class="icon-play3 ml-2"></i></button>*@
+
+    <div class="modal-body">
+
+
+        <div class="form-group">
+            <div class="row">
+
+                <div class="col-sm-3">
+                    <label>Vehicle Reg. No</label>
+                    <input type="hidden"hfVehicleId" value="0" />
+                    <span class="text-danger">*</span>
+                    @* <input type="text" placeholder="Vehicle Reg. No" class="form-control" id="txtVehicleNo" onkeypress="return AvoidSpace(event);" onblur="this.value=removeSpaces(this.value);" style="text-transform:uppercase" required>*@
+                    <input type="text" placeholder="Vehicle Reg. No" class="form-control" id="txtVehicleNo" onkeypress="return isAlpha(event.keyCode);" style="text-transform:uppercase" required>
+                </div>
+                <div class="col-sm-3">
+                    <label>Chassis No</label>
+                    <span class="text-danger">*</span>
+                    <input type="text" placeholder="Chassis No" class="form-control" id="txtChassisNo" onkeypress="return isAlpha(event.keyCode);" autocomplete="off" required>
+                </div>
+                <div class="col-sm-3">
+                    <label>Vehicle Type </label>
+                    <span class="text-danger">*</span>
+                    <select id="ddlVehicleType" required
+                            class="form-control">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <label>Zone</label>
+
+                    <select id="ddlZone" onchange="CallFCircleByZone();" required
+                            class="form-control">
+                        <option value="0">Select</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-3">
+                    <label>Circle</label>
+                    <select id="ddlCircle" onchange="CallFWardByCircle()" required
+                            class="form-control">
+                        <option value="0">Select</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <label>Ward</label>
+                    <select id="ddlWard" onchange="CallOtherLocationByWard()" required
+                            class="form-control">
+                        <option value="0">Select</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <label>
+                        UId IsManual
+                    </label>
+
+
+                    <span class="text-danger">*</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="Square-o" type="checkbox" onclick="boxDisable();" id="ckbIsManual" value="1">
+                    <input type="text" placeholder="Enter UId" class="form-control" id="txtUId" disabled required>
+                </div>
+                <div class="col-sm-3">
+                    <label>Owner Type</label>
+                    <select id="ddlOwnerType" required
+                            class="form-control">
+                        <option value="0">Select</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+
+                <div class="col-sm-3">
+                    <label>Upload File</label>
+                    <input type="file" id="files" name="files" class="form-control h-auto" accept=".jpg,.jpeg,.png,.gif,.bmp" value="" />
+
+                </div>
+                <div class="col-sm-3">
+                    <label>Driver Name</label>
+                    <input type="text" placeholder="Driver Name" class="form-control" id="txtDriverName" onkeypress="return isAlpha(event.keyCode);">
+                </div>
+                <div class="col-sm-3">
+                    <label>Driver No</label>
+                    <input type="text" placeholder="Driver No" class="form-control" id="txtDriverNo" onkeypress="return isAlpha(event.keyCode);">
+                </div>
+                <div class="col-sm-3">
+                    <label>Incharge</label>
+                    <select id="ddlIncharge"
+                            class="form-control">
+                        <option value="0">Select</option>
+                    </select>
+                </div>
+            
+            
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+
+                
+               
+               
+            </div>
+        </div>
+         <div class="form-group">
+           <div class="row">
+
+               
+                <div class="col-sm-3">
+                     <label>Landmark</label>
+                    <select id="ddlLandmark"
+                            class="form-control">
+                        <option value="0">Select</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <label>Transfer Station</label>
+                    <select id="ddlTs"
+                            class="form-control">
+                        <option value="0">Select</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <label>Gross Weight</label>
+                    <input type="text" value="0" placeholder="Gross Weight" class="form-control" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" onselectstart="return false" autocomplete="off" onkeypress="return isNumberKey(this, event);" id="txtGrossWt" required>
+                    </div>
+            <div class="col-sm-3">
+                    <label>Tare Weight</label>
+                    <input type="text" value="0" placeholder="Tare Weight" class="form-control" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" onselectstart="return false" autocomplete="off" onkeypress="return isNumberKey(this, event);" id="txtTareWt" required>
+                </div>
+                </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+              
+                <div class="col-sm-3">
+                    <label>Net Weight</label>
+                    <input type="text" value="0" placeholder="Net Weight" class="form-control" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" onselectstart="return false" autocomplete="off" onkeypress="return isNumberKey(this, event);" id="txtNetWt" required>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group" id="dvStatus" style="display:none">
+            <div class="row">
+                <div class="col-sm-4">
+                    <input type="hidden" id="hfStatus" />
+                    <label>Status</label>
+                    <span class="text-danger">*</span>
+                    <select id="ddlStatus" onchange="StatusChange();" required
+                            class="form-control">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <label>Remarks</label>
+                    <textarea rows="3" cols="3" class="form-control" id="txtARemarks" readonly></textarea>
+                    @*<input type="text" class="form-control" id="txtARemarks" readonly>*@
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+        <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+        <button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+    function isAlpha(keyCode) {
+
+        return ((keyCode >= 65 && keyCode <= 90) || keyCode == 8 || keyCode == 32 || keyCode == 190 || (keyCode >= 48 && keyCode <= 57) || (keyCode >= 97 && keyCode <= 122))
+
+    }
+    $(document).keydown(function (keyCode) {
+        if (keyCode.ctrlKey == true && (keyCode.which == '118' || keyCode.which == '86')) {
+
+            keyCode.preventDefault();
+        }
+    });
+
+</script>

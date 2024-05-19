@@ -1,0 +1,296 @@
+﻿
+@{
+    ViewData["Title"] = "RouteInfo";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+<link href="~/otherfiles/assets/css/style.css" rel="stylesheet" type="text/css">
+
+
+<div class="page-header border-bottom-0">
+
+
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+                @*  <div class="d-flex">
+                    <div class="dropdown me-2">
+                    <button class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    January 2021
+                    </button>
+                    <ul class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="#">February 2021</a></li>
+                    <li><a class="dropdown-item" href="#">March 2021</a></li>
+                    <li><a class="dropdown-item" href="#">April 2021</a></li>
+                    </ul>
+                    </div>
+                    <button class="btn btn-success">
+                    <i data-feather="plus" class="fill-white feather-sm"></i>
+                    Create
+                    </button>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+    <!-- Page header -->
+    <div class="page-header border-bottom-0">
+    </div>
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0 ">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">All Route Wise Collection </span> Report</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+
+
+        <div class="card-body">
+
+            <div class="form-group">
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>From Date</label>
+                            <input type="text" placeholder="Select From Date" class="form-control mydatepicker" id="txtFromDate" autocomplete="off">
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>To Date</label>
+                            <input type="text" placeholder="Select To Date" id="txtToDate" class="form-control mydatepicker" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Zone</label>
+                            <select id="ddlZone" onchange="CallFCircleByZone();" data-placeholder="Select Your Zone" class="form-control form-control-select2" style="width: 100%; height: 36px">
+                                <option value="0">All Zone</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Circle</label>
+                            <select id="ddlCircle" onchange="CallAllRouteByZoneAndWard();" data-placeholder="Select Your Circle" class="form-control form-control-select2" style="width: 100%; height: 36px">
+                                <option value="0">All Circle</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Route</label>
+                                <select id="ddlRoute" onchange="CallAllTripByRoute();" data-placeholder="Select" class="form-control form-control-select2" style="width: 100%; height: 36px">
+                                    <option value="0">Select</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Route Trip Code</label>
+                                <select id="ddlTrip" data-placeholder="Select" class="form-control form-control-select2" style="width: 100%; height: 36px">
+                                    <option value="0">Select</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group">
+
+                                <input type="button" id="btnSearch" class="btn btn-primary" value="Search" onclick="CallAllFunction('Click');" style="margin-top:32px;">
+
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label>Point Status By Color </label><br>
+                            <h6 class="card-title  badge badge-dark ">Start/End</h6>
+                            <h6 class="card-title  badge badge-secondary">Gray</h6>
+                            <h6 class="card-title  badge badge-success">Collected</h6>
+                            <h6 class="card-title  badge badge-danger">Not Collected</h6>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="border-bottom title-part-padding input-group">
+                            <h4 class="card-title mb-0">Map View</h4>
+                            <div class="col-md-3">
+
+                                <select id="ddlMap" class="form-control" onchange="AllPointTimelineInfo('Click');">
+                                    <option value="10">10</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="500">500</option>
+                                    <option value="1000">1000</option>
+                                    <option value="-1">All</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="map_basic" style="height: 373px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="accordion accordion-flush" id="dvTimeline">
+            </div>
+
+          
+        </div>
+
+
+
+        <div class="dataTables_wrapper no-footer">
+
+            <div class="datatable-scroll-wrap" id="dv1">
+
+                <table class="table datatable-button-html5-columns" id="example">
+                    <thead>
+                        <tr>
+                            <th>Sr. No</th>
+                            <th>Dated On</th>
+                            <th>Route Information</th>
+                            <th>Status</th>
+                            <th>Start Time</th>
+                            <th>Total Point</th>
+                            <th>Collected Point</th>
+                            <th>Not Collected Point</th>
+                            <th>Total Drive Time</th>
+                            <th>Total Weight</th>
+                            <th>Last Pickup Date & Time</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+<div id="viewonmap" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">View On Map</h3>
+                <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="dvIMap" style="height: 400px; width: 100%">
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center bg-teal-400 border-top-0">
+                <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*
+    <div class="progress p-5 d-flex align-items-center">
+
+    <div class="fa-stack fa-2x text-center">
+    <i class="fa fa-circle-o fa-stack-2x"></i>
+    <div class=""><b>1</b></div>
+    </div>
+    <div class="line-btw"></div>
+    <div class="fa-stack fa-2x text-center" style="">
+    <i class="fa fa-circle-o fa-stack-2x"></i>
+    <div style=""><b>2</b></div>
+    </div>
+    <div class="line-btw"></div>
+    <div class="fa-stack fa-2x text-center" style="">
+    <i class="fa fa-circle-o fa-stack-2x"></i>
+    <div class=""><b>3</b></div>
+    </div>
+
+    </div>*@
+
+
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+
+@section scripts {
+<link href="~/otherfiles/monsteradmin/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+<script src="~/otherfiles/monsteradmin/js/moment.js"></script>
+<script src="~/otherfiles/monsteradmin/js/bootstrap-datepicker.min.js"></script>
+<link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+<script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+<script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.full.min.js"></script>
+<script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.min.js"></script>
+<script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.init.js"></script>
+<script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR9w4KTLnl8IWjTgFLHIvHZXLrpJlKi6I"></script>
+<script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Demo1/RouteInfo.js?@DateTime.Now.Ticks"></script>
+}
+
+
+
+
+
+
+
+
+
+
+
+

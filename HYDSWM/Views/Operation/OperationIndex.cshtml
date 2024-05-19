@@ -1,0 +1,442 @@
+﻿@{
+    ViewData["Title"] = "Operation Dashboard";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-md-4 align-self-center">
+            <h3 class="page-title">Dashboard</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Operation Dashboard
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="
+                col-md-8
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+            <div class="d-flex">
+
+                <div class="input-group mb-3">
+                    @*<label>Transfer Station</label>*@
+                    <select id="ddlTransferStation" data-placeholder="Select Transfer Station" class="form-control form-control-select2" data-fouc>
+                        <option value="0">All Transfer Station</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    @*<label>Transfer Station</label>*@
+                    <select id="ddlOperationType" data-placeholder="Select Operation Type" class="form-control form-control-select2" data-fouc>
+                        <option value="0">All Operation Type</option>
+                    </select>
+                </div>
+                <div class="input-group mb-5" style="display:none;">
+                    <input type="text" class="form-control timeseconds" />
+
+                </div>
+
+                <button type="button" class="btn btn-primary border-2" style="height:39px; margin-left:18px" onclick="CallAllFunc('Click');">Search</button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="border-bottom title-part-padding">
+                    <h4 class="card-title mb-0">Vehicle Traffic Analysis</h4>
+                    <div class="fc-toolbar fc-header-toolbar">
+                        <div class="fc-right">
+                            <div class="fc-button-group">
+                                <button type="button" id="btnMonth" class="fc-month-button fc-button fc-state-default fc-corner-left" onclick="SecondaryCollectionBarChart('Click','Month');">month</button>
+                                <button type="button" id="btnWeek" class="fc-agendaWeek-button fc-button fc-state-default" onclick="SecondaryCollectionBarChart('Click','Week');">week</button>
+                                <button type="button" id="btnDaily" class="fc-agendaDay-button fc-button fc-state-default fc-corner-right" onclick="SecondaryCollectionBarChart('Click','Daily');">day</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body analytics-info">
+                    <div id="basic-bar" style="height: 353px;"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-4 d-flex align-items-stretch" id="dvNotification1">
+            <div class="card w-100">
+                <div class="card-body">
+                    <div class="d-md-flex align-items-center no-block">
+                        <h4 class="card-title">Vehicle Traffic Stats</h4>
+
+                    </div>
+                    <!-- Row -->
+                    <div class="row">
+
+
+
+                        <!-- Column -->
+                        <div class="col-lg-6" id="dvTotalAutoTipper">
+                            <div class="card">
+                                <div class="box p-0 rounded bg-info text-center">
+                                    <h1 class="fw-light text-white" id="h6TotalAutoTipper">0</h1>
+                                    <h6 class="text-white">Mini Tippers</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-lg-6" id="dvTotalSwachAuto">
+                            <div class="card">
+                                <div class="box p-0 rounded bg-primary text-center">
+                                    <h1 class="fw-light text-white" id="h6TotalSwachAuto">0</h1>
+                                    <h6 class="text-white">Ghmc Swatch Auto</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column -->
+                        <div class="col-lg-6" id="dvTotalPvtSwachAuto">
+                            <div class="card">
+                                <div class="box p-0 rounded bg-success text-center">
+                                    <h1 class="fw-light text-white" id="h6TotalPvtSwachAuto">0</h1>
+                                    <h6 class="text-white">Pvt Swatch Auto</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6" id="dvTotalHKLVehicle">
+                            <div class="card">
+                                <div class="box p-0 rounded text-center" style="background-color: #4082a8!important;">
+                                    <h1 class="fw-light text-white" id="h6TotalHKLVehicle">0</h1>
+                                    <h6 class="text-white">Hook Loaders</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6" id="dvTotalRCCompVehicle">
+                            <div class="card">
+                                <div class="box p-0 rounded text-center" style="background-color: #01c0c8!important;">
+                                    <h1 class="fw-light text-white" id="h6TotalRCCompVehicle">0</h1>
+                                    <h6 class="text-white">RC Compactors</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6" id="dvTotalTipperVehicle">
+                            <div class="card">
+                                <div class="box p-0 rounded text-center" style="background-color: #868e96!important;">
+                                    <h1 class="fw-light text-white" id="h6TotalTipperVehicle">0</h1>
+                                    <h6 class="text-white">Tippers</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-lg-6" id="dvTotalVehicle">
+                            <div class="card">
+                                <div class="box p-0 rounded bg-warning text-center">
+                                    <h1 class="fw-light text-white" id="h6TotalVehicle">0</h1>
+                                    <h6 class="text-white">Total Vehicle</h6>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- Row -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-4 d-flex align-items-stretch" id="dvNotification">
+            <div class="card w-100">
+                <div class="card-body">
+                    <div class="d-md-flex align-items-center no-block">
+                        <h3>Secondary Collection Transist Point Activity</h3>
+
+
+                    </div>
+                    <!-- Row -->
+                    <div class="row">
+
+                        <div class="col-lg-12">
+                            <h4 class="card-title">Secondary Collection Summary</h4>
+
+                        </div>
+
+                        <!-- Column -->
+                        <div class="col-lg-6" id="dvActiveContainer">
+                            <div class="card">
+                                <div class="box p-0 rounded bg-info text-center">
+                                    <h1 class="fw-light text-white" id="h6ActiveContainer">0</h1>
+                                    <h6 class="text-white">Active Container</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-lg-6" id="dvContainerFilled">
+                            <div class="card">
+                                <div class="box p-0 rounded bg-primary text-center">
+                                    <h1 class="fw-light text-white" id="h6ContainerFilled">0</h1>
+                                    <h6 class="text-white">Container Filled</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column -->
+                        <div class="col-lg-6" id="dvAwaitingHL">
+                            <div class="card">
+                                <div class="box p-1 rounded bg-danger text-center">
+                                    <h1 class="fw-light text-white" id="h6AwaitingHL">0</h1>
+                                    <h6 class="text-white">Awaiting For Pickup By Hookloader</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-lg-6" id="dvContainerAVGTime">
+                            <div class="card">
+                                <div class="box p-0 rounded bg-orange-700 text-center">
+                                    <h1 class="fw-light text-white" id="h6ContainerAVGTime">0</h1>
+                                    <h6 class="text-white">Container Average Waiting Time After Filled(hrs)</h6>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-12">
+                            <h4 class="card-title">Linkage To Hookloader Collection Summary</h4>
+
+                        </div>
+
+                        <!-- Column -->
+                        <div class="col-lg-6" id="dvActiveHL">
+                            <div class="card">
+                                <div class="box p-0 rounded bg-info text-center">
+                                    <h1 class="fw-light text-white" id="h6ActiveHL">0</h1>
+                                    <h6 class="text-white">Active Hookloader</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-lg-6" id="dvLinkedHL">
+                            <div class="card">
+                                <div class="box p-0 rounded bg-primary text-center">
+                                    <h1 class="fw-light text-white" id="h6LinkedHL">0</h1>
+                                    <h6 class="text-white">Hookloader Linked</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column -->
+                        <div class="col-lg-6" id="dvAwaitingForCollHL">
+                            <div class="card">
+                                <div class="box p-0 rounded bg-danger text-center">
+                                    <h1 class="fw-light text-white" id="h6AwaitingForCollHL">0</h1>
+                                    <h6 class="text-white">Hookloader Awaiting For Linkage With Container</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-lg-6" id="dvAVGTimeHL">
+                            <div class="card">
+                                <div class="box p-1 rounded bg-orange-700 text-center">
+                                    <h1 class="fw-light text-white" id="h6AVGTimeHL">0</h1>
+                                    <h6 class="text-white">Average Waiting Time Of Hookloader(hrs)</h6>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-12">
+                            <h4 class="card-title">RCV Collection Summary</h4>
+
+                        </div>
+
+                        <!-- Column -->
+                        <div class="col-lg-6" id="dvOpenRCV">
+                            <div class="card">
+                                <div class="box p-3 rounded bg-info text-center">
+                                    <h1 class="fw-light text-white" id="h6OpenRCV">0</h1>
+                                    <h6 class="text-white">Open RCV</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-lg-6" id="dvFilledRCV">
+                            <div class="card">
+                                <div class="box p-3 rounded bg-primary text-center">
+                                    <h1 class="fw-light text-white" id="h6FilledRCV">0</h1>
+                                    <h6 class="text-white">RCV Filled</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Row -->
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-2 d-flex align-items-stretch" id="dvNotificatio2">
+            <div class="card w-100">
+                <div class="card-body">
+                    <div class="d-md-flex align-items-center no-block">
+                        <h4 class="card-title">Overall Collection Summary</h4>
+
+                    </div>
+                    <!-- Row -->
+                    <div class="row">
+
+
+
+                        <!-- Column -->
+                        <div class="col-lg-12" id="dvTotalUContainer">
+                            <div class="card">
+                                <div class="box p-0 rounded bg-teal-700 text-center">
+                                    <h1 class="fw-light text-white" id="h6TotalUContainer">0</h1>
+                                    <h6 class="text-white">Total Unique Container</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-lg-12" id="dvTotalUHL">
+                            <div class="card">
+                                <div class="box p-0 rounded bg-dark text-center">
+                                    <h1 class="fw-light text-white" id="h6TotalUHL">0</h1>
+                                    <h6 class="text-white">Total Unique Hookloader</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column -->
+                        <div class="col-lg-12" id="dvForceTrans">
+                            <div class="card">
+                                <div class="box p-0 rounded bg-danger-700 text-center">
+                                    <h1 class="fw-light text-white" id="h6ForceTrans">0</h1>
+                                    <h6 class="text-white">Force Transaction</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+
+                        <div class="col-lg-12">
+                            <h4 class="card-title">Force Trans. Category Wise</h4>
+
+                        </div>
+
+                        <div class="col-lg-12" id="dvPVForceTrans">
+                            <div class="card">
+                                <div class="box p-0 rounded text-center" style="background-color: #868e96!important;">
+                                    <h1 class="fw-light text-white" id="h6PVForceTrans">0</h1>
+                                    <h6 class="text-white">Primary Vehicle</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12" id="dvHKLForceTrans">
+                            <div class="card">
+                                <div class="box p-0 rounded text-center" style="background-color: #01c0c8!important;">
+                                    <h1 class="fw-light text-white" id="h6HKLForceTrans">0</h1>
+                                    <h6 class="text-white">Hookloader</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12" id="dvContainerForceTrans">
+                            <div class="card">
+                                <div class="box p-0 rounded text-center" style="background-color: #4fc3f7!important;">
+                                    <h1 class="fw-light text-white" id="h6ContainerForceTrans">0</h1>
+                                    <h6 class="text-white">Container</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Row -->
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="border-bottom title-part-padding">
+                    <h4 class="card-title mb-0">TS/SCTP Map View</h4>
+
+                    @*<button type="button" class="fc-month-button fc-button fc-state-default fc-corner-left fc-state-active" onclick="">Active</button>
+                        <button type="button" class="fc-agendaWeek-button fc-button fc-state-default" onclick="">InActive</button>*@
+                    <label class="radio-inline">
+                        <input type="radio" name="MStatus" id="rblActive" value="0" onclick="GetScTPMapData('Click');" checked>All
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="MStatus" id="rblActive" value="1" onclick="GetScTPMapData('Click');">Active
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="MStatus" id="rblInActive" value="2" onclick="GetScTPMapData('Click');"> InActive
+                    </label>
+
+                </div>
+                <div class="card-body analytics-info">
+                    <div id="map_basic" style="height: 790px"></div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+</div>
+
+<!-- /content area -->
+@section scripts {
+<script src="~/otherfiles/monsteradmin/assets/libs/echarts/dist/echarts-en.min.js"></script>
+@*<script src="~/otherfiles/monsteradmin/assets/libs/echarts/dist/bar.js"></script>*@
+<script src="~/otherfiles/Light/global_assets/js/plugins/forms/selects/nselect2.min.js"></script>
+<script src="~/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+<script src="~/otherfiles/monsteradmin/assets/libs/moment/moment.js"></script>
+<link rel="stylesheet" type="text/css" href="/otherfiles/monsteradmin/assets/libs/daterangepicker/daterangepicker.css" />
+<script src="~/otherfiles/monsteradmin/assets/libs/daterangepicker/daterangepicker.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR9w4KTLnl8IWjTgFLHIvHZXLrpJlKi6I&libraries=places"></script>
+<script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+<script>
+    $(".timeseconds").daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        timePicker24Hour: true,
+        timePickerSeconds: true,
+        locale: {
+          format: "MM-DD-YYYY h:mm:ss",
+        },
+    });
+
+</script>
+<script src="~/ViewJs/Operation/OperationIndexInfo.js?@DateTime.Now.Ticks"></script>
+
+}

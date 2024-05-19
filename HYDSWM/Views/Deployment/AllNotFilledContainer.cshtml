@@ -1,0 +1,154 @@
+﻿@{
+    ViewData["Title"] = "All Not Filled Container";
+    Layout = "~/Views/Shared/_MonsterLayout.cshtml";
+}
+
+
+<div class="page-header border-bottom-0">
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+            </div>
+            <div class="
+                col-md-7
+                justify-content-end
+                align-self-center
+                d-none d-md-flex
+              ">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content pt-0">
+
+    <!-- Page header -->
+    <div class="page-header border-bottom-0">
+    </div>
+    <!-- /page header -->
+
+    <div class="card mt-1 mr-2">
+        <div class="card-header header-elements-inline pt-0 pb-0 ">
+            <div class="page-title d-flex mt-4">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold" id="spnHeader">All Containers For Change Location </span> Information</h4>&nbsp;
+
+            </div>
+
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="reload"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>TS/SCTP</label>
+                    <select id="ddlSTransferStation" onchange="GetDataTableData('Click');" class="form-control form-control-select2" data-fouc>
+                        <option value="0">All Transfer Station</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="dataTables_wrapper no-footer">
+
+
+            <div class="datatable-scroll-wrap">
+                <table class="table datatable-button-html5-columns" id="example">
+                    <thead>
+                        <tr>
+                            <th>Sr. No</th>
+                            <th>Date & Time</th>
+                            <th>Container No</th>
+
+                            <th>Transfer Station</th>
+                            <th>Container Arrived On</th>
+                            <th>No. Of Primary Vehicle Loaded</th>
+                            <th>User Name</th>
+                            <th>Last Modified On</th>
+                            <th>Change Of SCTP/TS</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Vertical form modal -->
+<div id="modal_form_AddDetail" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form class="form-validate-jquery" onsubmit="return Formsubmit();">
+
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Change Container Location </h3>
+                    <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
+                </div>
+                @*<button type="button" class="btn bg-primary" id="alert" onclick="ShowMessage('1','record added');">Launch <i class="icon-play3 ml-2"></i></button>*@
+
+                <div class="modal-body">
+
+
+                    <div class="form-group">
+                        <div class="row">
+
+
+                            <div class="col-sm-12">
+                                <label>Transfer Station</label>
+                                <input type="hidden" id="hfDHLTId" value="0" />
+                                <span class="text-danger">*</span>
+                                <select id="ddlTransferStation" required
+                                        class="form-control">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
+                    <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
+                    <button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+<!-- /vertical form modal -->
+<style>
+    td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_open.png') no-repeat center center;
+    }
+
+    tr.shown td.details-control {
+        background: url('/otherfiles/Light/global_assets/images/details_close.png') no-repeat center center;
+    }
+</style>
+<script>
+    function CloseModal() {
+        $(".modal").modal('hide');
+    }
+</script>
+
+@section scripts {
+<link href="~/otherfiles/FancyBox/jquery.fancybox.min.css" rel="stylesheet" />
+<script src="~/otherfiles/FancyBox/jquery.fancybox.min.js"></script>
+<script src="~/otherfiles/Light/global_assets/js/plugins/forms/selects/nselect2.min.js"></script>
+<script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
+<script src="~/js/CommonHelper.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Common/AllGenericFunc.js?@DateTime.Now.Ticks"></script>
+<script src="~/ViewJs/Deployment/NotFilledContainerInfo.js?@DateTime.Now.Ticks"></script>
+}
+
+
+
