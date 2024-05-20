@@ -2057,7 +2057,8 @@ textarea.form-control {
 }
 
 .form-group {
-    margin-bottom: 1.25rem
+    margin-bottom: 1.25rem;
+    margin-top: 19px;
 }
 
 .form-text {

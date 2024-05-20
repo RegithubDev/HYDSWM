@@ -307,7 +307,8 @@ namespace DEMOSWMCKC.Controllers
                 add_upd1 = add_upd1,
                 SComplaintId = SComplaintId,
                 complaint_add = complaint_add,
-                RegDate = RegDate
+                RegDate = RegDate,
+                RegType = RegType
 
 
             };

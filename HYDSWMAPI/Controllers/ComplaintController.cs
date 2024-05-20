@@ -553,7 +553,7 @@ namespace HYDSWMAPI.Controllers
                   new SqlParameter("@Circlename",txt_circle),
                   new SqlParameter("@zonename",txt_Zone),
                   new SqlParameter("@RegDate",RegDate),
-                  new SqlParameter("RegType",RegType)
+                  new SqlParameter("@RegType",RegType)
                   
 
 

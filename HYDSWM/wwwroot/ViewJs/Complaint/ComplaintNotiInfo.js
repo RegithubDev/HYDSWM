@@ -231,9 +231,6 @@ function SaveAndUpdateComplaintInfo() {
 
     var input = {
 
-
-
-
         complaint_name: $("#complaint_name").val(),
         complaint_num: $("#complaint_num").val(),
         complaint_add: $("#complaint_add").val(),
@@ -244,13 +241,9 @@ function SaveAndUpdateComplaintInfo() {
         RegDate: $("#RegDate").val(),
         file: file,
         Complaint_descrip: $("#complaint_descrip").val(),
+        ddlRegType: $("#ddlRegType option:selected").text()
         
 
-        
-        
-        
-        
-        
         
     };
 
@@ -265,8 +258,8 @@ function SaveAndUpdateComplaintInfo() {
     formData.append("FileUpload", input.file);
     formData.append("Complaint_descrip", input.Complaint_descrip);
 
-    formData.append("RegDate", input.RegDate);
-    
+    formData.append("RegDate", input.RegDate); 
+    formData.append("ddlRegType", input.ddlRegType);
     
     if (input.Complaint_num == '' || input.Complaint_cat == '' || input.Complaint_add == '' || input.Complaint_descrip == '' )//|| input.Transfer_station == '')
         isvalid = 0;
