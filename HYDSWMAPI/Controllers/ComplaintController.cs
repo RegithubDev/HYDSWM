@@ -389,8 +389,8 @@ namespace HYDSWMAPI.Controllers
             string Status = obj.GetValue("Status").Value<string>();
             string Action_Remark = obj.GetValue("Action_Remark").Value<string>();
             string address = obj.GetValue("address").Value<string>();
-            string SComplaintId = obj.GetValue("SComplaintId").Value<string>();
-
+            string comp_id = obj.GetValue("comp_id").Value<string>();
+            string complaint_num = obj.GetValue("complaint_num").Value<string>();
             bool IsActive;
 
 
@@ -414,12 +414,12 @@ namespace HYDSWMAPI.Controllers
             */
 
 
-            int comp_id = 0;
+            int comp_id1 = 0;
 
             DateTime TDate = CommonHelper.IndianStandard(DateTime.UtcNow);
 
-            if (SComplaintId != null)
-                comp_id = Int32.Parse(SComplaintId);
+            if (comp_id != null)
+                comp_id1 = Int32.Parse(comp_id);
             
             string Result;
 
@@ -429,12 +429,12 @@ namespace HYDSWMAPI.Controllers
 
             SqlParameter[] parameters = new SqlParameter[]
           {
-                  new SqlParameter("@CCId",comp_id),
+                  new SqlParameter("@CCId",comp_id1),
                   new SqlParameter("@ComplaintDate",TDate),
-                  new SqlParameter("@ComplaintCode", "hello123"),
+                  new SqlParameter("@ComplaintCode", complaint_num),
                   new SqlParameter("@TSId",23),
                   new SqlParameter("@revised_ward_num",revised_ward_num),
-                  new SqlParameter("@Remarks",Status),
+                  new SqlParameter("@Remarks",Action_Remark),
                   new SqlParameter("@FLat",22.7),
                   new SqlParameter("@FLng",5.7),
                   new SqlParameter("@FAddress",string.Empty),

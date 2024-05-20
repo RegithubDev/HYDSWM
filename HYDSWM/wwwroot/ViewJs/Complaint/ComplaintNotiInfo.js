@@ -137,10 +137,10 @@ function Formsubmit() {
     
 
     
-
-
-   
+    if (add_upd == 1)
         SaveAndUpdateComplaintInfo();
+   else
+        updateComplaintInfo();
     
     
         
@@ -163,8 +163,9 @@ function updateComplaintInfo() {
         revised_ward_num: $("#revised_ward_num").val(),
         Status: $("#Status").val(),
         Action_Remark: $("#Action_Remark").val(),
-        address: $("#address").val()
-        
+        address: $("#address").val(),
+        comp_id: comp_id,
+        complaint_num: $("#complaint_num").val()
 
     };
 
@@ -172,7 +173,8 @@ function updateComplaintInfo() {
     formData.append("Status", input.Status);
     formData.append("Action_Remark", input.Action_Remark);
     formData.append("address", input.address);
-    
+    formData.append("comp_id", input.comp_id);
+    formData.append("complaint_num", input.complaint_num);
 
 
     if (input.revised_ward_num == '' || input.Status == '' || input.Action_Remark == '' || input.address == '')//|| input.Transfer_station == '')
@@ -308,17 +310,23 @@ function SaveAndUpdateComplaintInfo() {
 
 
 
+var add_upd;
 
+var comp_id;
 
 
 
 function CallFunc(obj,i) {
 
 
-
+    add_upd = i;
 
 
     var ddId = $(obj).attr('complaintId');
+
+    comp_id = ddId;
+
+    
 
     if (i == 1) {
         $('#user_content').load("/Complaint/AddComplaint");
@@ -326,13 +334,13 @@ function CallFunc(obj,i) {
     }
     else { 
         $('#user_content').load("/Complaint/UpdateComplaint");
-        SetDataOnControls();
+        SetDataOnControls(ddId);
     }
     $('#modal_form_AddDetail').modal('toggle');
 
     
 
-        SetDataOnControls(ddId);
+        //SetDataOnControls(ddId);
 
     
 }

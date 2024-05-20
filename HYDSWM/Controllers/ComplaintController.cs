@@ -322,6 +322,7 @@ namespace DEMOSWMCKC.Controllers
             string input1 = Request.Query["Complaintdata"].ToString();
             string formdata = Request.Form.ToString();
 
+            /*
 
             var formFile = HttpContext.Request.Form.Files[0];
 
@@ -334,7 +335,7 @@ namespace DEMOSWMCKC.Controllers
                 formFile.CopyToAsync(fileStream);
             }
 
-
+            */
 
 
 
@@ -350,16 +351,17 @@ namespace DEMOSWMCKC.Controllers
 
             string SComplaintId = dresult.SComplaintId;
 
-            
+            string comp_id = dresult.comp_id;
 
+            string complaint_num = dresult.complaint_num;
             var obj = new
             {
                 revised_ward_num = revised_ward_num,
                 Status = Status,
                 Action_Remark = Action_Remark,
                 address = address,
-              SComplaintId = SComplaintId
-
+                comp_id = comp_id,
+                complaint_num = complaint_num
             };
 
             string input = JsonConvert.SerializeObject(obj);
