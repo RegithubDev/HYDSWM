@@ -94,7 +94,7 @@ function GetDataTableData(Type) {
             { data: "ComplaintContactNumber", sortable: true },
             { data: "ComplaintType", sortable: true },
             { data: "Remarks", sortable: true },
-            { data: "Zone", sortable: true },
+            { data: "ZoneName", sortable: true },
             { data: "WardName", sortable: true },
            
             { data: "STREET LOCATION", sortable: true },
@@ -102,7 +102,7 @@ function GetDataTableData(Type) {
             { data: "ComplaintOn", sortable: true },
             { data: "ClosedOn", sortable: true },
             { data: "ModeOfReporting", sortable: true },
-            { data: "PREDEFINED SLA DURATION (Min)", sortable: true },
+            { data: "PredefinedSLADuration", sortable: true },
             { data: "ACTUAL DURATION", sortable: true },
 
             { data: "Status", sortable: true},
@@ -241,6 +241,7 @@ function SaveAndUpdateComplaintInfo() {
         ddlWard: $("#ddlWard option:selected").text(),
         txt_circle: $("#txt_circle").val(),
         txt_Zone: $("#txt_Zone").val(),
+        RegDate: $("#RegDate").val(),
         file: file,
         Complaint_descrip: $("#complaint_descrip").val(),
         
@@ -263,6 +264,8 @@ function SaveAndUpdateComplaintInfo() {
 
     formData.append("FileUpload", input.file);
     formData.append("Complaint_descrip", input.Complaint_descrip);
+
+    formData.append("RegDate", input.RegDate);
     
     
     if (input.Complaint_num == '' || input.Complaint_cat == '' || input.Complaint_add == '' || input.Complaint_descrip == '' )//|| input.Transfer_station == '')

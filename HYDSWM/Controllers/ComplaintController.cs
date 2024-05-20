@@ -287,6 +287,10 @@ namespace DEMOSWMCKC.Controllers
 
             string SComplaintId = dresult.SComplaintId;
 
+            string RegDate = dresult.RegDate;
+
+            string RegType = dresult.RegType;
+
 
 
 
@@ -302,7 +306,8 @@ namespace DEMOSWMCKC.Controllers
                 Complaint_descrip = Complaint_descrip,
                 add_upd1 = add_upd1,
                 SComplaintId = SComplaintId,
-                complaint_add = complaint_add
+                complaint_add = complaint_add,
+                RegDate = RegDate
 
 
             };

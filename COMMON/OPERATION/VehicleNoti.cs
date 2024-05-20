@@ -259,6 +259,8 @@ namespace COMMON.OPERATION
         public string CLng { get; set; }
         public string CAddress { get; set; }
         public string ModeOfReporting { get; set; }
+
+        public string PredefinedSLADuration { get; set; }
         public string Status { get; set; }
         public bool IsClosed { get; set; }
         public string CreatedBy { get; set; }
@@ -267,7 +269,10 @@ namespace COMMON.OPERATION
         public string ClosedOn { get; set; }
         public string TotalTimeTaken { get; set; }
         public string LabelClass { get; set; }
-        public string WardNo { get; set; }
+        public string WardName { get; set; }
+
+        public string ZoneName { get;set; }
+
         public string ComplaintName { get; set; }
 
         public string ComplaintContactNumber { get; set; }

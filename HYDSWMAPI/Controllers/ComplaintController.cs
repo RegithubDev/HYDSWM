@@ -491,6 +491,9 @@ namespace HYDSWMAPI.Controllers
             string Complaint_descrip = obj.GetValue("Complaint_descrip").Value<string>();
             string SComplaintId = obj.GetValue("SComplaintId").Value<string>();
             string add_upd1 = obj.GetValue("add_upd1").Value<string>();
+            string RegType = obj.GetValue("RegType").Value<string> ();
+
+            string RegDate = obj.GetValue("RegDate").Value<string>();
             bool IsActive;
 
 
@@ -548,7 +551,10 @@ namespace HYDSWMAPI.Controllers
                   new SqlParameter("@ComplaintContactNumber",complaint_num),
                   new SqlParameter("@Wardname",ddlWard),
                   new SqlParameter("@Circlename",txt_circle),
-                  new SqlParameter("@zonename",txt_Zone)
+                  new SqlParameter("@zonename",txt_Zone),
+                  new SqlParameter("@RegDate",RegDate),
+                  new SqlParameter("RegType",RegType)
+                  
 
 
          };
