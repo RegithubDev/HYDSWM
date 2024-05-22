@@ -63,48 +63,82 @@
                 <a class="list-icons-item" data-action="remove"></a>
             </div>
         </div>
+        
         <div class="card-body">
+            <div class="row">
 
+                <div class="col-sm-4">
+                    <label>From Date</label>
+                    <input type="date" class="form-control"
+                           id="FromDate" name="FromDate" value="">
+                </div>
+                <div class="col-sm-4">
+                    <label>To Date</label>
+                    <input type="date" class="form-control"
+                           id="ToDate" name="ToDate" value="">
+                </div>
+
+                <div class="col-sm-4">
+                    <input type="button" id="btnSearch" class="btn btn-primary" style=" width:80px; top:32px"
+                           value="Search" onclick="get_inform_btw_from_to_date()">
+                </div>
+            </div>
         </div>
-
         <div class="dataTables_wrapper no-footer">
 
             <div class="datatable-scroll-wrap">
                 <div class="col-md-6 row">
-                    <div class="button-group">
-
-
-                        @*<input type="button" id="btnSearch" class="btn btn-primary" value="Search" onclick="GetDataTableData('Click');">*@
-                        <input type="button" id="btnExcel" class="btn btn-success" value="Export To Excel" onclick="DownloadFile('Excel');">
-                    </div>
+                   
                 </div>
 
                 <table class="table datatable-button-html5-columns vehicletable" id="example">
                     <thead>
                         <tr>
                             <th>Sr. No</th>
-                            <th>Image</th>
-                            <th>CG No</th>
-                            <th>GCC COMP REF</th>
-                            <th>COMPLAINT NAME</th>
-                            <th>COMPLAINT CONTACT No</th>
-                            <th>COMPLAINT CATEGORY</th>
-                            <th>DESCRIPTION</th>
+                            @*<th>Image</th>*@
+                            <th>REG No</th>
+                            <th>REGISTRATION Type</th>
+                            <th>REGISTRATION DATE</th>
+                            <th>COMPLAINT TYPE</th>
                             <th>ZONE</th>
-                            <th>WARD Name</th>
-                            <th>STREET LOCATION</th>
+                            <th>Circle</th>
+                            <th>WARD</th>
                             <th>LOCATION</th>
-                            <th>COMPLAINT CREATED ON</th>
+
+                            <th>STATUS</th>
+
+                            <th>CITIZEN NAME</th>
+
+                            <th>CITIZEN CONTACT No</th>
+
+                            <th>Citizen Email Id</th>
+
+                            <th>Complaint Address</th>
+
                             <th>COMPLAINT CLOSURE ON</th>
+
+                            @*<th>GCC COMP REF</th>*@
+                            
+                            
+                            
+                     @*
+                            
+                            <th>DESCRIPTION</th>
+                            
+                            
+                            
+                            
+                            <th>COMPLAINT CREATED ON</th>
+                           
                             <th>MODE OF REPORTING</th>
                             <th>PREDEFINED SLA DURATION(MIN)</th>
                             <th>ACTUAL DURATION(HR:MIN)</th>
-                            <th>STATUS</th>
-                            <th>CLOSE TIME LOCATION</th>
+                            *@
+                            @* <th>CLOSE TIME LOCATION</th>
                             <th>CLOSING IMAGE</th>
                             <th>ACTION REMARKS</th>
                             <th>REVISEED WARD NO</th>
-                            <th>REVISEED STREET LOCATION</th>
+                            <th>REVISEED STREET LOCATION</th>*@
                             <th>ACTION</th>
                             
                             

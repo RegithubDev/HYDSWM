@@ -4,6 +4,7 @@ using DocumentFormat.OpenXml.Drawing.Diagrams;
 using HYDSWM;
 using HYDSWM.Helpers;
 using HYDSWMAPI;
+using HYDSWMAPI.Middleware;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -49,8 +50,8 @@ namespace DEMOSWMCKC.Controllers
             requestModel.UserId = this.User.GetUserId();
             requestModel.ContratorId = !string.IsNullOrEmpty(requestModel.ContratorId) ? requestModel.ContratorId : "0";
             requestModel.NotiId = !string.IsNullOrEmpty(requestModel.NotiId) ? requestModel.NotiId : "";
-            requestModel.FromDate = requestModel.FromDate.ToString()== "1/1/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow): requestModel.FromDate;
-            requestModel.ToDate = requestModel.ToDate.ToString() == "1/1/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow): requestModel.ToDate;
+            requestModel.FromDate = requestModel.FromDate.ToString() == "1/1/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : requestModel.FromDate;
+            requestModel.ToDate = requestModel.ToDate.ToString() == "1/1/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : requestModel.ToDate;
             string input = JsonConvert.SerializeObject(requestModel);
             //string endpoint = "api/Complaint/GetAllStaffComplaint_Paging";
             string endpoint = "api/Complaint/GetAllStaffComplaint_PagingB64";
@@ -246,8 +247,8 @@ namespace DEMOSWMCKC.Controllers
         public object SaveAndUpdateComplaintInfo()
         {
 
-            string input1 = Request.Query["Complaintdata"].ToString();
-            string formdata = Request.Form.ToString();
+            //string input1 = Request.Query["Complaintdata"].ToString();
+            //string formdata = Request.Form.ToString();
 
 
             var formFile = HttpContext.Request.Form.Files[0];
@@ -262,34 +263,45 @@ namespace DEMOSWMCKC.Controllers
             }
 
 
+            var Form_var = HttpContext.Request.Form.Keys;
+
+
+
+            var dict = Request.Form.ToDictionary(x => x.Key, x => x.Value.ToString());
+
+
+
+            //dynamic dresult = JObject.Parse(Form_var);
+
+
+            string RegDate = dict["RegDate"];
+
+            string RegType = dict["ddlRegType"];
+
+            string ddlRegType = dict["ddlRegType"];
+
+            string citizen_name = dict["citizen_name"];
+
+            string citizen_email = dict["citizen_email"];
+
+            string txtContactNo = dict["txtContactNo"];
+
+            string ddlComplaint_Type = dict["ddlComplaint_Type"];
+
+            string ddlWard = dict["ddlWard"];
+
+            string txt_circle = dict["txt_circle"];
+
+            string txt_Zone = dict["txt_Zone"];
+
            
 
+            string complaint_add = dict["complaint_add"];
 
-            dynamic dresult = JObject.Parse(input1);
-           
-            string complaint_name = dresult.complaint_name;
+            string complaint_descrip = dict["complaint_descrip"];
 
-            string complaint_num = dresult.complaint_num;
 
-            string ddlCategory = dresult.ddlCategory;
 
-            string complaint_add = dresult.complaint_add;
-
-            string ddlWard = dresult.ddlWard;
-
-            string txt_circle = dresult.txt_circle;
-
-            string txt_Zone = dresult.txt_Zone;
-
-            string Complaint_descrip = dresult.Complaint_descrip;
-
-            string add_upd1 = dresult.add_upd1;
-
-            string SComplaintId = dresult.SComplaintId;
-
-            string RegDate = dresult.RegDate;
-
-            string RegType = dresult.RegType;
 
 
 
@@ -297,18 +309,19 @@ namespace DEMOSWMCKC.Controllers
 
             var obj = new
             {
-                complaint_name = complaint_name,
-                complaint_num = complaint_num,
-                ddlCategory = ddlCategory,
+                RegDate = RegDate,
+                ddlRegType = ddlRegType,
+                citizen_name = citizen_name,
+                citizen_email = citizen_email,
+                txtContactNo = txtContactNo,
+                ddlComplaint_Type = ddlComplaint_Type,
                 ddlWard = ddlWard,
                 txt_circle = txt_circle,
                 txt_Zone = txt_Zone,
-                Complaint_descrip = Complaint_descrip,
-                add_upd1 = add_upd1,
-                SComplaintId = SComplaintId,
+                file = fileName,
                 complaint_add = complaint_add,
-                RegDate = RegDate,
-                RegType = RegType
+                complaint_descrip = complaint_descrip
+                
 
 
             };

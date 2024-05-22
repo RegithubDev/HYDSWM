@@ -1,16 +1,22 @@
 ﻿
 $(document).ready(function () {
     
-    GetDataTableData('Load');
+    GetDataTableData('Load',"","");
 });
 var dt;
 var comp_id;
-function GetDataTableData(Type) {
+function GetDataTableData(Type,from_date,to_date) {
     var TId = getUrlParameterInfo('TId');
     var TName = getUrlParameterInfo('TName');
     $("#spnHeader").html('');
     $("#spnHeader").html(TName);
     var IsClick = '0';
+
+    if (from_date != "" && to_date != "")
+        IsClick = '1';
+    else
+        IsClick = '0';
+
     var NotiId = TId;
     
 
@@ -56,6 +62,16 @@ function GetDataTableData(Type) {
             data: function (d) {
                 d.ContratorId = IsClick;
                 d.NotiId = NotiId;
+
+                if (from_date != "" && to_date != "") {
+                    d.FromDate = from_date;
+
+                    d.ToDate = to_date;
+                }
+
+                
+                
+                
                 return {
 
                     requestModel: d
@@ -81,39 +97,76 @@ function GetDataTableData(Type) {
                 }
             },
             
-            {
+            /*{
                 sortable: false,
                 "render": function (data, type, row, meta) {
 
                     return '<a cticketid="' + row.VehicleId + '" href="' + row.Img1Base64 + '" data-fancybox="gallery"><img id="imageresource1" src = "' + row.Img1Base64 + '" alt="" class="img-preview rounded"></a>';
                 }
-            },
+            },*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
             { data: "Complaintcode", sortable: true },
-            { data: "Complaint Type", sortable: true },
-            { data: "ComplaintName", sortable: true },
-            { data: "ComplaintContactNumber", sortable: true },
+
+            { data: "RegistrationType", sortable: true },
+
+            { data: "RegistrationDate", sortable: true },
+
             { data: "ComplaintType", sortable: true },
-            { data: "Remarks", sortable: true },
+
             { data: "ZoneName", sortable: true },
+
+            { data: "CircleName", sortable: true },
+
+
             { data: "WardName", sortable: true },
-           
-            { data: "STREET LOCATION", sortable: true },
+
             { data: "Location", sortable: true },
-            { data: "ComplaintOn", sortable: true },
+
+            { data: "Status", sortable: true },
+
+            { data: "ComplaintName", sortable: true },
+
+            { data: "ComplaintContactNumber", sortable: true },
+
+            { data: "email", sortable: true },
+
+
+            /*{ data: "Complaint Type", sortable: true },*/
+
+
+            { data: "Complaint Address", sortable: true },
+
             { data: "ClosedOn", sortable: true },
-            { data: "ModeOfReporting", sortable: true },
-            { data: "PredefinedSLADuration", sortable: true },
-            { data: "ACTUAL DURATION", sortable: true },
-
-            { data: "Status", sortable: true},
-
+            /*
             { data: "CLOSE TIME LOCATION", sortable: true },
             { data: "CLOSING IMAGE", sortable: true },
             { data: "ACTION REMARKS", sortable: true },
 
             { data: "REVISED WARD NO", sortable: true },
             { data: "REVISED STREET LOCATION", sortable: true },
-            
+            */
             {
                 sortable: false,
                 "render": function (data, type, row, meta) {
@@ -129,6 +182,27 @@ function GetDataTableData(Type) {
     });
 
 }
+
+
+
+function get_inform_btw_from_to_date() {
+
+    var From_date = document.getElementById("FromDate").value;
+
+    var To_date = document.getElementById("ToDate").value;
+
+    if (!(From_date != "" && To_date == "") || !(From_date == "" && To_date != "")) {
+
+        GetDataTableData('Load', From_date, To_date);
+
+    }
+
+}
+
+
+
+
+
 
 
 function Formsubmit() {
@@ -226,57 +300,55 @@ function SaveAndUpdateComplaintInfo() {
     var isvalid = 1;
     var formData = new FormData();
 
-    var file = document.getElementById("files").files[0];
+    var file = document.getElementById("file").files[0];
 
 
-    var input = {
-
-        complaint_name: $("#complaint_name").val(),
-        complaint_num: $("#complaint_num").val(),
-        complaint_add: $("#complaint_add").val(),
-        ddlCategory: $("#ddlCategory").val(),
-        ddlWard: $("#ddlWard option:selected").text(),
-        txt_circle: $("#txt_circle").val(),
-        txt_Zone: $("#txt_Zone").val(),
-        RegDate: $("#RegDate").val(),
-        file: file,
-        Complaint_descrip: $("#complaint_descrip").val(),
-        ddlRegType: $("#ddlRegType option:selected").text()
-        
-
-        
-    };
-
-    formData.append("complaint_name", input.complaint_name);
-    formData.append("complaint_add", input.complaint_add);
-    formData.append("complaint_num", input.complaint_num);
-    formData.append("ddlCategory", input.ddlCategory);
-    formData.append("ddlWard", input.ddlWard);
-    formData.append("txt_circle", input.txt_circle);
-    formData.append("txt_Zone", input.txt_Zone);
-
-    formData.append("FileUpload", input.file);
-    formData.append("Complaint_descrip", input.Complaint_descrip);
-
-    formData.append("RegDate", input.RegDate); 
-    formData.append("ddlRegType", input.ddlRegType);
     
-    if (input.Complaint_num == '' || input.Complaint_cat == '' || input.Complaint_add == '' || input.Complaint_descrip == '' )//|| input.Transfer_station == '')
-        isvalid = 0;
+    var RegDate = $("#RegDate").val();
+    var ddlRegType = $("#ddlRegType option:selected").text();
+    var citizen_name = $("#citizen_name").val();
+    var citizen_email =  $("#citizen_email").val();
+    var txtContactNo = $("#txtContactNo").val();
+    var ddlComplaint_Type = $("#ddlComplaint_Type option:selected").text();
+    var ddlWard =  $("#ddlWard option:selected").text();
+    var txt_circle = $("#txt_circle").val();
+    var txt_Zone = $("#txt_Zone").val();
+    var complaint_add = $("#complaint_add").val();
+    var complaint_descrip = $("#complaint_descrip").val();
+    
+
+    formData.append("RegDate", RegDate);
+    formData.append("ddlRegType", ddlRegType);
+    formData.append("citizen_name", citizen_name);
+    formData.append("citizen_email", citizen_email);
+    formData.append("txtContactNo", txtContactNo);
+    formData.append("ddlComplaint_Type", ddlComplaint_Type);
+    formData.append("ddlWard", ddlWard);
+
+    formData.append("txt_circle", txt_circle);
+    formData.append("txt_Zone", txt_Zone);
+
+    formData.append("file", file); 
+    formData.append("complaint_add", complaint_add);
+    formData.append("complaint_descrip", complaint_descrip);
+    
+    
+  //  if (input.Complaint_num == '' || input.Complaint_cat == '' || input.Complaint_add == '' || input.Complaint_descrip == '' )//|| input.Transfer_station == '')
+        //isvalid = 0;
 
 
     //var formData = new FormData();
 
     //myData = JSON.parse(input);
 
-    var stringified = JSON.stringify(input);
+    //var stringified = JSON.stringify(input);
 
 
     //formData.append('input', JSON.stringify(input));
     if (isvalid == 1) {
         $.ajax({
             type: "POST",
-            url: '/Complaint/SaveAndUpdateComplaintInfo?Complaintdata=' + stringified,
+            url: '/Complaint/SaveAndUpdateComplaintInfo',// + stringified,
             data: formData,
             dataType: 'json',
             contentType: false,

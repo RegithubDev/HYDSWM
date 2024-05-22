@@ -298,7 +298,7 @@ namespace HYDSWMAPI.Controllers
 
 
             string Result = _dataRepository.ExecuteQueryDynamicSqlParameter(StoredProcedureHelper.spGetAllStaffComplaint_Paging, parameters);
-           
+
             List<AllVehicle> Mhlst = JsonConvert.DeserializeObject<List<AllVehicle>>(Result);
             string strJson = JsonConvert.SerializeObject(Mhlst);
             return Ok(strJson);
@@ -481,19 +481,19 @@ namespace HYDSWMAPI.Controllers
         {
 
 
-            string complaint_name = obj.GetValue("complaint_name").Value<string>();
-            string complaint_num = obj.GetValue("complaint_num").Value<string>();
-            string complaint_add = obj.GetValue("complaint_add").Value<string>();
-            string ddlCategory = obj.GetValue("ddlCategory").Value<string>();
+            string RegDate = obj.GetValue("RegDate").Value<string>();
+            string ddlRegType = obj.GetValue("ddlRegType").Value<string>();
+            string citizen_name = obj.GetValue("citizen_name").Value<string>();
+            string citizen_email = obj.GetValue("citizen_email").Value<string>();
+            string txtContactNo = obj.GetValue("txtContactNo").Value<string>();
+            string ddlComplaint_Type = obj.GetValue("ddlComplaint_Type").Value<string>();
             string ddlWard = obj.GetValue("ddlWard").Value<string>();
             string txt_circle = obj.GetValue("txt_circle").Value<string>();
             string txt_Zone = obj.GetValue("txt_Zone").Value<string>();
-            string Complaint_descrip = obj.GetValue("Complaint_descrip").Value<string>();
-            string SComplaintId = obj.GetValue("SComplaintId").Value<string>();
-            string add_upd1 = obj.GetValue("add_upd1").Value<string>();
-            string RegType = obj.GetValue("RegType").Value<string> ();
-
-            string RegDate = obj.GetValue("RegDate").Value<string>();
+            string file = obj.GetValue("file").Value<string>();
+            string complaint_add = obj.GetValue("complaint_add").Value<string>();
+            string complaint_descrip = obj.GetValue("complaint_descrip").Value<string>();
+            
             bool IsActive;
 
 
@@ -516,13 +516,12 @@ namespace HYDSWMAPI.Controllers
 
             */
 
-
-            int comp_id = 0;
+            //int comp_id = 0;
 
             DateTime TDate = CommonHelper.IndianStandard(DateTime.UtcNow);
 
-             if(SComplaintId != null)
-            comp_id = Int32.Parse(SComplaintId);
+             //if(SComplaintId != null)
+           // comp_id = Int32.Parse(SComplaintId);
             
             string Result;
 
@@ -535,30 +534,29 @@ namespace HYDSWMAPI.Controllers
 
                   new SqlParameter("@ComplaintTypeId",1),
                   new SqlParameter("@ComplaintDate",TDate),
-                  new SqlParameter("@Complaintcode","COMP/0000000001"),
                   new SqlParameter("@TSId",23),
                   new SqlParameter("@Location",complaint_add),
-                  new SqlParameter("@Remarks",Complaint_descrip),
+                  new SqlParameter("@Remarks",complaint_descrip),
                   new SqlParameter("@FLat",22.7),
                   new SqlParameter("@FLng",5.7),
                   new SqlParameter("@FAddress",string.Empty),
                   new SqlParameter("@FImgUrl",string.Empty),
-                  new SqlParameter("@ModeOfReporting","APP"),
+                  new SqlParameter("@ModeOfReporting","WEB"),
                   new SqlParameter("@CreatedDate",TDate),
                   new SqlParameter("@CreatedBy",string.Empty),
                   new SqlParameter("@FolderName","uploads/"),
-                  new SqlParameter("@ComplaintName",complaint_name),
-                  new SqlParameter("@ComplaintContactNumber",complaint_num),
+                  new SqlParameter("@ComplaintName",citizen_name),
+                  new SqlParameter("@ComplaintContactNumber",txtContactNo),
                   new SqlParameter("@Wardname",ddlWard),
                   new SqlParameter("@Circlename",txt_circle),
                   new SqlParameter("@zonename",txt_Zone),
                   new SqlParameter("@RegDate",RegDate),
-                  new SqlParameter("@RegType",RegType)
+                  new SqlParameter("@RegType",ddlRegType)
                   
 
 
          };
-                Result = _dataRepository.ExecuteQuerySingleDataTableDynamic(StoredProcedureHelper.spAddStaffComplaint, parameters);
+                    Result = _dataRepository.ExecuteQuerySingleDataTableDynamic(StoredProcedureHelper.spAddStaffComplaint, parameters);
             
             
             return Ok(Result);

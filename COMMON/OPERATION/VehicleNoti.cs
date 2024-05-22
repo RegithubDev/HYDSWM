@@ -273,10 +273,14 @@ namespace COMMON.OPERATION
 
         public string ZoneName { get;set; }
 
+        public string CircleName { get; set; }
+
         public string ComplaintName { get; set; }
 
         public string ComplaintContactNumber { get; set; }
 
+        public string RegistrationDate { get; set; }
+        public string RegistrationType { get; set; }
 
         public string FImgUrl
         {
