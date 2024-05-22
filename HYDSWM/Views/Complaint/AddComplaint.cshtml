@@ -42,7 +42,7 @@
                     <label>Citizen Email-ID.</label>
                     <input type="hidden" id="hfComplaint" />
                     <span class="text-danger">*</span>
-                    <input type="text" placeholder="Citizen Name." class="form-control" id="citizen_name" onkeypress="return isAlpha(event.keyCode);" required>
+                    <input type="text" placeholder="Citizen Name." class="form-control" id="citizen_email" onkeypress="return isAlpha(event.keyCode);" required>
                 </div>
 
                 </div>
@@ -56,13 +56,13 @@
                     <label>Contact Number.</label>
                     <input type="hidden" id="hfComplaint" />
                     <span class="text-danger">*</span>
-                    <input type="text" placeholder="Complaint Contact No." class="form-control" id="complaint_num" onkeypress="return isAlpha(event.keyCode);" required>
+                    <input type="text" placeholder="Complaint Contact No." class="form-control" id="txtContactNo" onkeypress="return isAlpha(event.keyCode);" required>
                 </div>
 
                         <div class="col-sm-4">
                     <label> Complaint Type</label>
                     <span class="text-danger">*</span>
-                    <select id="ddlComplaint Type" required="" class="form-control"><option value="">Select</option><option value="1">REMOVAL OF GARBAGE</option><option value="2">ABSENTEEISM OF SWEEPERS</option><option value="3">OVERFLOWING OF GARBAGE BIN</option><option value="4">PROVISION OF GARBAGE BIN</option><option value="5">BROKEN BIN</option><option value="6">IMPROPER SWEEPING</option><option value="7">SPILLING OF GARBAGE FROM LORRY</option><option value="8">GARBAGE LORRY WITHOUT NET</option><option value="9">ABSENTEEISM OF DOOR TO DOOR GARBAGE COLLECTOR</option><option value="10">NUISANCE BY GARBAGE COMPACTOR OR TRUCK</option><option value="12">SHIFTING OF GARBAGE BIN</option><option value="13">BURNING OF GARBAGE</option><option value="14">DEATH OF STRAY ANIMALS</option><option value="29">SPILLAGE OF GARBAGE FROM BOV</option></select>
+                    <select id="ddlComplaint_Type" required="" class="form-control"><option value="">Select</option><option value="1">REMOVAL OF GARBAGE</option><option value="2">ABSENTEEISM OF SWEEPERS</option><option value="3">OVERFLOWING OF GARBAGE BIN</option><option value="4">PROVISION OF GARBAGE BIN</option><option value="5">BROKEN BIN</option><option value="6">IMPROPER SWEEPING</option><option value="7">SPILLING OF GARBAGE FROM LORRY</option><option value="8">GARBAGE LORRY WITHOUT NET</option><option value="9">ABSENTEEISM OF DOOR TO DOOR GARBAGE COLLECTOR</option><option value="10">NUISANCE BY GARBAGE COMPACTOR OR TRUCK</option><option value="12">SHIFTING OF GARBAGE BIN</option><option value="13">BURNING OF GARBAGE</option><option value="14">DEATH OF STRAY ANIMALS</option><option value="29">SPILLAGE OF GARBAGE FROM BOV</option></select>
                     </div>
 
 
@@ -96,7 +96,7 @@
 
                         <div class="col-sm-4">
                             <label>Upload File</label>
-                            <input type="file" id="files" name="files" class="form-control h-auto" accept=".jpg,.jpeg,.png,.gif,.bmp" value="">
+                            <input type="file" id="file" name="file" class="form-control h-auto" accept=".jpg,.jpeg,.png,.gif,.bmp" value="">
 
                         </div>
 
