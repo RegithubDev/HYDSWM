@@ -49,7 +49,6 @@ namespace HYDSWM.Helpers
                 StringContent content = new StringContent(bodyparam, Encoding.UTF8, "application/json");
                 using (var Response = client.PostAsync(endpoint, content))
                 {
-                    Response.Wait();
                     var result = Response.Result;
                     if (result.IsSuccessStatusCode)
                     {
