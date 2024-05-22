@@ -26,7 +26,7 @@ function GetDataTableData(Type,from_date,to_date) {
         responsive: true,
         serverSide: true,
         searchable: true,
-        lengthMenu: [[10, 20, 50, 100, 500, 10000, -1], [10, 20, 50, 100, 500, 10000, "All"]],
+        lengthMenu: [[10, 20, 50, 100, 500, 10000, 1], [10, 20, 50, 100, 500, 10000, "All"]],
         language: {
             //infoEmpty: "No records available",
             searchPlaceholder: "Search Records",
