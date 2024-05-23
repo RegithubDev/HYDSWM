@@ -25493,7 +25493,8 @@ textarea.form-control-lg {
     border: 0 solid rgba(0,0,0,.2);
     border-radius: 5px;
     box-shadow: 0 2px 9px 0 rgba(169,184,200,.2);
-    outline: 0
+    outline: 0;
+    height: 20rem;
 }
 
 .modal-backdrop {
