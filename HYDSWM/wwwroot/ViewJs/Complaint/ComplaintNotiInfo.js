@@ -427,6 +427,7 @@ function SetDataOnControls(ddId) {
 
             
 
+
             $("#add_upd1").val('2');
 
 
@@ -434,7 +435,7 @@ function SetDataOnControls(ddId) {
             $("#SComplaintId").val(myJSON.SComplaintId);
 
 
-            //$("#Action_Remark").val(myJSON.Remarks);
+            $("#Action_Remark").val(myJSON.Remarks);
 
 
 
