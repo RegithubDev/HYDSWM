@@ -282,6 +282,8 @@ namespace COMMON.OPERATION
         public string RegistrationDate { get; set; }
         public string RegistrationType { get; set; }
 
+        public string citizen_email { get; set; }
+
         public string FImgUrl
         {
             get

@@ -385,10 +385,10 @@ namespace HYDSWMAPI.Controllers
         {
 
 
-            string revised_ward_num = obj.GetValue("revised_ward_num").Value<string>();
+            //string revised_ward_num = obj.GetValue("revised_ward_num").Value<string>();
             string Status = obj.GetValue("Status").Value<string>();
             string Action_Remark = obj.GetValue("Action_Remark").Value<string>();
-            string address = obj.GetValue("address").Value<string>();
+            string complaint_address = obj.GetValue("complaint_address").Value<string>();
             string comp_id = obj.GetValue("comp_id").Value<string>();
             string complaint_num = obj.GetValue("complaint_num").Value<string>();
             bool IsActive;
@@ -433,7 +433,7 @@ namespace HYDSWMAPI.Controllers
                   new SqlParameter("@ComplaintDate",TDate),
                   new SqlParameter("@ComplaintCode", complaint_num),
                   new SqlParameter("@TSId",23),
-                  new SqlParameter("@revised_ward_num",revised_ward_num),
+                  //new SqlParameter("@revised_ward_num",revised_ward_num),
                   new SqlParameter("@Remarks",Action_Remark),
                   new SqlParameter("@FLat",22.7),
                   new SqlParameter("@FLng",5.7),
@@ -444,7 +444,7 @@ namespace HYDSWMAPI.Controllers
                   new SqlParameter("@CreatedBy",string.Empty),
                   new SqlParameter("@FolderName","uploads/"),
                   new SqlParameter("@Action_Remark",Action_Remark),
-                  new SqlParameter("@address",address)
+                  new SqlParameter("@address",complaint_address)
                   
               };
 
@@ -535,6 +535,7 @@ namespace HYDSWMAPI.Controllers
                   new SqlParameter("@ComplaintTypeId",1),
                   new SqlParameter("@ComplaintDate",TDate),
                   new SqlParameter("@TSId",23),
+                  new SqlParameter("citizen_email",citizen_email),
                   new SqlParameter("@Location",complaint_add),
                   new SqlParameter("@Remarks",complaint_descrip),
                   new SqlParameter("@FLat",22.7),

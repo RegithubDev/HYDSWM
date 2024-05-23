@@ -360,13 +360,13 @@ namespace DEMOSWMCKC.Controllers
 
             dynamic dresult = JObject.Parse(input1);
 
-            string revised_ward_num = dresult.revised_ward_num;
+            //string revised_ward_num = dresult.revised_ward_num;
 
             string Status = dresult.Status;
 
             string Action_Remark = dresult.Action_Remark;
 
-            string address = dresult.address;
+            string complaint_address = dresult.complaint_address;
 
             string SComplaintId = dresult.SComplaintId;
 
@@ -375,10 +375,10 @@ namespace DEMOSWMCKC.Controllers
             string complaint_num = dresult.complaint_num;
             var obj = new
             {
-                revised_ward_num = revised_ward_num,
+               // revised_ward_num = revised_ward_num,
                 Status = Status,
                 Action_Remark = Action_Remark,
-                address = address,
+                complaint_address = complaint_address,
                 comp_id = comp_id,
                 complaint_num = complaint_num
             };

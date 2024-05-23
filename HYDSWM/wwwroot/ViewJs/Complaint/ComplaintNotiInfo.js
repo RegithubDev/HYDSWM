@@ -150,7 +150,7 @@ function GetDataTableData(Type,from_date,to_date) {
 
             { data: "ComplaintContactNumber", sortable: true },
 
-            { data: "email", sortable: true },
+            { data: "citizen_email", sortable: true },
 
 
             /*{ data: "Complaint Type", sortable: true },*/
@@ -229,24 +229,24 @@ function updateComplaintInfo() {
     var isvalid = 1;
     var formData = new FormData();
 
-    var file = document.getElementById("files").files[0];
+    var file = document.getElementById("file").files[0];
 
 
     var input = {
 
-        revised_ward_num: $("#revised_ward_num").val(),
+        //revised_ward_num: $("#revised_ward_num").val(),
         Status: $("#Status").val(),
         Action_Remark: $("#Action_Remark").val(),
-        address: $("#address").val(),
+        complaint_address: $("#complaint_address").val(),
         comp_id: comp_id,
         complaint_num: $("#complaint_num").val()
 
     };
 
-    formData.append("revised_ward_num", input.revised_ward_num);
+    //formData.append("revised_ward_num", input.revised_ward_num);
     formData.append("Status", input.Status);
     formData.append("Action_Remark", input.Action_Remark);
-    formData.append("address", input.address);
+    formData.append("complaint_address", input.complaint_address);
     formData.append("comp_id", input.comp_id);
     formData.append("complaint_num", input.complaint_num);
 
@@ -315,6 +315,7 @@ function SaveAndUpdateComplaintInfo() {
     var txt_Zone = $("#txt_Zone").val();
     var complaint_add = $("#complaint_add").val();
     var complaint_descrip = $("#complaint_descrip").val();
+
     
 
     formData.append("RegDate", RegDate);
@@ -433,7 +434,7 @@ function SetDataOnControls(ddId) {
             $("#SComplaintId").val(myJSON.SComplaintId);
 
 
-            $("#Action_Remark").val(myJSON.Remarks);
+            //$("#Action_Remark").val(myJSON.Remarks);
 
 
 
@@ -442,6 +443,8 @@ function SetDataOnControls(ddId) {
             $("#complaint_num").val(myJSON.Complaintcode);
 
             $("#revised_ward_num").val(myJSON.WardNo);
+
+            $("#complaint_add").val(myJSON.Location);
             
             if (myJSON.IsClosed == 'True')
                 $("#Status").val("2");
