@@ -23978,7 +23978,9 @@ textarea.form-control-lg {
 .card-footer {
     padding: .625rem 1.25rem;
     background-color: rgba(0,0,0,.03);
-    border-top: 0 solid transparent
+    border-top: 0 solid transparent;
+    margin-top: 9px;
+    margin-bottom: -36px;
 }
 
     .card-footer:last-child {
@@ -25494,7 +25496,7 @@ textarea.form-control-lg {
     border-radius: 5px;
     box-shadow: 0 2px 9px 0 rgba(169,184,200,.2);
     outline: 0;
-    height: 20rem;
+    
 }
 
 .modal-backdrop {

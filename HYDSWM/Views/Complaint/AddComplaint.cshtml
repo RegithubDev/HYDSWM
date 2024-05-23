@@ -15,7 +15,7 @@
                 <div class="col-sm-4">
                     <label>Register Date</label>
                     <input type="date" class="form-control"
-                           id="RegDate" name="RegDate" value="2024-05-18">
+                           id="RegDate" name="RegDate" value="dd/mm/yyyy">
                 </div>
 
                 <div class="col-sm-4">
@@ -42,7 +42,7 @@
                     <label>Citizen Email-ID.</label>
                     <input type="hidden" id="hfComplaint" />
                     <span class="text-danger">*</span>
-                    <input type="text" placeholder="Citizen Name." class="form-control" id="citizen_email" onkeypress="return isAlpha(event.keyCode);" required>
+                    <input type="email" placeholder="Citizen Name." class="form-control" id="citizen_email"  required>
                 </div>
 
                 </div>
@@ -56,7 +56,7 @@
                     <label>Contact Number.</label>
                     <input type="hidden" id="hfComplaint" />
                     <span class="text-danger">*</span>
-                    <input type="text" placeholder="Complaint Contact No." class="form-control" id="txtContactNo" onkeypress="return isAlpha(event.keyCode);" required>
+                    <input type="text" placeholder="Complaint Contact No." class="form-control" maxlength="10" id="txtContactNo" onkeypress="return isAlpha(event.keyCode);" required>
                 </div>
 
                         <div class="col-sm-4">
