@@ -255,13 +255,16 @@ namespace DEMOSWMCKC.Controllers
 
             var fileName = formFile.FileName;
 
+            //if(HttpContext.Request.Form.Files.Count != 0)
+            //{ 
+
             var uploads = "D:\\New folder\\hyd\\HYDSWM\\HYDSWM\\wwwroot\\ViewJs\\Complaint\\uploads";
             string FileName = formFile.FileName;
             using (var fileStream = new FileStream(Path.Combine(uploads, FileName), FileMode.Create))
             {
                 formFile.CopyToAsync(fileStream);
             }
-
+            //}
 
             var Form_var = HttpContext.Request.Form.Keys;
 

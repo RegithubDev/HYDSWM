@@ -784,7 +784,7 @@ input[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent) + .form-con
 }
 
 .btn {
-    position: relative
+    position: relative;
 }
 
     .btn:not(.bg-transparent):not([class*=btn-outline]):not(.btn-light):not(.btn-link):not([class*=alpha-]):not(.fab-menu-btn).active, .btn:not(.bg-transparent):not([class*=btn-outline]):not(.btn-light):not(.btn-link):not([class*=alpha-]):not(.fab-menu-btn).focus, .btn:not(.bg-transparent):not([class*=btn-outline]):not(.btn-light):not(.btn-link):not([class*=alpha-]):not(.fab-menu-btn):active, .btn:not(.bg-transparent):not([class*=btn-outline]):not(.btn-light):not(.btn-link):not([class*=alpha-]):not(.fab-menu-btn):focus, .btn:not(.bg-transparent):not([class*=btn-outline]):not(.btn-light):not(.btn-link):not([class*=alpha-]):not(.fab-menu-btn):hover, .show > .btn:not(.bg-transparent):not([class*=btn-outline]):not(.btn-light):not(.btn-link):not([class*=alpha-]):not(.fab-menu-btn).dropdown-toggle {
@@ -821,7 +821,7 @@ input[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent) + .form-con
     }
 
 .btn-outline.disabled, .btn-outline:disabled, .btn-outline:not(:hover):not(:active):not(.active):not([aria-expanded=true]) {
-    background-color: transparent !important
+    background-color: #ffff!important
 }
 
 .btn-outline:not(.disabled):not(:disabled):not([class*=alpha-]):hover, .btn-outline:not(.disabled):not(:disabled):not([class*=alpha-]):not([disabled]):not(.disabled).active, .btn-outline:not(.disabled):not(:disabled):not([class*=alpha-]):not([disabled]):not(.disabled):active, .show > .btn-outline:not(.disabled):not(:disabled):not([class*=alpha-]).dropdown-toggle {
@@ -829,7 +829,7 @@ input[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent) + .form-con
 }
 
 .btn-outline.bg-white:not(.disabled):not(:disabled):hover, .btn-outline.bg-white:not(.disabled):not(:disabled):not([disabled]):not(.disabled).active, .btn-outline.bg-white:not(.disabled):not(:disabled):not([disabled]):not(.disabled):active, .show > .btn-outline.bg-white:not(.disabled):not(:disabled).dropdown-toggle {
-    color: #333 !important
+    color: #fff !important
 }
 
 .show > .btn-link.dropdown-toggle {
@@ -838,7 +838,7 @@ input[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent) + .form-con
 
 .btn-icon {
     padding-left: .56252rem;
-    padding-right: .56252rem
+    padding-right: .56252rem;
 }
 
     .btn-icon input[type=checkbox], .btn-icon input[type=radio] {
@@ -879,7 +879,8 @@ input[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent) + .form-con
 
 .btn.border-2 {
     padding-top: .375rem;
-    padding-bottom: .375rem
+    padding-bottom: .375rem;
+    margin-left: 14rem; 
 }
 
     .btn.border-2.btn-lg {

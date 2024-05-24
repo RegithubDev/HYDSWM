@@ -19222,7 +19222,7 @@ progress {
         flex-shrink: 0;
         width: 100%;
         max-width: 100%;
-        padding-right: calc(var(--bs-gutter-x)/ 2);
+        padding-right: calc(var(--bs-gutter-x)/ 7);
         padding-left: calc(var(--bs-gutter-x)/ 2);
         margin-top: var(--bs-gutter-y)
     }
@@ -19480,7 +19480,7 @@ progress {
 
     .col-sm-3 {
         flex: 0 0 auto;
-        width: 25%
+        width: 48%
     }
 
     .col-sm-4 {
@@ -25585,7 +25585,7 @@ textarea.form-control-lg {
 
 @media (min-width:992px) {
     .modal-lg, .modal-xl {
-        max-width: 1080px
+        max-width: 40rem;
     }
 }
 
@@ -26980,7 +26980,7 @@ textarea.form-control-lg {
 }
 
 .border-white {
-    border-color: #fff !important
+    border-color: #009efb !important
 }
 
 .border-1 {
@@ -28069,7 +28069,7 @@ textarea.form-control-lg {
 }
 
 .bg-info {
-    background-color: #009efb !important
+    background-color: #fff !important
 }
 
 .bg-warning {
@@ -28165,7 +28165,7 @@ textarea.form-control-lg {
 }
 
 .bg-white {
-    background-color: #fff !important
+    background-color: #009efb !important
 }
 
 .bg-transparent {
@@ -36976,7 +36976,7 @@ button:focus {
     color: #fff
 }
 
-    .btn-danger.active, .btn-danger.disabled, .btn-danger:disabled, .btn-danger:focus, .btn-danger:hover, .btn-info.active, .btn-info.disabled, .btn-info:disabled, .btn-info:focus, .btn-info:hover, .btn-primary.active, .btn-primary.disabled, .btn-primary:disabled, .btn-primary:focus, .btn-primary:hover, .btn-secondary.active, .btn-secondary.disabled, .btn-secondary:disabled, .btn-secondary:focus, .btn-secondary:hover, .btn-success.active, .btn-success.disabled, .btn-success:disabled, .btn-success:focus, .btn-success:hover, .btn-warning.active, .btn-warning.disabled, .btn-warning:disabled, .btn-warning:focus, .btn-warning:hover {
+    .btn-danger.active, .btn-danger.disabled, .btn-danger:disabled, .btn-danger:focus, .btn-danger:hover, .btn-info.active, .btn-info.disabled, .btn-info:disabled, .btn-info:focus, .btn-info:hover, .btn-primary.active, .btn-primary.disabled, .btn-primary:disabled, .btn-primary:focus,  .btn-secondary.active, .btn-secondary.disabled, .btn-secondary:disabled, .btn-secondary:focus, .btn-secondary:hover, .btn-success.active, .btn-success.disabled, .btn-success:disabled, .btn-success:focus, .btn-warning.active, .btn-warning.disabled, .btn-warning:disabled, .btn-warning:focus, .btn-warning:hover {
         color: #fff;
         background-color: #da0d14;
         border-color: #da0d14;
