@@ -156,7 +156,7 @@ function GetDataTableData(Type,from_date,to_date) {
             /*{ data: "Complaint Type", sortable: true },*/
 
 
-            { data: "Complaint Address", sortable: true },
+            { data: "Location", sortable: true },
 
             { data: "ClosedOn", sortable: true },
             /*

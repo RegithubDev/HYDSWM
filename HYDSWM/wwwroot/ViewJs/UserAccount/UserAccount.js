@@ -15,6 +15,7 @@ $(document).ready(function () {
 var dt;
 function GetDataTableData() {
     dt = $('#example').DataTable({
+        
         processing: true,
         destroy: true,
         responsive: true,
@@ -27,8 +28,13 @@ function GetDataTableData() {
         },
         dom: 'Blfrtip',
         buttons: {
+
+
+            
             buttons: [
-                {
+
+                
+              /*  {
                     extend: 'copyHtml5',
                     className: 'btn btn-light',
                     text: '<i class="icon-copy3 mr-2"></i> Copy'
@@ -43,7 +49,7 @@ function GetDataTableData() {
                     extend: 'colvis',
                     text: '<i class="icon-three-bars"></i>',
                     className: 'btn bg-blue btn-icon dropdown-toggle'
-                }
+                }*/
             ]
         },
         initComplete: function () {
@@ -69,18 +75,21 @@ function GetDataTableData() {
         columns: [
 
             {
-                sortable: false,
+                
                 render: function (data, type, row, meta) {
                     return meta.row + meta.settings._iDisplayStart + 1;
-                }
+                },
+                sortable: false
+  
+
+                //"bSortable": false
             },
-            { data: "FullName", sortable: true },
-            { data: "EmpCode", sortable: true },
+            //{ data: "FullName", sortable: true },
+            //{ data: "EmpCode", sortable: true },
             { data: "RoleName", sortable: true },
-            { data: "EmailId", sortable: true },
-            { data: "Mobile", sortable: true },
-            { data: "LastLogin", sortable: false },
-            { data: "TSName", sortable: false },
+            { data: "CCode", sortable: true },
+            //{ data: "Mobile", sortable: true },
+            
             /*{ data: "WardNo", sortable: false },*/
             {
                 sortable: true,

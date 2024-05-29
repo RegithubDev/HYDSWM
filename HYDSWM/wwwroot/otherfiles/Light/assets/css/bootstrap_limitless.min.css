@@ -785,6 +785,7 @@ input[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent) + .form-con
 
 .btn {
     position: relative;
+
 }
 
     .btn:not(.bg-transparent):not([class*=btn-outline]):not(.btn-light):not(.btn-link):not([class*=alpha-]):not(.fab-menu-btn).active, .btn:not(.bg-transparent):not([class*=btn-outline]):not(.btn-light):not(.btn-link):not([class*=alpha-]):not(.fab-menu-btn).focus, .btn:not(.bg-transparent):not([class*=btn-outline]):not(.btn-light):not(.btn-link):not([class*=alpha-]):not(.fab-menu-btn):active, .btn:not(.bg-transparent):not([class*=btn-outline]):not(.btn-light):not(.btn-link):not([class*=alpha-]):not(.fab-menu-btn):focus, .btn:not(.bg-transparent):not([class*=btn-outline]):not(.btn-light):not(.btn-link):not([class*=alpha-]):not(.fab-menu-btn):hover, .show > .btn:not(.bg-transparent):not([class*=btn-outline]):not(.btn-light):not(.btn-link):not([class*=alpha-]):not(.fab-menu-btn).dropdown-toggle {
@@ -821,7 +822,7 @@ input[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent) + .form-con
     }
 
 .btn-outline.disabled, .btn-outline:disabled, .btn-outline:not(:hover):not(:active):not(.active):not([aria-expanded=true]) {
-    background-color: #ffff!important
+    background-color: #009efb!important
 }
 
 .btn-outline:not(.disabled):not(:disabled):not([class*=alpha-]):hover, .btn-outline:not(.disabled):not(:disabled):not([class*=alpha-]):not([disabled]):not(.disabled).active, .btn-outline:not(.disabled):not(:disabled):not([class*=alpha-]):not([disabled]):not(.disabled):active, .show > .btn-outline:not(.disabled):not(:disabled):not([class*=alpha-]).dropdown-toggle {
