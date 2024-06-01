@@ -12,13 +12,13 @@
         <div class="form-group">
             <div class="row">
 
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <label>Register Date</label>
                     <input type="date" class="form-control"
                            id="RegDate" name="RegDate" value="dd/mm/yyyy">
                 </div>
 
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <label>Register Type</label>
                     <span class="text-danger">*</span>
                     <select id="ddlRegType" required
@@ -30,28 +30,27 @@
                 </div>
 
 
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <label>Citizen Name.</label>
                     <input type="hidden" id="hfComplaint" />
                     <span class="text-danger">*</span>
                     <input type="text" placeholder="Citizen Name." class="form-control" id="citizen_name" onkeypress="return isAlpha(event.keyCode);" required>
                 </div>
+            </div>
+        </div>
 
-
-                <div class="col-sm-4">
+        <div class="form-group">
+                    <div class="row">
+               
+                        <div class="col-sm-3">
                     <label>Citizen Email-ID.</label>
                     <input type="hidden" id="hfComplaint" />
                    @* <span class="text-danger">*</span>*@
                     <input type="email" placeholder="Citizen Name." class="form-control" id="citizen_email" >
                 </div>
 
-                </div>
-                </div>
                
               
-                <div class="form-group">
-                    <div class="row">
-
                 <div class="col-sm-4">
                     <label>Contact Number.</label>
                     <input type="hidden" id="hfComplaint" />
@@ -65,6 +64,11 @@
                     <select id="ddlComplaint_Type" required="" class="form-control"><option value="">Select</option><option value="1">REMOVAL OF GARBAGE</option><option value="2">ABSENTEEISM OF SWEEPERS</option><option value="3">OVERFLOWING OF GARBAGE BIN</option><option value="4">PROVISION OF GARBAGE BIN</option><option value="5">BROKEN BIN</option><option value="6">IMPROPER SWEEPING</option><option value="7">SPILLING OF GARBAGE FROM LORRY</option><option value="8">GARBAGE LORRY WITHOUT NET</option><option value="9">ABSENTEEISM OF DOOR TO DOOR GARBAGE COLLECTOR</option><option value="10">NUISANCE BY GARBAGE COMPACTOR OR TRUCK</option><option value="12">SHIFTING OF GARBAGE BIN</option><option value="13">BURNING OF GARBAGE</option><option value="14">DEATH OF STRAY ANIMALS</option><option value="29">SPILLAGE OF GARBAGE FROM BOV</option></select>
                     </div>
 
+                    </div>
+                    </div>
+
+        <div class="form-group">
+            <div class="row">
 
                         <div class="col-sm-4">
                             <label>Ward</label>
@@ -81,32 +85,33 @@
                             <span class="text-danger">*</span>
                             <input type="text" placeholder="Circle" class="form-control" id="txt_circle" disabled>
                         </div>
-                       
-                        </div>
-                        
-                       
-                              <div class="form-group">
-                                    <div class="row">
+               
                         <div class="col-sm-4">
-                            <label>Zone</label>
-                            <input type="hidden" id="hfComplaint" />
-                            <span class="text-danger">*</span>
-                            <input type="text" placeholder="Zone" class="form-control" id="txt_Zone">
+                    <label>Zone</label>
+                    <input type="hidden" id="hfComplaint" />
+                    <span class="text-danger">*</span>
+                    <input type="text" placeholder="Zone" class="form-control" id="txt_Zone">
+                </div>
                         </div>
-
-                        <div class="col-sm-4">
+                        </div>
+        
+            <div class="form-group">
+            <div class="row">
+                              
+                       
+                        <div class="col-sm-3">
                             <label>Upload File</label>
                             <input type="file" id="file" name="file" class="form-control h-auto" accept=".jpg,.jpeg,.png,.gif,.bmp" value="">
 
                         </div>
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                     <label>Location</label>
                                     <span class="text-danger">*</span>
                                     <textarea rows="1" cols="1" class="form-control" placeholder="Location" id="complaint_add" required=""></textarea>
                                 </div>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <label>Description</label>
                                     <span class="text-danger">*</span>
                                     <textarea rows="1" cols="1" class="form-control" placeholder="Description" id="complaint_descrip" required=""></textarea>
@@ -114,10 +119,9 @@
                                 <input type="hidden" id="add_upd1" />
                                 <input type="hidden" id="SComplaintId" />
                 
-                                
+                         </div>       
                </div>
-               </div>
-
+              
                @*
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.452697041917!2d78.39076592375736!3d17.43803374982052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9144cdba8c47%3A0x937fe346f411a645!2sTutorials%20Point%20(India)%20Ltd.!5e0!3m2!1sen!2sin!4v1673629212535!5m2!1sen!2sin"
                         width="1050"
@@ -135,7 +139,7 @@
        
         <button type="submit" class="btn btn-outline bg-blue text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
     </div>
-</div>
+
 
 <script type="text/javascript">
 

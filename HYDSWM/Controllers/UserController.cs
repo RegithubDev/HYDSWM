@@ -259,8 +259,8 @@ namespace HYDSWM.Controllers
             requestModel.CCode = this.User.GetCompanyCode();
             requestModel.UserId = this.User.GetUserId();
             requestModel.Shift = this.User.GetTSId();
-            requestModel.FromDate = FromDate.ToString() == "1/1/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : FromDate;
-            requestModel.ToDate = ToDate.ToString() == "1/1/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : ToDate;
+            requestModel.FromDate = FromDate.ToString() == "01/01/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : FromDate;
+            requestModel.ToDate = ToDate.ToString() == "01/01/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : ToDate;
             requestModel.length = -1;
             string input = JsonConvert.SerializeObject(requestModel);
             string endpoint = "api/User/GetAllUserLog";
@@ -293,8 +293,8 @@ namespace HYDSWM.Controllers
             requestModel.CCode = this.User.GetCompanyCode();
             requestModel.UserId = this.User.GetUserId();
             requestModel.Shift = this.User.GetTSId();
-            requestModel.FromDate = FromDate.ToString() == "1/1/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : FromDate;
-            requestModel.ToDate = ToDate.ToString() == "1/1/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : ToDate;
+            requestModel.FromDate = FromDate.ToString() == "01/01/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : FromDate;
+            requestModel.ToDate = ToDate.ToString() == "01/01/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : ToDate;
             requestModel.length = -1;
             string input = JsonConvert.SerializeObject(requestModel);
             string endpoint = "api/User/GetAllUserLog";

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "All User";
+    ViewData["Title"] = "Roles";
     Layout = "_MonsterLayout";
 }
 <div class="page-header border-bottom-0">
@@ -14,7 +14,27 @@
                 align-self-center
                 d-none d-md-flex
               ">
-               
+                @*  <div class="d-flex">
+                <div class="dropdown me-2">
+                <button class="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                January 2021
+                </button>
+                <ul class="dropdown-menu"
+                aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="#">February 2021</a></li>
+                <li><a class="dropdown-item" href="#">March 2021</a></li>
+                <li><a class="dropdown-item" href="#">April 2021</a></li>
+                </ul>
+                </div>
+                <button class="btn btn-success">
+                <i data-feather="plus" class="fill-white feather-sm"></i>
+                Create
+                </button>
+                </div>*@
             </div>
         </div>
     </div>
@@ -28,8 +48,10 @@
     <div class="card mt-1 mr-2">
         <div class="card-header header-elements-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">All Roles </span> </h4>&nbsp;
-               
+                <h4> <span class="font-weight-semibold">All Users </span> </h4>&nbsp;
+                @*<button type="button" class="btn btn-outline bg-teal-400 text-teal-400 border-teal-400" id="btnAdd" loginid="" cid="" onclick="CallFunc(this);">
+                <i class="icon-add"></i> Add New
+                </button>*@
             </div>
 
             <div class="list-icons">
@@ -54,9 +76,11 @@
                                 <th>RoleCode</th>
                                 <th>Status</th>
                                 <th>Action</th>
+
                             </tr>
                         </thead>
-                        
+                        <tfoot>
+                        </tfoot>
                         <tbody></tbody>
                     </table>
 
@@ -68,105 +92,132 @@
 <!-- Vertical form modal -->
 <div id="modal_form_vertical" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <form class="form-validate-jquery" autocomplete="off" onsubmit="return Formsubmit();" name="registration">
+        <form class="form-validate-jquery" autocomplete="off" onsubmit="return Formssubmit();" name="registration">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="modalTitle"></h3>
+                    <h3 class="modal-title" id="modalTitle">Add Users</h3>
                     <button type="button" class="close" data-dismiss="modal" onclick="CloseModal()">&times;</button>
                 </div>
 
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input type="hidden" value="0" id="UserId" />
-                                    <label>Name</label>
-                                    <span class="text-danger">*</span>
-                                    <input type="text" placeholder="Enter Name" class="form-control" id="FullName" onkeypress="return isAlpha(event.keyCode);" required>
-                                </div>
+
+                            <div class="col-sm-4">
+                                <label>Emp Code</label>
+                                <input type="hidden" id="hfUsers" />
+                                <span class="text-danger">*</span>
+                                <input type="text" placeholder="Citizen Name." class="form-control" id="citizen_name" onkeypress="return isAlpha(event.keyCode);" required>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Employee</label>
-                                    @*<input type="text" placeholder="Employee Code" class="form-control" id="EmpCode">*@
-                                    <select id="ddlEmp" style="width  : 100%;" onchange="OnEmpChange(this);" class="form-control">
-                                        <option value="">--select--</option>
-                                    </select>
-                                </div>
 
 
+                            <div class="col-sm-4">
+                                <label>User Name</label>
+                                <input type="hidden" id="hfUsers" />
+                                <span class="text-danger">*</span>
+                                <input type="text" placeholder="Citizen Name." class="form-control" id="citizen_name" onkeypress="return isAlpha(event.keyCode);" required>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label>Role</label>
-                                    <span class="text-danger">*</span>
-                                    <select id="ddlRole" required class="form-control">
-                                        <option value="">-select-</option>
-                                    </select>
-                                </div>
 
-                                <div class="col-sm-6">
-                                    <label>Mobile</label>
-                                    <input type="text" maxlength="10"  placeholder="Mobile No" class="form-control" id="Mobile" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
-                                </div>
+
+                            <div class="col-sm-4">
+                                <label>Role Name</label>
+                                <span class="text-danger">*</span>
+                                <select id="ddlRoleName" required
+                                        class="form-control">
+                                    <option value="">Select</option>
+                                    <option value="1"></option>
+                                    <option value="2"></option>
+                                </select>
                             </div>
                         </div>
+                    </div>
+
+
+
+                    <div class="modal-body" style="
+    margin-left: -13px;
+    width: 40.2rem;
+">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
+                                    <label>Email-ID</label>
+                                    <input type="hidden" id="hfUsers" />
+                                    <span class="text-danger">*</span>
+                                    <input type="email" placeholder="Enter Email-Id." class="form-control" id="email_Id" required>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label>Mobile Number</label>
+                                    <input type="hidden" id="hfUsers" />
+                                    <span class="text-danger">*</span>
+                                    <input type="text" placeholder="Enter Mobile No." class="form-control" maxlength="10" id="txtContactNo" onkeypress="return isAlpha(event.keyCode);" required>
+                                </div>
+
+                                <div class="col-sm-4">
                                     <label>Password</label>
+                                    <input type="hidden" id="hfUsers" />
                                     <span class="text-danger">*</span>
-                                    <input type="text" placeholder="Password" value="" required class="form-control" id="Password" onkeypress="return IsAlphaNumeric(event);" minlength="8">
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Login Id</label>
-                                        <span class="text-danger">*</span>
-                                        <input type="text" placeholder="Enter Login Id" class="form-control" id="Email" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" checked="checked" class="form-check-input" id="IsActive">
-                                            Is Active
-                                        </label>
-                                    </div>
+                                    <input type="password" class="form-control" name="password" placeholder="Password" required="">
 
                                 </div>
+
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="datatable-scroll-wrap">
-                                <table class="table datatable-button-html5-columns" id="tblCirclemaster">
-                                    <thead>
-                                        <tr>
-                                            <th>Zone</th>
-                                            <th>Transfer Station</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                    </tfoot>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+
+
+
+
+
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label class="form-label">
+                            Is Employee<span style="color: rgb(236, 17, 23);">*</span>
+                        </label>
+                        <div class="form-group" style="display: flex;">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="isActive" id="activeRadio" value="true" checked="">
+                                <label class="form-check-label" for="activeRadio">Yes</label>
+                            </div>
+                            <div class="form-check" style="margin-left: 47px;margin-top: 1px;">
+                                <input type="radio" class="form-check-input" name="isActive" id="inactiveRadio" value="false">
+                                <label class="form-check-label" for="inactiveRadio">NO</label>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
-                        <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
-                        <button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
+
+
+
+
+
+                    <div class="col-md-4 mt-2">
+                        <label class="form-label">
+                            Status<span style="color: rgb(236, 17, 23);">*</span>
+                        </label>
+                        <div class="form-group" style="display: flex;">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="isActive" id="activeRadio" value="true" checked="">
+                                <label class="form-check-label" for="activeRadio">Active</label>
+                            </div>
+                            <div class="form-check" style="margin-left: 47px;margin-top: 1px;">
+                                <input type="radio" class="form-check-input" name="isActive" id="inactiveRadio" value="false">
+                                <label class="form-check-label" for="inactiveRadio">Inactive</label>
+                            </div>
+                        </div>
+
                     </div>
 
-                </div>
+
+                    <div class="col-md-4 mt-2">
+
+                        <button type="submit" class="btn btn-outline bg-white text-white border-white border-2">
+                            Submit
+                            <i class="icon-paperplane ml-2">
+
+                            </i>
+                        </button>
+                    </div>
         </form>
     </div>
 </div>
@@ -181,10 +232,10 @@
 
     }
     function IsAlphaNumeric(e) {
-        
+
         var keyCode = e.keyCode == 0 ? e.charCode : e.keyCode;
         var ret = ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 64 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122));
-       // document.getElementById("error").style.display = ret ? "none" : "inline";
+        // document.getElementById("error").style.display = ret ? "none" : "inline";
         return ret;
     }
 </script>
@@ -209,7 +260,3 @@
     <script src="~/js/aes.js"></script>
     <script src="~/ViewJs/UserAccount/UserAccount.js?@DateTime.Now.Ticks"></script>
 }
-
-
-
-

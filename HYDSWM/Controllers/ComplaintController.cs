@@ -50,8 +50,8 @@ namespace DEMOSWMCKC.Controllers
             requestModel.UserId = this.User.GetUserId();
             requestModel.ContratorId = !string.IsNullOrEmpty(requestModel.ContratorId) ? requestModel.ContratorId : "0";
             requestModel.NotiId = !string.IsNullOrEmpty(requestModel.NotiId) ? requestModel.NotiId : "";
-            requestModel.FromDate = requestModel.FromDate.ToString() == "1/1/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : requestModel.FromDate;
-            requestModel.ToDate = requestModel.ToDate.ToString() == "1/1/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : requestModel.ToDate;
+            requestModel.FromDate = requestModel.FromDate.ToString() == "01/01/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : requestModel.FromDate;
+            requestModel.ToDate = requestModel.ToDate.ToString() == "01/01/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : requestModel.ToDate;
             string input = JsonConvert.SerializeObject(requestModel);
             //string endpoint = "api/Complaint/GetAllStaffComplaint_Paging";
             string endpoint = "api/Complaint/GetAllStaffComplaint_PagingB64";
@@ -101,8 +101,8 @@ namespace DEMOSWMCKC.Controllers
             requestModel.UserId = this.User.GetUserId();
             requestModel.ContratorId = !string.IsNullOrEmpty(requestModel.ContratorId) ? requestModel.ContratorId : "0";
             requestModel.NotiId = !string.IsNullOrEmpty(requestModel.NotiId) ? requestModel.NotiId : "";
-            requestModel.FromDate = requestModel.FromDate.ToString() == "1/1/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : requestModel.FromDate;
-            requestModel.ToDate = requestModel.ToDate.ToString() == "1/1/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : requestModel.ToDate;
+            requestModel.FromDate = requestModel.FromDate.ToString() == "01/01/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : requestModel.FromDate;
+            requestModel.ToDate = requestModel.ToDate.ToString() == "01/01/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : requestModel.ToDate;
             requestModel.length = -1;
             string input = JsonConvert.SerializeObject(requestModel);
             string endpoint = "api/Complaint/GetAllStaffComplaint_Paging";
