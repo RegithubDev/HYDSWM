@@ -400,7 +400,7 @@ namespace HYDSWMAPI.Controllers
 
             
 
-            if (Status == "2")
+            if (Status == "3")
                 Status1 = 1;
 
             else
@@ -461,7 +461,7 @@ namespace HYDSWMAPI.Controllers
                   new SqlParameter("@CreatedDate",TDate),
                   new SqlParameter("@CreatedBy",string.Empty),
                   
-                  new SqlParameter("@FolderName","uploads/"),
+                  new SqlParameter("@FolderName","uploads/")
                   //new SqlParameter("@Action_Remark",Action_Remark)
                   //new SqlParameter("@address",complaint_address)
                   
@@ -471,7 +471,7 @@ namespace HYDSWMAPI.Controllers
 
                 Result = _dataRepository.ExecuteQuerySingleDataTableDynamic(StoredProcedureHelper.spUpdateStaffComplaint, parameters);
             
-            return Ok(Result);
+                return Ok(Result);
         }
 
 

@@ -263,7 +263,7 @@ namespace DEMOSWMCKC.Controllers
             //if(HttpContext.Request.Form.Files.Count != 0)
             //{ 
 
-            var uploads = "C:\\Users\\uma.maheswar\\Desktop\\project-hyd\\HYDSWM\\HYDSWM\\wwwroot\\ViewJs\\Complaint\\uploads";
+            var uploads = "C:\\Users\\uma.maheswar\\Desktop\\LOCAL-Test\\project-hyd\\HYDSWM\\HYDSWM\\wwwroot\\ViewJs\\Complaint\\uploads";
             string FileName = formFile.FileName;
             using (var fileStream = new FileStream(Path.Combine(uploads, FileName), FileMode.Create))
             {
