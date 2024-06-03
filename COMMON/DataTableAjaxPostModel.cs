@@ -20,6 +20,8 @@ namespace COMMON
         public string CCode { get; set; }
         public string ZoneId { get; set; }
         public string CircleId { get; set; }
+
+        public string sort_status { get; set; }
         public string WardId { get; set; }
 
         public string CityId { get; set; }

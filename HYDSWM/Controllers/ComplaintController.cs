@@ -52,6 +52,11 @@ namespace DEMOSWMCKC.Controllers
             requestModel.NotiId = !string.IsNullOrEmpty(requestModel.NotiId) ? requestModel.NotiId : "";
             requestModel.FromDate = requestModel.FromDate.ToString() == "01/01/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : requestModel.FromDate;
             requestModel.ToDate = requestModel.ToDate.ToString() == "01/01/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : requestModel.ToDate;
+
+            requestModel.sort_status = requestModel.sort_status;
+
+
+
             string input = JsonConvert.SerializeObject(requestModel);
             //string endpoint = "api/Complaint/GetAllStaffComplaint_Paging";
             string endpoint = "api/Complaint/GetAllStaffComplaint_PagingB64";
@@ -258,7 +263,7 @@ namespace DEMOSWMCKC.Controllers
             //if(HttpContext.Request.Form.Files.Count != 0)
             //{ 
 
-            var uploads = "D:\\New folder\\hyd\\HYDSWM\\HYDSWM\\wwwroot\\ViewJs\\Complaint\\uploads";
+            var uploads = "C:\\Users\\uma.maheswar\\Desktop\\project-hyd\\HYDSWM\\HYDSWM\\wwwroot\\ViewJs\\Complaint\\uploads";
             string FileName = formFile.FileName;
             using (var fileStream = new FileStream(Path.Combine(uploads, FileName), FileMode.Create))
             {

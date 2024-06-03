@@ -249,6 +249,8 @@ namespace HYDSWMAPI.Controllers
             if (SearchTXT != null)
                 str = SearchTXT.Trim();
 
+            string sort_status = requestModel.sort_status;
+
             string SortColumn = string.Empty;
             string SortDir = requestModel.order[0].dir;
             switch (requestModel.order[0].column)
@@ -284,6 +286,7 @@ namespace HYDSWMAPI.Controllers
              {
                   new SqlParameter("@SearchTerm",str),
                   new SqlParameter("@SortColumn",SortColumn),
+                  new SqlParameter("@sortstatus",sort_status),
                   new SqlParameter("@SortOrder",SortDir),
                   new SqlParameter("@PageNumber",start),
                   new SqlParameter("@PageSize",length),

@@ -1,8 +1,11 @@
 ﻿
+
+var today;
+
 $(document).ready(function () {
 
-
-    let today = new Date();
+    today = new Date();
+    
 
     let dd = today.getDate();
     let mm = today.getMonth() + 1;
@@ -20,11 +23,11 @@ $(document).ready(function () {
     
 
     
-    GetDataTableData('Load', "05/01/2001", today);
+    GetDataTableData('Load', "05/01/2001", today,"");
 });
 var dt;
 var comp_id;
-function GetDataTableData(Type,from_date,to_date) {
+function GetDataTableData(Type,from_date,to_date,sort_status) {
     var TId = getUrlParameterInfo('TId');
     var TName = getUrlParameterInfo('TName');
     $("#spnHeader").html('');
@@ -87,8 +90,25 @@ function GetDataTableData(Type,from_date,to_date) {
 
                     d.ToDate = to_date;
                 }
+                else if (from_date == "" && to_date == "")
+                {
+                    d.FromDate = "05/01/2001";
+                    d.ToDate = today;
+                }
+                else if (from_date != "" && to_date == "") {
+                    d.FromDate = from_date;
+                    d.ToDate = today;
+                }
+                else if (from_date == "" && to_date != "") {
+                    d.FromDate = "05/01/2001";
+                    d.ToDate = to_date;
+                }
 
-                
+
+
+                if (sort_status != "Select") {
+                    d.sort_status = sort_status;
+                }
                 
                 
                 return {
@@ -212,7 +232,7 @@ function get_inform_btw_from_to_date() {
 
     if (!(From_date != "" && To_date == "") || !(From_date == "" && To_date != "")) {
 
-        GetDataTableData('Load', From_date, To_date);
+        GetDataTableData('Load', From_date, To_date,"");
 
     }
 
@@ -310,6 +330,16 @@ function updateComplaintInfo() {
     else
         ShowCustomMessage('0', 'Please Enter All Required Details', '');
 
+
+}
+
+
+
+function get_infom_status() {
+
+    var status_selected = $("#Status option:selected").text();
+
+    GetDataTableData('Load', "05/01/2001", today, status_selected);
 
 }
 

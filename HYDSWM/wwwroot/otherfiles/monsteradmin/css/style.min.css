@@ -12,7 +12,7 @@
     text-rendering: auto;
     line-height: 1
 }
- 
+
 .fa-lg {
     font-size: 1.33333em;
     line-height: .75em;
@@ -18886,7 +18886,7 @@ button, input, optgroup, select, textarea {
 
 button, select {
     text-transform: none;
-        margin-left:6px;
+    margin-left: 1px;
 }
 
 [role=button] {
@@ -19475,17 +19475,17 @@ progress {
 
     .col-sm-2 {
         flex: 0 0 auto;
-        width: 16.66667%
+        width: 48%
     }
 
     .col-sm-3 {
         flex: 0 0 auto;
-        width: 48%
+        width: 33%
     }
 
     .col-sm-4 {
         flex: 0 0 auto;
-        width: 25%
+        width: 33%
     }
 
     .col-sm-5 {
@@ -23979,7 +23979,7 @@ textarea.form-control-lg {
     padding: .625rem 1.25rem;
     background-color: rgba(0,0,0,.03);
     border-top: 0 solid transparent;
-    margin-top: 9px;
+    margin-top: 1rem;
     margin-bottom: -36px;
 }
 
@@ -25470,7 +25470,7 @@ textarea.form-control-lg {
 }
 
     .modal-dialog-scrollable .modal-content {
-        max-height: 100%;
+        max-height: 115%;
         overflow: hidden
     }
 
@@ -25496,7 +25496,6 @@ textarea.form-control-lg {
     border-radius: 5px;
     box-shadow: 0 2px 9px 0 rgba(169,184,200,.2);
     outline: 0;
-    
 }
 
 .modal-backdrop {
@@ -32695,12 +32694,11 @@ svg.tea {
 
     .topbar .navbar-collapse {
         padding: 0 10px 0 0
-    } 
+    }
 
     .topbar .top-navbar {
         height: 70px;
         padding: 0;
-        
     }
 
         .topbar .top-navbar .dropdown-toggle::after {
@@ -36976,11 +36974,10 @@ button:focus {
     color: #fff
 }
 
-    .btn-danger.active, .btn-danger.disabled, .btn-danger:disabled, .btn-danger:focus, .btn-danger:hover, .btn-info.active, .btn-info.disabled, .btn-info:disabled, .btn-info:focus, .btn-info:hover, .btn-primary.active, .btn-primary.disabled, .btn-primary:disabled, .btn-primary:focus,  .btn-secondary.active, .btn-secondary.disabled, .btn-secondary:disabled, .btn-secondary:focus, .btn-secondary:hover, .btn-success.active, .btn-success.disabled, .btn-success:disabled, .btn-success:focus, .btn-warning.active, .btn-warning.disabled, .btn-warning:disabled, .btn-warning:focus, .btn-warning:hover {
+    .btn-danger.active, .btn-danger.disabled, .btn-danger:disabled, .btn-danger:focus, .btn-danger:hover, .btn-info.active, .btn-info.disabled, .btn-info:disabled, .btn-info:focus, .btn-info:hover, .btn-primary.active, .btn-primary.disabled, .btn-primary:disabled, .btn-primary:focus, .btn-secondary.active, .btn-secondary.disabled, .btn-secondary:disabled, .btn-secondary:focus, .btn-secondary:hover, .btn-success.active, .btn-success.disabled, .btn-success:disabled, .btn-success:focus, .btn-warning.active, .btn-warning.disabled, .btn-warning:disabled, .btn-warning:focus, .btn-warning:hover {
         color: #fff;
         background-color: #da0d14;
         border-color: #da0d14;
-
     }
 
 .btn-outline-danger:hover, .btn-outline-info:hover, .btn-outline-primary:hover, .btn-outline-success:hover, .btn-outline-warning:hover {
