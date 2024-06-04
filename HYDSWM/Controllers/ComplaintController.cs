@@ -378,6 +378,33 @@ namespace DEMOSWMCKC.Controllers
             */
 
 
+            string file_path = "";
+
+            string file_path1 = "";
+
+
+
+            if (HttpContext.Request.Form.Files.Count != 0)
+            {
+
+                var formFile = HttpContext.Request.Form.Files[0];
+
+                var fileName = formFile.FileName;
+
+                var uploads = "D:\\LOCAL-Test\\project-hyd\\HYDSWM\\HYDSWM\\wwwroot\\ViewJs\\Complaint\\uploads\\";
+
+                string FileName = formFile.FileName;
+                using (var fileStream = new FileStream(Path.Combine(uploads, FileName), FileMode.Create))
+                {
+                    formFile.CopyToAsync(fileStream);
+
+                    file_path = Path.Combine(uploads, FileName);
+
+                    file_path1 = "D:\\\\LOCAL-Test\\\\project-hyd\\\\HYDSWM\\\\HYDSWM\\\\wwwroot\\\\ViewJs\\\\Complaint\\\\uploads\\\\" + fileName;
+                }
+            }
+
+
 
             dynamic dresult = JObject.Parse(input1);
 
@@ -401,7 +428,8 @@ namespace DEMOSWMCKC.Controllers
                 Action_Remark = Action_Remark,
                 complaint_address = complaint_address,
                 comp_id = comp_id,
-                complaint_num = complaint_num
+                complaint_num = complaint_num,
+                file=file_path1
             };
 
             string input = JsonConvert.SerializeObject(obj);

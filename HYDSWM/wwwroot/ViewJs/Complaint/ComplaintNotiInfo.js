@@ -48,7 +48,7 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
         responsive: true,
         serverSide: true,
         searchable: true,
-        lengthMenu: [[10, 20, 50, 100, 500, 10000, 1], [10, 20, 50, 100, 500, 10000, "All"]],
+        lengthMenu: [[10, 20, 50, 100, 500, 10000, 10000], [10, 20, 50, 100, 500, 10000, "All"]],
         language: {
             //infoEmpty: "No records available",
             searchPlaceholder: "Search Records",
@@ -274,8 +274,8 @@ function updateComplaintInfo() {
     var isvalid = 1;
     var formData = new FormData();
 
+    //var file = document.getElementById("file").files[0].name;
     var file = document.getElementById("file").files[0];
-
 
     var input = {
 
@@ -284,7 +284,8 @@ function updateComplaintInfo() {
         Action_Remark: $("#Action_Remark").val(),
         complaint_address: $("#complaint_add").val(),
         comp_id: comp_id,
-        complaint_num: $("#complaint_num").val()
+        complaint_num: $("#complaint_num").val(),
+
 
     };
 
@@ -294,6 +295,7 @@ function updateComplaintInfo() {
     formData.append("complaint_address", input.complaint_address);
     formData.append("comp_id", input.comp_id);
     formData.append("complaint_num", input.complaint_num);
+    formData.append("file", file);
 
 
     if (input.revised_ward_num == '' || input.Status == '' || input.Action_Remark == '' || input.address == '')//|| input.Transfer_station == '')

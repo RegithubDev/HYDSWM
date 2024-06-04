@@ -284,6 +284,9 @@ namespace COMMON.OPERATION
 
         public string citizen_email { get; set; }
 
+        public string ActionRemarks { get; set; }
+
+
         public string FImgUrl
         {
             get

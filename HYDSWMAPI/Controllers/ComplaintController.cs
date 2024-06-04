@@ -278,7 +278,7 @@ namespace HYDSWMAPI.Controllers
                     break;
 
                 default:
-                    SortDir = String.Empty;
+                    SortDir = string.Empty;
                     SortColumn = string.Empty;
                     break;
             }
@@ -394,6 +394,7 @@ namespace HYDSWMAPI.Controllers
             string complaint_address = obj.GetValue("complaint_address").Value<string>();
             string comp_id = obj.GetValue("comp_id").Value<string>();
             string complaint_num = obj.GetValue("complaint_num").Value<string>();
+            string file = obj.GetValue("file").Value<string>();
             bool IsActive;
 
             int Status1;
@@ -407,12 +408,36 @@ namespace HYDSWMAPI.Controllers
                 Status1 = 0;
 
 
-            
+
+            //string file_path = "";
+
+            //string file_path1 = "";
 
 
+            /*
+            if (HttpContext.Request.Form.Files.Count != 0)
+            {
 
+                var formFile = HttpContext.Request.Form.Files[0];
 
-            var uploads = "D:\\New folder\\hyd\\HYDSWM\\HYDSWM\\wwwroot\\ViewJs\\Complaint\\uploads";
+                var fileName = formFile.FileName;
+
+                var uploads = "D:\\LOCAL-Test\\project-hyd\\HYDSWM\\HYDSWM\\wwwroot\\ViewJs\\Complaint\\uploads\\";
+
+                string FileName = formFile.FileName;
+                using (var fileStream = new FileStream(Path.Combine(uploads, FileName), FileMode.Create))
+                {
+                    formFile.CopyToAsync(fileStream);
+
+                    file_path = Path.Combine(uploads, FileName);
+
+                    file_path1 = "D:\\\\LOCAL-Test\\\\project-hyd\\\\HYDSWM\\\\HYDSWM\\\\wwwroot\\\\ViewJs\\\\Complaint\\\\uploads\\\\" + fileName;
+                }
+            }
+
+            */
+
+            //var uploads = "D:\\New folder\\hyd\\HYDSWM\\HYDSWM\\wwwroot\\ViewJs\\Complaint\\uploads";
 
 
             //Path.GetExtension(value.Files[0].FileName);
@@ -461,9 +486,9 @@ namespace HYDSWMAPI.Controllers
                   new SqlParameter("@CreatedDate",TDate),
                   new SqlParameter("@CreatedBy",string.Empty),
                   new SqlParameter("@complaint_address",complaint_address),
-                  new SqlParameter("@FolderName","uploads/"),
-                  new SqlParameter("@Action_Remark",Action_Remark)
-                  //new SqlParameter("@address",complaint_address)
+                  //new SqlParameter("@FolderName","uploads/"),
+                  new SqlParameter("@Action_Remark",Action_Remark),
+                  new SqlParameter("@file",file)
                   
               };
 
