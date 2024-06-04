@@ -391,7 +391,7 @@ namespace HYDSWMAPI.Controllers
             //string revised_ward_num = obj.GetValue("revised_ward_num").Value<string>();
             string Status = obj.GetValue("Status").Value<string>();
             string Action_Remark = obj.GetValue("Action_Remark").Value<string>();
-            //string complaint_address = obj.GetValue("complaint_address").Value<string>();
+            string complaint_address = obj.GetValue("complaint_address").Value<string>();
             string comp_id = obj.GetValue("comp_id").Value<string>();
             string complaint_num = obj.GetValue("complaint_num").Value<string>();
             bool IsActive;
@@ -452,7 +452,7 @@ namespace HYDSWMAPI.Controllers
                   new SqlParameter("@TSId",23),
                   
                   
-                  //new SqlParameter("@Remarks",Action_Remark),
+                  //new SqlParameter("@complaint_address",complaint_address),
                   new SqlParameter("@FLat",22.7),
                   new SqlParameter("@FLng",5.7),
                   new SqlParameter("@FAddress",string.Empty),
@@ -460,9 +460,9 @@ namespace HYDSWMAPI.Controllers
                   new SqlParameter("@ModeOfReporting","APP"),
                   new SqlParameter("@CreatedDate",TDate),
                   new SqlParameter("@CreatedBy",string.Empty),
-                  
-                  new SqlParameter("@FolderName","uploads/")
-                  //new SqlParameter("@Action_Remark",Action_Remark)
+                  new SqlParameter("@complaint_address",complaint_address),
+                  new SqlParameter("@FolderName","uploads/"),
+                  new SqlParameter("@Action_Remark",Action_Remark)
                   //new SqlParameter("@address",complaint_address)
                   
               };
@@ -564,7 +564,7 @@ namespace HYDSWMAPI.Controllers
                   new SqlParameter("@ModeOfReporting","WEB"),
                   new SqlParameter("@CreatedDate",TDate),
                   new SqlParameter("@CreatedBy",string.Empty),
-                  new SqlParameter("@FolderName","uploads/"),
+                  new SqlParameter("@FolderName",file),
                   new SqlParameter("@ComplaintName",citizen_name),
                   new SqlParameter("@ComplaintContactNumber",txtContactNo),
                   new SqlParameter("@Wardname",ddlWard),

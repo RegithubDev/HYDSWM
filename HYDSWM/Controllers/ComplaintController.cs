@@ -83,14 +83,17 @@ namespace DEMOSWMCKC.Controllers
             string endpoint = "api/Complaint/GetComplaintInfoById?CId=" + CId;
             HttpClientHelper<string> apiobj = new HttpClientHelper<string>();
             string Result = apiobj.GetRequest(endpoint);
-            return Json(Result);
+
+            string Result1 = JToken.Parse(Result).ToString();
+
+            return Json(Result1);
         }
 
 
 
 
         [HttpPost]
-        public FileResult ExportGetAllStaffComplaint_Paging(string ContratorId, string NotiId, string FName)
+        public FileResult ExportGetAllStaffComplaint_Paging(string ContratorId, string NotiId, string FName="")
         {
             byte[] filearray = null;
             string ContentType = string.Empty;
@@ -254,22 +257,32 @@ namespace DEMOSWMCKC.Controllers
 
             //string input1 = Request.Query["Complaintdata"].ToString();
             //string formdata = Request.Form.ToString();
+            string file_path = "";
 
+            string file_path1 = "";
 
-            var formFile = HttpContext.Request.Form.Files[0];
+            
 
-            var fileName = formFile.FileName;
+            if(HttpContext.Request.Form.Files.Count != 0)
+            {
 
-            //if(HttpContext.Request.Form.Files.Count != 0)
-            //{ 
+                var formFile = HttpContext.Request.Form.Files[0];
 
-            var uploads = "C:\\Users\\uma.maheswar\\Desktop\\LOCAL-Test\\project-hyd\\HYDSWM\\HYDSWM\\wwwroot\\ViewJs\\Complaint\\uploads";
-            string FileName = formFile.FileName;
+                var fileName = formFile.FileName;
+
+                var uploads = "D:\\LOCAL-Test\\project-hyd\\HYDSWM\\HYDSWM\\wwwroot\\ViewJs\\Complaint\\uploads\\";
+            
+                string FileName = formFile.FileName;
             using (var fileStream = new FileStream(Path.Combine(uploads, FileName), FileMode.Create))
             {
                 formFile.CopyToAsync(fileStream);
+
+                    file_path = Path.Combine(uploads, FileName);
+
+                    file_path1 = "D:\\\\LOCAL-Test\\\\project-hyd\\\\HYDSWM\\\\HYDSWM\\\\wwwroot\\\\ViewJs\\\\Complaint\\\\uploads\\\\" + fileName; 
             }
-            //}
+            }
+            
 
             var Form_var = HttpContext.Request.Form.Keys;
 
@@ -326,7 +339,7 @@ namespace DEMOSWMCKC.Controllers
                 ddlWard = ddlWard,
                 txt_circle = txt_circle,
                 txt_Zone = txt_Zone,
-                file = fileName,
+                file = file_path1,
                 complaint_add = complaint_add,
                 complaint_descrip = complaint_descrip
                 

@@ -66,7 +66,8 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
                     extend: 'csvHtml5',
                     className: 'btn btn-light',
                     text: '<i class="icon-file-spreadsheet mr-2"></i> Excel',
-                    extension: '.csv'
+                    extension: '.csv',
+                    filename: 'All Complaint - MSW Waste Management'
                 },
                 {
                     extend: 'colvis',
@@ -198,6 +199,8 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
             { data: "Location", sortable: true },
 
             { data: "ClosedOn", sortable: true },
+
+            { data: "ActionRemarks", sortable: true },
             /*
             { data: "CLOSE TIME LOCATION", sortable: true },
             { data: "CLOSING IMAGE", sortable: true },
@@ -224,15 +227,18 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
 
 
 
-function get_inform_btw_from_to_date() {
+function get_inform_btw_from_to_date_and_status() {
 
     var From_date = document.getElementById("FromDate").value;
 
     var To_date = document.getElementById("ToDate").value;
 
+    var status_selected = $("#Status option:selected").text();
+
+
     if (!(From_date != "" && To_date == "") || !(From_date == "" && To_date != "")) {
 
-        GetDataTableData('Load', From_date, To_date,"");
+        GetDataTableData('Load', From_date, To_date, status_selected);
 
     }
 
@@ -276,7 +282,7 @@ function updateComplaintInfo() {
         //revised_ward_num: $("#revised_ward_num").val(),
         Status: $("#Status").val(),
         Action_Remark: $("#Action_Remark").val(),
-        complaint_address: $("#complaint_address").val(),
+        complaint_address: $("#complaint_add").val(),
         comp_id: comp_id,
         complaint_num: $("#complaint_num").val()
 
@@ -335,13 +341,7 @@ function updateComplaintInfo() {
 
 
 
-function get_infom_status() {
 
-    var status_selected = $("#Status option:selected").text();
-
-    GetDataTableData('Load', "05/01/2001", today, status_selected);
-
-}
 
 
 function SaveAndUpdateComplaintInfo() {
@@ -469,9 +469,11 @@ function SetDataOnControls(ddId) {
         type: "post",
         url: "/Complaint/GetComplaintInfoById",
         data: { CId: ddId },
-        success: function (data) {
+        success: function (data4) {
 
-            var myJSON = JSON.parse(data);
+            var myJSON = JSON.parse(data4);
+
+
             //$("#hfCId").val(myJSON.CId);
 
             
@@ -483,8 +485,7 @@ function SetDataOnControls(ddId) {
 
             $("#SComplaintId").val(myJSON.SComplaintId);
 
-
-            //$("#Action_Remark").val(myJSON.Remarks);
+            $("#Action_Remark").val(myJSON.ActionRemarks);
 
 
 
