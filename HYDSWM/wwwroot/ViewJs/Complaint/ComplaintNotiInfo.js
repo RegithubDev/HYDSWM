@@ -54,6 +54,7 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
         serverSide: true,
         searchable: true,
         lengthMenu: [[10, 20, 50, 100, 500, 10000, -1], [10, 20, 50, 100, 500, 10000, "All"]],
+        //paging: true,
         //pageLength: 1000,
         /*layout: {
             topStart: {
@@ -88,7 +89,7 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
             ]
         },
         initComplete: function () {
-            $(this.api().table().container()).find('input').parent().wrap('<form>').parent().attr('autocomplete', 'off');
+            $(this.api().table().container()).find('input').parent().wrap('<form>').parent().attr('autocomplete', 'on');
         },
         ajax: {
             url: "/Complaint/GetAllStaffComplaint_Paging/",
@@ -140,10 +141,10 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
 
                 json.recordsFiltered = json.recordsFiltered;
                 json.data = json.data;
-                if (json.recordsFiltered != json.recordsTotal)
+                if (flag == 0) { 
                     total_records(json.recordsTotal);
-                else
-                    total_records(json.recordsFiltered);
+                    flag = 1;
+                }
                 var return_data = json;
                 return return_data.data;
             }
