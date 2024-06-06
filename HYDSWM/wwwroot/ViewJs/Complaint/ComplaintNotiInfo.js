@@ -27,6 +27,9 @@ $(document).ready(function () {
 });
 var dt;
 var comp_id;
+var totalrows;
+
+var flag = 0;
 function GetDataTableData(Type,from_date,to_date,sort_status) {
     var TId = getUrlParameterInfo('TId');
     var TName = getUrlParameterInfo('TName');
@@ -40,6 +43,8 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
         IsClick = '0';
 
     var NotiId = TId;
+
+
     
 
     dt = $('#example').DataTable({
@@ -48,7 +53,13 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
         responsive: true,
         serverSide: true,
         searchable: true,
-        lengthMenu: [[10, 20, 50, 100, 500, 10000, 10000], [10, 20, 50, 100, 500, 10000, "All"]],
+        lengthMenu: [[10, 20, 50, 100, 500, 10000, -1], [10, 20, 50, 100, 500, 10000, "All"]],
+        //pageLength: 1000,
+        /*layout: {
+            topStart: {
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+            }
+        },*/
         language: {
             //infoEmpty: "No records available",
             searchPlaceholder: "Search Records",
@@ -122,8 +133,17 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
 
                 json.draw = json.draw;
                 json.recordsTotal = json.recordsTotal;
+                
+                totalrows = json.recordsTotal;
+
+                
+
                 json.recordsFiltered = json.recordsFiltered;
                 json.data = json.data;
+                if (json.recordsFiltered != json.recordsTotal)
+                    total_records(json.recordsTotal);
+                else
+                    total_records(json.recordsFiltered);
                 var return_data = json;
                 return return_data.data;
             }
@@ -223,7 +243,39 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
         ]
     });
 
+  //  $('#example').on('xhr.dt', function (e, settings, json, xhr) {
+    //    dt.page.len(json.data.length).draw()
+   // })
+
+
+    //dt.fnSettings().fnRecordsTotal();fnGetData().length
+
+    //var somestring = dt.column(0).data().length;
+
+    //var count = 0;
+    //$('#example tr').each(function () {
+    //    count++;
+    // });
+
+   // var l = dt.rows().eq(0).length;
+
+
+
+    
+    
+    
+    
 }
+
+function total_records(total) {
+    dt.page.len(total).draw();
+}
+
+//dt.page.len(totalrows).draw();
+
+//var rowCount = dt.settings()[0].json.recordsTotal;
+
+
 
 
 
@@ -242,6 +294,29 @@ function get_inform_btw_from_to_date_and_status() {
 
     }
 
+}
+
+
+
+
+function Accept_image_type_only() {
+
+    var file_name = document.getElementById("file").files[0].name;
+
+    var file_extension = file_name.split('.').pop();
+
+
+    if (file_extension == "jpg" || file_extension == "jpeg" || file_extension == "png") {
+        
+    }
+    else {
+        $("#file").val('');
+        alert("Files of type jpg, jpeg, png are only accepted")
+    }
+
+
+
+    //alert(file_extension);
 }
 
 

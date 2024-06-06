@@ -112,7 +112,7 @@
 
                 <div class="col-sm-3">
                     <label>Upload File</label>
-                    <input type="file" id="file" name="file" class="form-control h-auto" accept=".jpg,.jpeg,.png,.gif,.bmp" value="">
+                    <input type="file" id="file" name="file" class="form-control h-auto" accept=".jpg,.jpeg,.png,.gif,.bmp" onchange="Accept_image_type_only()" value="">
 
                 </div>
                 <input type="hidden" id="add_upd1" />
@@ -170,6 +170,12 @@
 
         document.getElementById('RegDate').valueAsDate = new Date();
     }
+
+
+
+
+
+
 
     /*
 
