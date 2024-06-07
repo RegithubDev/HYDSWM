@@ -77,15 +77,44 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
                 {
                     extend: 'csvHtml5',
                     className: 'btn btn-light',
-                    text: '<i class="icon-file-spreadsheet mr-2"></i> Excel',
+                    text: '<i class="icon-file-spreadsheet mr-2"></i> ',
                     extension: '.csv',
-                    filename: 'All Complaint - MSW Waste Management'
+                    filename: 'All Complaint - MSW Waste Management',
+                    modifier: {
+                        order: 'current',
+                        page: 'all',
+                        selected: false,
+                    }
                 },
+                {
+                    text: '<i></i> Excel',
+                    action: function () {
+                        var fileSelector = $('<input type="button" id="download_excel" name="download_excel" onclick="Download_excel();">');
+                        fileSelector.click();
+                        return true;
+                    }
+                },
+               
+                
                 {
                     extend: 'colvis',
                     text: '<i class="icon-three-bars"></i>',
                     className: 'btn bg-blue btn-icon dropdown-toggle'
-                }
+                }/*,
+                {
+                    extend: 'excel',
+                    text: '<i class="icon-file-spreadsheet mr-2"></i> Excel'
+                    exportOptions: {
+                    columns: ':visible',
+                    orthogonal: 'excel',
+                    modifier: {
+                        order: 'current',
+                        page: 'all',
+                        selected: false,
+                    }
+                    
+                    }
+                }*/
             ]
         },
         initComplete: function () {
@@ -141,10 +170,11 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
 
                 json.recordsFiltered = json.recordsFiltered;
                 json.data = json.data;
-                if (flag == 0) { 
+               /* if (flag == 0) { 
                     total_records(json.recordsTotal);
                     flag = 1;
                 }
+                */
                 var return_data = json;
                 return return_data.data;
             }
@@ -260,9 +290,6 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
 
    // var l = dt.rows().eq(0).length;
 
-
-
-    
     
     
     
@@ -277,7 +304,59 @@ function total_records(total) {
 //var rowCount = dt.settings()[0].json.recordsTotal;
 
 
+function Download_excel() {
+    var From_date = document.getElementById("FromDate").value;
 
+    var To_date = document.getElementById("ToDate").value;
+
+    var status_selected = $("#Status option:selected").text();
+
+    var formData = new FormData();
+
+    
+
+
+    if (From_date != "" && To_date != "") {
+        From_date = From_date;
+
+        To_date = To_date;
+    }
+    else if (From_date == "" && To_date == "") {
+        From_date = "05/01/2001";
+        To_date = today;
+    }
+    else if (From_date != "" && To_date == "") {
+        From_date = From_date;
+        To_date = today;
+    }
+    else if (From_date == "" && To_date != "") {
+        From_date = "05/01/2001";
+        To_date = To_date;
+    }
+    
+
+
+
+    formData.append("FromDate", From_date);
+    formData.append("ToDate", To_date);
+    formData.append("sort_status", status_selected)
+
+    //Creating an XMLHttpRequest and sending
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/Complaint/GetAllStaffComplaints');
+    xhr.send(formData);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+
+            window.open('file:///D://outputfile.csv', 'Download');
+
+
+            //alert("File was Uploaded Successfully");
+        }
+    }
+
+
+}
 
 
 function get_inform_btw_from_to_date_and_status() {
@@ -312,7 +391,7 @@ function Accept_image_type_only() {
     }
     else {
         $("#file").val('');
-        alert("Files of type jpg, jpeg, png are only accepted")
+        alert("Files of type jpg, jpeg, png are only accepted");
     }
 
 
@@ -360,7 +439,7 @@ function updateComplaintInfo() {
         Action_Remark: $("#Action_Remark").val(),
         complaint_address: $("#complaint_add").val(),
         comp_id: comp_id,
-        complaint_num: $("#complaint_num").val(),
+        complaint_num: $("#complaint_num").val()
 
 
     };

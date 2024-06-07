@@ -216,6 +216,7 @@ namespace COMMON
         public const string spGetAllComplaintCategory = "[dbo].[spGetAllComplaintCategory]";
         public const string spAddStaffComplaint = "[dbo].[spAddStaffComplaint]";
         public const string spGetAllStaffComplaint_Paging = "[dbo].[spGetAllStaffComplaint_Paging]";
+        public const string spGetAllStaffComplaints = "[dbo].[spGetAllStaffComplaints]";
         public const string spUpdateStaffComplaint = "[dbo].[spUpdateStaffComplaint]";
         public const string spGetAllComplaintNotification = "[dbo].[spGetAllComplaintNotification]";
         public const string SaveAndUpdateCCategory = "[dbo].[SaveAndUpdateCCategory]";

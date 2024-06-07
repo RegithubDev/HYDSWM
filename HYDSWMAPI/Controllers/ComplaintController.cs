@@ -5,6 +5,7 @@ using COMMON.STAFFCOMPLAINT;
 using GeoCoordinatePortable;
 using GoogleMaps.LocationServices;
 using HYDSWMAPI.INTERFACE;
+using iTextSharp.tool.xml.html.table;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,9 +17,11 @@ using OfficeOpenXml.FormulaParsing.Excel.Functions.Logical;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 
@@ -229,6 +232,19 @@ namespace HYDSWMAPI.Controllers
             
             string Result = _dataRepository.ExecuteQueryDynamicSqlParameter(StoredProcedureHelper.spGetAllStaffComplaint_Paging, parameters);
 
+
+            //WriteToFile(table, @"D:\outputfile.csv", false, ",");
+
+
+
+
+
+
+
+
+
+
+
             return Ok(Result);
         }
 
@@ -252,7 +268,7 @@ namespace HYDSWMAPI.Controllers
             string sort_status = requestModel.sort_status;
 
             string SortColumn = string.Empty;
-            string SortDir = requestModel.order[0].dir;
+            string SortDir = "asc";//requestModel.order[0].dir;
             switch (requestModel.order[0].column)
             {
                 case 2:
@@ -302,10 +318,214 @@ namespace HYDSWMAPI.Controllers
 
             string Result = _dataRepository.ExecuteQueryDynamicSqlParameter(StoredProcedureHelper.spGetAllStaffComplaint_Paging, parameters);
 
-            List<AllVehicle> Mhlst = JsonConvert.DeserializeObject<List<AllVehicle>>(Result);
+            //DataTable dt = (DataTable)JsonConvert.DeserializeObject(Result, (typeof(DataTable)));
+
+
+            //WriteToFile(dt, @"D:\outputfile.csv", false, ",");
+
+
+
+        List<AllVehicle> Mhlst = JsonConvert.DeserializeObject<List<AllVehicle>>(Result);
             string strJson = JsonConvert.SerializeObject(Mhlst);
             return Ok(strJson);
         }
+
+
+        /*public static void WriteToFile(DataTable dataSource, string fileOutputPath, bool firstRowIsColumnHeader = false, string seperator = ";")
+        {
+            var sw = new StreamWriter(fileOutputPath, false);
+
+            int icolcount = dataSource.Columns.Count;
+
+            if (!firstRowIsColumnHeader)
+            {
+                for (int i = 0; i < icolcount; i++)
+                {
+                    sw.Write(dataSource.Columns[i]);
+                    if (i < icolcount - 1)
+                        sw.Write(seperator);
+                }
+
+                sw.Write(sw.NewLine);
+            }
+
+            foreach (DataRow drow in dataSource.Rows)
+            {
+                for (int i = 0; i < icolcount; i++)
+                {
+                    if (!Convert.IsDBNull(drow[i]))
+                        sw.Write(drow[i].ToString());
+                    if (i < icolcount - 1)
+                        sw.Write(seperator);
+                }
+                sw.Write(sw.NewLine);
+            }
+            sw.Close();
+        }
+    
+        */
+
+
+        [HttpPost]
+        [Route("GetAllStaffComplaintsB64")]
+        public string GetAllStaffComplaintsB64(DataTableAjaxPostModel requestModel)
+        {
+            string baseUrl = Startup.StaticConfig.GetValue<string>("ApiBaseUrl");
+            Order _order = new Order();
+
+            string SearchTXT = "";//requestModel.search.value;
+            int draw = requestModel.draw;
+            int start = requestModel.start;
+            int length = 1000;//requestModel.length;
+
+            string sort_status;
+
+            string str = string.Empty;
+            if (SearchTXT != null)
+                str = SearchTXT.Trim();
+            if(requestModel.sort_status != "Select")
+            {
+            sort_status = requestModel.sort_status;//requestModel.sort_status;
+            }
+            else
+            {
+                sort_status = null;
+            }
+            string SortColumn = string.Empty;
+            string SortDir = string.Empty;//requestModel.order[0].dir;
+            /*
+             switch (requestModel.order[0].column)
+             {
+                 case 2:
+                     SortColumn = "AssetStatus";
+                     break;
+                 case 3:
+                     SortColumn = "UId";
+                     break;
+                 case 4:
+                     SortColumn = "ContainerCode";
+                     break;
+                 case 5:
+                     SortColumn = "ContainerName";
+                     break;
+                 case 6:
+                     SortColumn = "Capacity";
+                     break;
+                 case 7:
+                     SortColumn = "ContainerType";
+                     break;
+                 case 8:
+                     SortColumn = "CStatus";
+                     break;
+
+                 default:
+                     SortDir = string.Empty;
+                     SortColumn = string.Empty;
+                     break;
+             }*/
+
+
+
+
+            SqlParameter[] parameters = new SqlParameter[]
+             {
+                  new SqlParameter("@SearchTerm",str),
+                  new SqlParameter("@SortColumn",SortColumn),
+                  new SqlParameter("@sortstatus",sort_status),
+                  new SqlParameter("@SortOrder",SortDir),
+                  new SqlParameter("@PageNumber",start),
+                  new SqlParameter("@PageSize",length),
+                  new SqlParameter("@UserId",requestModel.UserId),
+                  new SqlParameter("@FPath",baseUrl),
+                  new SqlParameter("@NotiId",requestModel.NotiId),
+                  new SqlParameter("@FromDate",requestModel.FromDate),
+                  new SqlParameter("@ToDate",requestModel.ToDate),
+                  new SqlParameter("@AccessBy","WEB"),
+                  new SqlParameter("@IsClick","1")
+             };
+
+
+            string Result = _dataRepository.ExecuteQueryDynamicSqlParameter(StoredProcedureHelper.spGetAllStaffComplaints, parameters);
+
+
+            DataTable dt = (DataTable)JsonConvert.DeserializeObject(Result, (typeof(DataTable)));
+
+
+            WriteToFile(dt, @"D:\outputfile.csv", false, ",");
+
+
+            string filePath = "D:\\outputfile.csv";
+            Response.ContentType = "text/csv";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
+            Response.WriteFile(filePath);
+            Response.End();
+
+
+
+
+
+            return Result;
+
+
+            
+
+            /*
+
+            List<AllVehicle> Mhlst = JsonConvert.DeserializeObject<List<AllVehicle>>(Result);
+            string strJson = JsonConvert.SerializeObject(Mhlst);
+            return Ok(strJson);
+            */
+        }
+
+
+        public static void WriteToFile(DataTable dataSource, string fileOutputPath, bool firstRowIsColumnHeader = false, string seperator = ";")
+        {
+            var sw = new StreamWriter(fileOutputPath, false);
+
+            int icolcount = dataSource.Columns.Count;
+
+            if (!firstRowIsColumnHeader)
+            {
+                for (int i = 0; i < icolcount; i++)
+                {
+                    sw.Write(dataSource.Columns[i]);
+                    if (i < icolcount - 1)
+                        sw.Write(seperator);
+                }
+
+                sw.Write(sw.NewLine);
+            }
+
+            foreach (DataRow drow in dataSource.Rows)
+            {
+                for (int i = 0; i < icolcount; i++)
+                {
+                    if (!Convert.IsDBNull(drow[i]))
+                        sw.Write(drow[i].ToString());
+                    if (i < icolcount - 1)
+                        sw.Write(seperator);
+                }
+                sw.Write(sw.NewLine);
+            }
+            sw.Close();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         [HttpPost]

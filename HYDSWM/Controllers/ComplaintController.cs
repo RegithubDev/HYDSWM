@@ -78,6 +78,40 @@ namespace DEMOSWMCKC.Controllers
 
         [HttpPost]
         [CustomPostAuthorize]
+        public void GetAllStaffComplaints(DataTableAjaxPostModel requestModel)
+        {
+            requestModel.CCode = this.User.GetCompanyCode();
+            requestModel.UserId = this.User.GetUserId();
+            requestModel.ContratorId = !string.IsNullOrEmpty(requestModel.ContratorId) ? requestModel.ContratorId : "0";
+            requestModel.NotiId = !string.IsNullOrEmpty(requestModel.NotiId) ? requestModel.NotiId : "";
+            requestModel.FromDate = requestModel.FromDate.ToString() == "01/01/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : requestModel.FromDate;
+            requestModel.ToDate = requestModel.ToDate.ToString() == "01/01/0001 12:00:00 AM" ? CommonHelper.IndianStandard(DateTime.UtcNow) : requestModel.ToDate;
+
+            requestModel.sort_status = requestModel.sort_status;
+
+
+
+            string input = JsonConvert.SerializeObject(requestModel);
+            //string endpoint = "api/Complaint/GetAllStaffComplaint_Paging";
+            string endpoint = "api/Complaint/GetAllStaffComplaintsB64";
+            HttpClientHelper<string> apiobj = new HttpClientHelper<string>();
+
+            string Result = apiobj.PostRequestString(endpoint, input);
+            JArray _lst = JArray.Parse(Result);
+            IList<JToken> t = _lst.SelectTokens("$..TotalCount").ToList();
+            int tt = 0;
+            if (t.Count > 0)
+            {
+                tt = (int)t[0];
+            }
+            //var response = new { data = _lst, recordsFiltered = tt, recordsTotal = tt };
+            //var response = new { data = _lst, recordsFiltered = tt, recordsTotal = tt };
+           // return Json(response);
+        }
+
+
+        [HttpPost]
+        [CustomPostAuthorize]
         public JsonResult GetComplaintInfoById(string CId)
         {
             string endpoint = "api/Complaint/GetComplaintInfoById?CId=" + CId;
