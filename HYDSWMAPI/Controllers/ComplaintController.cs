@@ -269,29 +269,56 @@ namespace HYDSWMAPI.Controllers
             string sort_status = requestModel.sort_status;
 
             string SortColumn = string.Empty;
-            string SortDir = "asc";//requestModel.order[0].dir;
+            string SortDir = requestModel.order[0].dir;
             switch (requestModel.order[0].column)
             {
                 case 2:
-                    SortColumn = "AssetStatus";
+                    SortColumn = "RegistrationType";
                     break;
                 case 3:
-                    SortColumn = "UId";
+                    SortColumn = "RegistrationDate";
                     break;
                 case 4:
-                    SortColumn = "ContainerCode";
+                    SortColumn = "ComplaintType";
                     break;
                 case 5:
-                    SortColumn = "ContainerName";
+                    SortColumn = "ZoneName";
                     break;
                 case 6:
-                    SortColumn = "Capacity";
+                    SortColumn = "CircleName";
                     break;
                 case 7:
-                    SortColumn = "ContainerType";
+                    SortColumn = "WardName";
                     break;
                 case 8:
-                    SortColumn = "CStatus";
+                    SortColumn = "Location";
+                    break;
+
+                case 9:
+                    SortColumn = "Status";
+                    break;
+
+               
+                case 10:
+                    SortColumn = "ComplaintName";
+                    break;
+
+                case 11:
+                    SortColumn = "ComplaintContactNumber";
+                    break;
+
+                case 12:
+                    SortColumn = "citizen_email";
+                    break;
+
+                case 13:
+                    SortColumn = "Location";
+                    break;
+                case 14:
+                    SortColumn = "ClosedOn";
+                    break;
+                case 15:
+                    SortColumn = "ActionRemarks"; 
                     break;
 
                 default:
@@ -482,11 +509,19 @@ namespace HYDSWMAPI.Controllers
 
             int icolcount = dataSource.Columns.Count;
 
+            int[] col_sel = { 0,5,11,10,3,30,31,29,6,20,32,33,34,6,26,24 };
+
+            int col_count = col_sel.Count();
+
+            icolcount = col_count;
+
+            //var someval = dataSource.Columns[1].ToString();
+
             if (!firstRowIsColumnHeader)
             {
                 for (int i = 0; i < icolcount; i++)
                 {
-                    sw.Write(dataSource.Columns[i]);
+                    sw.Write(dataSource.Columns[col_sel[i]]);
                     if (i < icolcount - 1)
                         sw.Write(seperator);
                 }
@@ -498,8 +533,8 @@ namespace HYDSWMAPI.Controllers
             {
                 for (int i = 0; i < icolcount; i++)
                 {
-                    if (!Convert.IsDBNull(drow[i]))
-                        sw.Write(drow[i].ToString());
+                    if (!Convert.IsDBNull(drow[col_sel[i]]))
+                        sw.Write(drow[col_sel[i]].ToString());
                     if (i < icolcount - 1)
                         sw.Write(seperator);
                 }

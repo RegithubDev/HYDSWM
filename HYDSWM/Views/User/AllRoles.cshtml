@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "All Roles";
     Layout = "_MonsterLayout";
 }
@@ -9,7 +8,6 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-md-5 align-self-center">
-               
             </div>
             <div class="
                 col-md-7
@@ -18,26 +16,26 @@
                 d-none d-md-flex
               ">
                 @*  <div class="d-flex">
-                        <div class="dropdown me-2">
-                            <button class="btn btn-secondary dropdown-toggle"
-                                    type="button"
-                                    id="dropdownMenuButton"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                January 2021
-                            </button>
-                            <ul class="dropdown-menu"
-                                aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#">February 2021</a></li>
-                                <li><a class="dropdown-item" href="#">March 2021</a></li>
-                                <li><a class="dropdown-item" href="#">April 2021</a></li>
-                            </ul>
-                        </div>
-                        <button class="btn btn-success">
-                            <i data-feather="plus" class="fill-white feather-sm"></i>
-                            Create
-                        </button>
-                    </div>*@
+                <div class="dropdown me-2">
+                <button class="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                January 2021
+                </button>
+                <ul class="dropdown-menu"
+                aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="#">February 2021</a></li>
+                <li><a class="dropdown-item" href="#">March 2021</a></li>
+                <li><a class="dropdown-item" href="#">April 2021</a></li>
+                </ul>
+                </div>
+                <button class="btn btn-success">
+                <i data-feather="plus" class="fill-white feather-sm"></i>
+                Create
+                </button>
+                </div>*@
             </div>
         </div>
     </div>
@@ -45,7 +43,6 @@
 <div class="content pt-0">
 
     <!-- Page header -->
-    
     <!-- /page header -->
 
     <div class="card mt-1 mr-2">
@@ -54,9 +51,9 @@
                 <h4> <span class="font-weight-semibold">All Roles </span> </h4>&nbsp;
                 @*<button type="button" class="btn btn-outline bg-teal-400 text-teal-400 border-teal-400" id="btnAdd" isactive="true" cid="0" roleName="" onclick="CallFunc(this);">
                 <i class="icon-add"></i> Add New
-            </button>*@
+                </button>*@
             </div>
-           
+
             <div class="list-icons">
                 <a title="Add" cid="0" onclick="CallFunc(this);" id="btnAdd"><i class="icon-add"></i></a>
                 <a class="list-icons-item" data-action="collapse"></a>
@@ -74,8 +71,9 @@
                     <table class="table datatable-button-html5-columns" id="tlbRole">
                         <thead>
                             <tr>
-                                <th>Sr. No</th>
-                                <th>Name</th>
+                                <th>S.No</th>
+                                <th>RoleName</th>
+                                <th>RoleCode</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -112,58 +110,255 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <input type="hidden" id="RoleId" value="0" />
-                                    <label>Name</label>
+                                    <label>Role Code</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" placeholder="Enter Code" class="form-control" id="txtRoleName" onkeypress="return isAlpha(event.keyCode);" required>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="hidden" id="RoleId" value="0" />
+                                    <label>Role Name</label>
                                     <span class="text-danger">*</span>
                                     <input type="text" placeholder="Enter Name" class="form-control" id="txtRoleName" onkeypress="return isAlpha(event.keyCode);" required>
 
                                 </div>
 
 
-                               
                             </div>
-                             <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Vehicle Type</label>
 
-                                        <select id="ddlVehicleType" class="select2 form-control" style="height: 36px; width: 100%" multiple="multiple">
-                                           
-                                        </select>
-                                   
+                        </div>
 
-                            </div>
+                        <div class="form-group">
+                            <div class="row">
+
+                                <div class="col-md-4 mt-2">
+                                    <label class="form-label">
+                                        Status<span style="color: rgb(236, 17, 23);">*</span>
+                                    </label>
+                                    <div class="form-group" style="display: flex;">
+                                        <div class="form-check" style="margin-left: 1rem;margin-top: 1px;">
+                                            <input type="radio" class="form-check-input" name="isActive" id="activeRadio" value="true" checked="">
+                                            <label class="form-check-label" for="activeRadio">Active</label>
+                                        </div>
+                                        <div class="form-check" style="margin-left: 3rem;margin-top: 1px;">
+                                            <input type="radio" class="form-check-input" name="isActive" id="inactiveRadio" value="false">
+                                            <label class="form-check-label" for="inactiveRadio">Inactive</label>
+                                        </div>
+                                    </div>
+
+                                </div>
 
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label>IsActive</label>
-                                <input type="checkbox" checked="checked" id="cbIsActive" />
+
+                        <div>
+                            <h3>Organization</h3>
+                            <div class="d-flex row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox custom-checkbox-info">
+                                            <input type="checkbox" class="custom-control-input" id="permission-1" name="permission-1" value="1">
+                                            <label class="custom-control-label" for="permission-1">
+                                                Zone
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox custom-checkbox-info">
+                                            <input type="checkbox" class="custom-control-input" id="permission-2" name="permission-2" value="2">
+                                            <label class="custom-control-label" for="permission-2">
+                                                Circle
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox custom-checkbox-info">
+                                            <input type="checkbox" class="custom-control-input" id="permission-3" name="permission-3" value="3">
+                                            <label class="custom-control-label" for="permission-3">
+                                                Ward
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+
+
+
+
+                        <div>
+                            <h3>Assets</h3>
+                            <div class="d-flex row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox custom-checkbox-info">
+                                            <input type="checkbox" class="custom-control-input" id="permission-4" name="permission-4" value="4">
+                                            <label class="custom-control-label" for="permission-4">
+                                                Vehicle
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox custom-checkbox-info">
+                                            <input type="checkbox" class="custom-control-input" id="permission-5" name="permission-5" value="5">
+                                            <label class="custom-control-label" for="permission-5">
+                                                Container
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox custom-checkbox-info">
+                                            <input type="checkbox" class="custom-control-input" id="permission-6" name="permission-6" value="6">
+                                            <label class="custom-control-label" for="permission-6">
+                                                Infra Assets
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox custom-checkbox-info">
+                                            <input type="checkbox" class="custom-control-input" id="permission-7" name="permission-7" value="7">
+                                            <label class="custom-control-label" for="permission-7">
+                                                Attendance
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox custom-checkbox-info">
+                                            <input type="checkbox" class="custom-control-input" id="permission-8" name="permission-8" value="8">
+                                            <label class="custom-control-label" for="permission-8">
+                                                Collection
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3>Attendance</h3>
+                            <div class="d-flex row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox custom-checkbox-info">
+                                            <input type="checkbox" class="custom-control-input" id="permission-9" name="permission-9" value="9">
+                                            <label class="custom-control-label" for="permission-9">
+                                                Shift
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox custom-checkbox-info">
+                                            <input type="checkbox" class="custom-control-input" id="permission-10" name="permission-10" value="10">
+                                            <label class="custom-control-label" for="permission-10">
+                                                Employee
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox custom-checkbox-info">
+                                            <input type="checkbox" class="custom-control-input" id="permission-11" name="permission-11" value="11">
+                                            <label class="custom-control-label" for="permission-11">
+                                                Department
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox custom-checkbox-info">
+                                            <input type="checkbox" class="custom-control-input" id="permission-12" name="permission-12" value="12">
+                                            <label class="custom-control-label" for="permission-12">
+                                                Department
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox custom-checkbox-info">
+                                            <input type="checkbox" class="custom-control-input" id="permission-13" name="permission-13" value="13">
+                                            <label class="custom-control-label" for="permission-13">
+                                                Designation
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div class="col-md-4 mt-2">
+
+                            <button type="submit" class="btn btn-outline bg-white text-white border-white border-2">
+                                Submit
+                                <i class="icon-paperplane ml-2">
+
+                                </i>
+                            </button>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="datatable-scroll-wrap">
-                            <table class="table datatable-button-html5-columns" id="tblMenumaster">
-                                <thead>
-                                    <tr>
-                                        <th>Menu</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                </tfoot>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer d-flex justify-content-between align-items-center bg-info border-top-0">
-                    <button type="button" class="btn bg-transparent text-white border-white border-2" data-dismiss="modal" onclick="CloseModal()">Close</button>
-                    <button onclick="SaveAndUpdateMenuInfo();" type="button" class="btn btn-outline bg-white text-white border-white border-2">Submit <i class="icon-paperplane ml-2"></i></button>
-                </div>
-
-            </div>
         </form>
     </div>
 </div>
@@ -178,7 +373,7 @@
         return ((keyCode >= 65 && keyCode <= 90) || keyCode == 8 || keyCode == 32 || keyCode == 190 || (keyCode >= 48 && keyCode <= 57) || (keyCode >= 97 && keyCode <= 122))
 
     }
-   
+
 </script>
 @*<style>
     .dropdown-check-list {
@@ -236,7 +431,7 @@
 </style>*@
 @section scripts {
 
-   @* <script src="/otherfiles/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+    @* <script src="/otherfiles/global_assets/js/plugins/ui/moment/moment.min.js"></script>
     <script src="/otherfiles/global_assets/js/plugins/pickers/daterangepicker.js"></script>
     <script src="/otherfiles/global_assets/js/plugins/pickers/anytime.min.js"></script>
     <script src="/otherfiles/global_assets/js/plugins/pickers/pickadate/picker.js"></script>
@@ -248,13 +443,12 @@
     <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.min.js"></script>
     <script src="~/otherfiles/monsteradmin/assets/libs/select2/dist/js/select2.init.js"></script>
     <script src="/otherfiles/Light/global_assets/js/demo_pages/form_layouts.js"></script>
-   @* <script src="/otherfiles/global_assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>*@
+    @* <script src="/otherfiles/global_assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>*@
     <script src="~/js/aes.js"></script>
     <link href="/otherfiles/assets/css/sweetalert.css" rel="stylesheet" />
     <script src="~/otherfiles/assets/js/sweetalert.min.js"></script>
     <script src="~/ViewJs/UserAccount/Roles.js?@DateTime.Now.Ticks"></script>
 }
-
 
 
 
