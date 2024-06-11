@@ -8,6 +8,7 @@ using HYDSWMAPI.INTERFACE;
 using iTextSharp.tool.xml.html.table;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -451,15 +452,12 @@ namespace HYDSWMAPI.Controllers
             DataTable dt = (DataTable)JsonConvert.DeserializeObject(Result, (typeof(DataTable)));
 
 
-            WriteToFile(dt, @"D:\outputfile.csv", false, ",");
+            WriteToFile(dt, @"D:\LOCAL-Test\project-hyd\HYDSWM\HYDSWM\wwwroot\otherfiles\downloads\All Complaint - MSW Waste Management.csv", false, ",");
 
 
-            string filePath = "D:\\outputfile.csv";
-            Response.ContentType = "text/csv";
-            Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
-            Response.WriteFile(filePath);
-            Response.End();
 
+
+         
 
 
 

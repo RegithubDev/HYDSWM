@@ -75,7 +75,7 @@
                     <label>Status</label>
                     <span class="text-danger"></span>
                     <select id="Status"
-                            class="form-control">
+                            class="form-control" required>
                         <option value="">Select</option>
                         <option value="2">Closed</option>
                         <option value="3">Invalid</option>
@@ -101,7 +101,7 @@
                        <div class="col-sm-3">
                         <label>Action Remarks</label>
                         <input type="hidden" id="hfComplaint" />
-                          @*<span class="text-danger">*</span>*@
+                                    <span class="text-danger">*</span>
                         <input type="text" placeholder="Action Remarks"
                         class="form-control" id="Action_Remark" onkeypress="return isAlpha(event.keyCode);" required>
                         </div>

@@ -20,19 +20,69 @@ $(document).ready(function () {
     }
     today = mm + '/' + dd + '/' + yyyy;
 
-    
+    var TName = getUrlParameterInfo('TName');
+    var status = "";
 
-    
-    GetDataTableData('Load', "05/01/2001", today,"");
+
+    if (TName == "All Complaints") {
+
+        var el = document.getElementById("Status");
+        for (var i = 0; i < el.options.length; i++) {
+            if (el.options[i].text == "All") {
+                el.selectedIndex = i;
+                status = "All";
+                break;
+            }
+
+        }
+    }
+
+
+
+
+    else if (TName == "All Pending Complaints") {
+
+        var el = document.getElementById("Status");
+        for (var i = 0; i < el.options.length; i++) {
+            if (el.options[i].text == "Open") {
+                el.selectedIndex = i;
+                status = "Open";
+                break;
+            }
+
+        }
+    }
+    else if (TName == "All Closed Complaints") {
+        var el = document.getElementById("Status");
+        for (var i = 0; i < el.options.length; i++) {
+            if (el.options[i].text == "Closed") {
+                el.selectedIndex = i;
+                status = "Closed";
+                break;
+            }
+
+        }
+
+
+        //$('#Status').prop('disabled', true);
+    }
+
+
+
+    GetDataTableData('Load', "05/01/2001", today, status);
 });
 var dt;
 var comp_id;
 var totalrows;
 
-var flag = 0;
-function GetDataTableData(Type,from_date,to_date,sort_status) {
+var f1 = 0;
+var f2 = 0;
+function GetDataTableData(Type, from_date, to_date, sort_status) {
     var TId = getUrlParameterInfo('TId');
     var TName = getUrlParameterInfo('TName');
+
+    
+
     $("#spnHeader").html('');
     $("#spnHeader").html(TName);
     var IsClick = '0';
@@ -74,20 +124,13 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
                     className: 'btn btn-light',
                     text: '<i class="icon-copy3 mr-2"></i> Copy'
                 },
+                
                 {
                     extend: 'csvHtml5',
                     className: 'btn btn-light',
-                    text: '<i class="icon-file-spreadsheet mr-2"></i> ',
+                    text: '<i class="icon-file-spreadsheet mr-2"></i> Excel',
                     extension: '.csv',
                     filename: 'All Complaint - MSW Waste Management',
-                    modifier: {
-                        order: 'current',
-                        page: 'all',
-                        selected: false,
-                    }
-                },
-                {
-                    text: '<i></i> Excel',
                     action: function () {
                         var fileSelector = $('<input type="button" id="download_excel" name="download_excel" onclick="Download_excel();">');
                         fileSelector.click();
@@ -146,11 +189,15 @@ function GetDataTableData(Type,from_date,to_date,sort_status) {
                     d.ToDate = to_date;
                 }
 
-
-
-                if (sort_status != "Select") {
-                    d.sort_status = sort_status;
+                if (sort_status == "All") {
+                    sort_status = "";
                 }
+
+
+
+                
+                    d.sort_status = sort_status;
+                
                 
                 
                 return {
@@ -333,8 +380,10 @@ function Download_excel() {
         From_date = "05/01/2001";
         To_date = To_date;
     }
-    
 
+    if (status_selected == "All") {
+        status_selected = "";
+    }
 
 
     formData.append("FromDate", From_date);
@@ -348,9 +397,11 @@ function Download_excel() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
 
-            window.open('file:///D://outputfile.csv', 'Download');
+            $('#downloadfile')[0].click();
 
-
+            //$('a[href="#downloadfile"]').click(function () {
+               // alert('Sign new href executed.');
+            //}); 
             //alert("File was Uploaded Successfully");
         }
     }

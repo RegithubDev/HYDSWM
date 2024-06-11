@@ -31,12 +31,12 @@ function CallAllClickFunc() {
         window.open('/Complaint/AllComplaintNoti?TId=' + TId + '&TName=' + TName , "_blank");
     });
     $('#dvPendingComplaint').click(function (e) {
-        var TId = '0';
+        var TId = '';
         var TName = "All Pending Complaints";
         window.open('/Complaint/AllComplaintNoti?TId=' + TId + '&TName=' + TName, "_blank");
     });
     $('#dvClosedComplaint').click(function (e) {
-        var TId = '1';
+        var TId = '';
         var TName = "All Closed Complaints";
         window.open('/Complaint/AllComplaintNoti?TId=' + TId + '&TName=' + TName, "_blank");
     });

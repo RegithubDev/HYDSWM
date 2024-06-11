@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Controllers\downloads\download.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Controllers\downloads\download.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CrossPlatformLibrary.Geolocation" Version="1.0.25" />
     <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
     <PackageReference Include="GeoCoordinate" Version="2.0.1" />
